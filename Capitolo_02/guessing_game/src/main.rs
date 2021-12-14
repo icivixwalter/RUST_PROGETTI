@@ -44,7 +44,7 @@ fn main() {
             Ok(num) => num,
             Err(_) => {
                 println!("Scrivi un numero");
-                continue; // Riparte da loop!!!!
+                continue; // Riparte da loop!!!! Si può usare solo dentro un loop, for, while.
             }
         };
 

@@ -5,10 +5,7 @@
 		
 		c:\Casa\RAR.EXE a -r -u c:\CASA\PROGRAMMI\RUST_PROGETTI\AA_SALVATAGGI\RustSorgenti.rar @Rust_Progetti_Lista.lst
 		
-		@REM COPIA NELLA CARTELLA c:\CASA\PROGRAMMI\GIT_DESKTOP\CASA\PROGRAMMI\RUST_PROGETTI\
 		
-		XCOPY /Y c:\CASA\PROGRAMMI\RUST_PROGETTI\AA_SALVATAGGI\RustSorgenti.rar c:\CASA\PROGRAMMI\GIT_DESKTOP\CASA\PROGRAMMI\RUST_PROGETTI\
-
 	REM			SOSPENSIONE
 	@REM -----------------------------------------------------------------------------------------
 	
