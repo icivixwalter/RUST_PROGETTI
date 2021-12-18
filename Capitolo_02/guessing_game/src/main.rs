@@ -1,4 +1,5 @@
-use std::io;
+use::std::io;
+use std::io::stdin;
 //aggiornare il file .toml   con le nuove dipendenze prima di utilizzare rand
 use rand::Rng;
 use std::cmp::Ordering; // libreria per gli
@@ -64,4 +65,17 @@ fn main() {
             }
         }
     }
+
+// PERMETTE DI RIMANERE VISIBILE LA SHELL 
+//---------------------------------------------------------------------------//
+// utilizzare questa libreria: 
+//use::std::io;
+//use std::io::stdin;
+
+	let mut s= String::new();
+	println!("premi invio per uscire!");
+	stdin().read_line(&mut s).expect("Did not enter a correct string");  
+
+//---------------------------------------------------------------------------//
+
 }
