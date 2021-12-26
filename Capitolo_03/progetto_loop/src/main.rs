@@ -228,6 +228,9 @@ fn main() {
                /*
                CICLO FOR  AD INTERVALLO INVERTITO, DA 1 a 4 
                  Si prevede il conto alla rovescia tramite .rev.
+                 vecchia procedura questa:
+                     for number in (1..4).rev() {.....
+                MODIFICA:
                  Tale ciclo è stato modifcato costruendo un ciclo sempre avendo
                  come base  un array i cui elementi possono essere aumentati
                  o diminuiti calcolando in modo automatico l'indice min e max
@@ -242,7 +245,7 @@ fn main() {
                 let array = [10, 20, 30, 40, 50, 60];  //array
                 //calcolo dell'intervallo minimo e massimo
                 let min=0;
-                let max=array.len();
+                let max=array.len(); 
                 //ciclo for sull'intervallo calcolato e con ciclo inventivo 
                 for a_for2 in (min..max).rev() { 
                     //stampo varore indice e varlore dell'array
