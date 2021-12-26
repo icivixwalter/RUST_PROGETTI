@@ -1,3 +1,5 @@
 /target
 /AA_SALVATAGGI
 /.idea
+*/*/target/
+Cargo.lock
