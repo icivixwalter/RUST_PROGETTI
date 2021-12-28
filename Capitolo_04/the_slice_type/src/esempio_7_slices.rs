@@ -113,8 +113,30 @@ print!("\n
         stampa_variabile(&word,&msg_s);
     
 //------------------------------------------------------------------------------//
-    
 
+
+
+
+// 08) LA MATRICE
+//------------------------------------------------------------------------------//
+let a = [1, 2, 3, 4, 5];
+let slice = &a[1..3];
+assert_eq!(slice, &[2, 3]);
+//let word = first_matrice(&a[...]);
+print!("07) MESSAGGIO - III° TIPO DI ESEMPIO LA MATRICE  - deve essere sviluppata!!!!
+        MATRICE IN LAVORAZIONE:
+        let a = [1, 2, 3, 4, 5];
+        stampo solo la matrice senza passarla ad una funzione di controllo ancora
+        da sviluppare, per ora il comando della parte della matrice è questo:
+        let slice = &a[1..3]; E PRODUCE QUESTO RISULTATO
+        slice[0] = {}
+        slice[1] = {}
+
+", slice[0],slice[1]);
+
+
+//------------------------------------------------------------------------------//
+    
 
 
 
@@ -139,7 +161,10 @@ fn first_word(s: &str) -> &str {
 				} &s[..] 
 		}
         
-/*         */
+
+
+
+/* stampo il messaggio con 2 parametri di riferimento         */
 fn stampa_variabile(s:&str, m:&str){
     print!("
             messaggio my_string passato alla funzione word; 
@@ -150,3 +175,7 @@ fn stampa_variabile(s:&str, m:&str){
         ",s,m );
 
 } 
+
+
+
+
