@@ -14,10 +14,24 @@ pub fn stampa_5_pfunct() {
 
     let len = s.len();
 
-    let slice = &s[0..len];
-    let slice = &s[..];
+    let slice_one = &s[0..len];
+    let slice_two = &s[..];
 
-    
+    println!("\n
+        ----------------------------------------------------------------------------------------------------
+
+        Restituisco della stringa hello la lunghezza con indice 0...len e indice senza valore iniziale e finale
+        .... e questi sono i risultati:
+        
+        1° valore della riga -->  let slice_one = &s[0..len];      {}
+        2° valore della riga -->  let slice_two = &s[..];          {}
+
+        definire l'indice iniziale oppure rimuoverlo da sempre lo stesso risultato.
+
+        *** fine esempio 5 ***
+        ----------------------------------------------------------------------------------------------------
+      
+    ", slice_one, slice_two);
 
 
 }

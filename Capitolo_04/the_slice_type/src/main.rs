@@ -1,9 +1,21 @@
 //
 
-mod esempio_4;
+
+
 
 use std::io::stdin;
+mod esempio_4;
 use crate::esempio_4::stampa_4_pfunct;
+mod esempio_5;
+use crate::esempio_5::stampa_5_pfunct;
+
+mod esempio_6;
+use crate::esempio_6::stampa_6_pfunct;
+
+mod esempio_7_slices;
+use crate::esempio_7_slices::stampa_7_slices_pfunct;
+
+
 
 
 /*CAPITOLO 4.3.00_The Slice Type_Il_tipo_DiSezione
@@ -187,11 +199,30 @@ fn main() {
             sulla gestione di UTF-8 si trova nella sezione "Memorizzazione di testo 
             codificato UTF-8 con stringhe" del Capitolo 8.
     */
-
+                //
+                stampa_5_pfunct();
 
      //_________________________________________________________________________________________________//
     
 
+    // VI ESEMPIO - API SOLIDA
+    //_________________________________________________________________________________________________//
+    /*note : ricerca dell'indice iniziale e finale con il compilatore che restituisce indice sempre validi
+    */
+                //
+                stampa_6_pfunct();
+
+     //_________________________________________________________________________________________________//
+    
+    // VI ESEMPIO - API GENERALE passaggio di una  &String che sui valori di riferimento &str
+    //_________________________________________________________________________________________________//
+    /*note : passaggio di String o di un riferimento ad una stringa.
+    */
+    
+
+            stampa_7_slices_pfunct();
+    //_________________________________________________________________________________________________//
+    
 
 
     //              RITARDO DELLA SCHELL
