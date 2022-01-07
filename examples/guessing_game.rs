@@ -1,5 +1,6 @@
-use::std::io;
+use std::io;
 use std::io::stdin;
+// TODO: impossibile trovare rand
 //aggiornare il file .toml   con le nuove dipendenze prima di utilizzare rand
 use rand::Rng;
 use std::cmp::Ordering; // libreria per gli
@@ -41,7 +42,7 @@ fn main() {
             CONVERSIONE STRINGA A NUMERO IN INPUT + CONTROLLO ERRORE
         */
         // let guess: u32 = guess.trim().parse().expect("Please type a number!");
-        let guess = match guess.trim().parse::<u32>(){
+        let guess = match guess.trim().parse::<u32>() {
             Ok(num) => num,
             Err(_) => {
                 println!("Scrivi un numero");
@@ -65,17 +66,9 @@ fn main() {
             }
         }
     }
-
-// PERMETTE DI RIMANERE VISIBILE LA SHELL 
-//---------------------------------------------------------------------------//
-// utilizzare questa libreria: 
-//use::std::io;
-//use std::io::stdin;
-
-	let mut s= String::new();
-	println!("premi invio per uscire!");
-	stdin().read_line(&mut s).expect("Did not enter a correct string");  
-
-//---------------------------------------------------------------------------//
-
+    let mut s = String::new();
+    println!("premi invio per uscire!");
+    stdin()
+        .read_line(&mut s)
+        .expect("Did not enter a correct string");
 }
