@@ -18,8 +18,10 @@ use nwg::NativeUi;
 const FILA_01_BUTTON_SIZE: (i32, i32) = (310, 30);       //larghezza + altezza fissi
 
 //II° FILA DI 10 BOTTONI - DA 11-20 *** da utilizzare ***
-//const FILA_02_BUTTON_SIZE: (i32 , i32) = (310, 90);       //larghezza + altezza fissi
-//const FILA_02_BUTTON_POSIZIONE: (i32, i32)=(10,10);                              //posizione della II° FILA DI BOTTONI
+//
+    const FILA_02_BUTTON_SIZE: (i32 , i32) = (310, 30);       //larghezza + altezza fissi
+//
+    const FILA_02_BUTTON_POSIZIONE: (i32, i32)=(350,100);                              //posizione della II° FILA DI BOTTONI
 
 
 //LA FINESTRA WINDOWS
@@ -169,6 +171,23 @@ pub struct BasicApp {
         button_10: nwg::Button,		
     //---------------------------------------------------------------------------------------//
 
+    // region: II_FILA_BUTTON_DA_11-20
+    //****************************************************************************************//
+    //          II° FILA DI BOTTONI
+    
+        //---------------------------------------------------------------------------------------//
+        #[nwg_control(text: "12) II FILA BUTTON", 
+        size: FILA_02_BUTTON_SIZE,    //II° FILA DI 10 BOTTONI: larg + alt       del bottone 
+        //position: (10, 100))]
+        position: FILA_02_BUTTON_POSIZIONE)]
+        #[nwg_events( OnButtonClick: [BasicApp::fn_button_esercizio_02] )]
+        button_12: nwg::Button,
+    //---------------------------------------------------------------------------------------//
+    
+    //****************************************************************************************//
+    // endregion: II_FILA_BUTTON_DA_11-20   
+    
+   
 
 }
 
