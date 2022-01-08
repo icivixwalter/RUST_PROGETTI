@@ -119,7 +119,9 @@ pub struct BasicApp {
 impl BasicApp {
     //buttone 1
     fn fn_button_esercizio_01(&self) {
-        call_exe::call("APRI_FILE_{guessing_game}.bat");
+       // call_exe::call("APRI_FILE_{guessing_game}.bat");
+       //2 ° call con path
+       call_exe::call("c:\\CASA\\PROGRAMMI\\RUST_PROGETTI\\APRI_FILE_{guessing_game}.bat");
     }
 
     //buttone 2
