@@ -12,3 +12,12 @@ rand = "0.8.4"
 call_exe={path="Capitolo_01/call_exe"}
 guessing_game={path="Capitolo_02/guessing_game"}
 data_type={path="Capitolo_03/data_type"}
+function={path="Capitolo_03/function"}
+progetto_loop={path="Capitolo_03/progetto_loop"} #button 05
+variables_and_mutability={path="Capitolo_03/variables_and_mutability"} #button 06
+
+#capitolo 04----------------------
+#sistemati:
+dangle={path="Capitolo_04/dangle"} #button 07 - c:\CASA\PROGRAMMI\RUST_PROGETTI\Capitolo_04\dangle\
+
+ownership={path="Capitolo_04/ownership"} #button 07 - c:\CASA\PROGRAMMI\RUST_PROGETTI\Capitolo_04\ownership\

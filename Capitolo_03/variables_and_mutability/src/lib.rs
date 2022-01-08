@@ -1,7 +1,7 @@
 
 use std::io;        //libreria di imput
 use std::io::stdin;
-fn main() {
+pub fn run () {
     let mut x = 5; //modificata con let mut per renderla da Static fina a variabile.
     println!("The value of x is: {}", x);
 
@@ -197,13 +197,13 @@ fn main() {
     //ARRAY CON ELEMENTI FISSI
     {
         //array quando gli elementi sono fissi
-            let a_Interi = [1, 2, 3, 4, 5]; 	//array di numeri interi
+            let a_interi = [1, 2, 3, 4, 5]; 	//array di numeri interi
             //ARRAY per i mesi (numeri di elementi fissi)
             
             let a_months = ["January", "February", "March", "April", "May", "June", "July", 			
                             "August", "September", "October", "November", "December"]; 
             let a_months_array=a_months[1];     //array assegno il primo ed il 4
-            let a_months_array4= a_months[4];
+            let a_months_array_4= a_months[4];
 
             let a_i32: [i32; 5] = [1, 2, 3, 4, 5];   //definizione del tipo di array i32 di 5 elementi 
             let a_definitivi_i32_03= a_i32[3];                  
@@ -211,11 +211,11 @@ fn main() {
 
 
             let a_inzializzato = [3; 5]; //inizializzo l’array valore iniziale 3 lunghezza 5 (5 elementi di 3)
-            let a_inzializzato_Pos3=a_inzializzato[3];  //assegno all'elemento 3   
+            let a_inzializzato_pos3=a_inzializzato[3];  //assegno all'elemento 3   
          
             //accesso agli elementi dell'array (ATTENZIONE l'array viene allocato nello stack)
-            let first = a_Interi[0];
-            let second = a_Interi[1];
+            let first = a_interi[0];
+            let second = a_interi[1];
 
             //stampo TODO: ATTENZIONE DA ERRORE
         println!(
@@ -226,15 +226,15 @@ fn main() {
             a_months                            : {}
             a_months indice 4                   : {}
             a_definitivi_i32_03                 : {}
-            a_inzializzato_Pos3                 : {}
-            let first                           :{}
-            let second                          :{}
+            a_inzializzato_pos3                 : {}
+            let first                           : {}
+            let second                          : {}
             ",
-            a_Interi[0],
+            a_interi[0],
             a_months_array, 
-            a_months_array4,
+            a_months_array_4,
             a_definitivi_i32_03,
-            a_inzializzato_Pos3, first, second   
+            a_inzializzato_pos3, first, second   
         ); //errore a_months
             
             
@@ -270,10 +270,9 @@ fn main() {
             //con lo standard io leggo un imput da tastiera + controllo errori
             //-------------------------------------------------------------------------//
                 println!("Please enter an array index."); 
-                let mut index = String::new(); c
-                io::stdin() 
-                    .read_line(&mut index) 
-                    .expect("ERRORE FALLITA LA LETTURA DA LINERA DI COMANDO:Failed to read line"); 
+                let mut index = String::new(); io::stdin()
+                .read_line(&mut index)
+                .expect("ERRORE FALLITA LA LETTURA DA LINERA DI COMANDO:Failed to read line"); 
             //-------------------------------------------------------------------------//
     
 

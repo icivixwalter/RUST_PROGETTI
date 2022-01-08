@@ -1,5 +1,5 @@
 //use::std::io;
-use std::io::stdin;
+//use std::io::stdin;
 
 /*CAPITOLO 4 - 4.1.00 What Is Ownership -Che cos'è la proprietà
 //____________________________________________________________________________//
@@ -7,9 +7,10 @@ use std::io::stdin;
 *c) Rust utilizza un terzo approccio: la memoria è gestita attraverso un sistema di
 *proprietà con un insieme di regole che il compilatore controlla in fase di compilazione.
 *Nessuna delle funzionalità di proprietà rallenta il tuo programma mentre è in esecuzione.
-*
+* attenzione rinominato il file main.rs a lib rs e la funzion da manin a run per essere
+* rilevato dal progetto generale e da file cargo.toml 
 */
-fn main() { //main
+pub fn run() { //main
     /*4.1.07_Ways Variables and Data Interact: Clone_Modi di interazione delle variabili e dei dati: clone
      * //____________________________________________________________________________//
      */
@@ -27,7 +28,10 @@ fn main() { //main
     let s2 = s1.clone(); // metodo costoso con clone
                          //stampa due volte il messaggio
     println!(
-        " Metodo clone CLONAZIONE PROFONDA, metodo costosto copia  
+        
+        " 
+        I° ESEMPIO
+        Metodo clone CLONAZIONE PROFONDA, metodo costosto copia  
                il valore dell'heap e quelli dello stack es:
                s1 = s2 : 
               valore di s1 = {} 
@@ -51,8 +55,20 @@ fn main() { //main
 
         // Here, x goes out of scope, then s. But because s's value was moved, nothing special happens
         // Qui, x esce dall'ambito, quindi s. Ma poiché il valore di s è stato spostato, niente di speciale succede.
+        
+        println!(
+        
+            " 
+            II° ESEMPIO
+            validita dello scope
+            la stringa di hello viene assegnata con String:: .. alla variabile  s  :
+            let s = String::from('hello'); ma dopo non è piu valida  per la funzione 
+            in quanto è fuori scope.
+            takes_ownership(s); il compilatore non l'accetta.        
+            let x è validata perche viene assegnata quindi il valore è:
+                 x                              = {} ", x );
     
-    
+        
     
     }
 
@@ -65,34 +81,35 @@ fn main() { //main
      println!("\n
      II° GRUPPO DI FUNZIONI  DELL'ESERCIZIO 4.1.01.07_Return_Values_and Scope
      //---------------------------------------------------------------------------//
-     NOte: con questo II° esercizio si vuole dimostrare come 
+     III° ESEMPIO RESTITUZIONE DEI VALORI
+     NOte: con questo III° esercizio si vuole dimostrare come 
      La restituzione di valori può anche trasferire la proprietà.   \n ");                                       
         //codice--->a)_gives_s1 = chiamo la funzione gives_ownership
-        let gives_s1 = gives_ownership();       // gives_ownership moves its return 
+        let _gives_s1 = gives_ownership();       // gives_ownership moves its return 
                                                 // value into s1 let gives_ownership sposta il valore 
 
          println!("
                     a) in gives_ownership  inserisco una stringa in s1- 
-                    comando---->  let gives_s1 = gives_ownership(); 
+                    comando---->  let _gives_s1 = gives_ownership(); 
                     \n");                                       
         
-         //codice--->gives_s2.b) = assegno a gives_s2 una stringa nell'heap
-        let gives_s2 = String::from("hello");         // s2 comes into scope – s2 entra nell’ambito di validita
+         //codice--->_gives_s2.b) = assegno a _gives_s2 una stringa nell'heap
+        let _gives_s2 = String::from("hello");         // s2 comes into scope – s2 entra nell’ambito di validita
         
         println!("
-                b) gives_s2 = assegno una stringa as s2;
-                comando---->  let gives_s1 = gives_ownership(); 
+                b) _gives_s2 = assegno una stringa as s2;
+                comando---->  let _gives_s1 = gives_ownership(); 
                 \n            
                 ");
 
-        //codice--->gives_s3.c) = assegno a gives_s3 una stringa da gives_s2
-        let gives_s3 = takes_and_gives_back(gives_s2); // s2 is moved into – s2 entra into
+        //codice--->_gives_s3.c) = assegno a _gives_s3 una stringa da _gives_s2
+        let _gives_s3 = takes_and_gives_back(_gives_s2); // s2 is moved into – s2 entra into
                                   // takes_and_gives_back, which also // moves its return value into s3 – 
                                   //takes_and_gives_back gli prende il valore di ritorno da s2 e lo sposta in s3
 
         println!("
-                 b) gives_s3 = assegno una stringa a s3  recuperandola dalla funzione;
-                        comando----> let gives_s3 = takes_and_gives_back(gives_s2);\n");
+                 b) _gives_s3 = assegno una stringa a s3  recuperandola dalla funzione;
+                        comando----> let _gives_s3 = takes_and_gives_back(_gives_s2);\n");
                   
             println!("\n
                 **** fine ****
@@ -113,6 +130,7 @@ fn main() { //main
         //codice------>Tupla.01_AssegnoLeVariabili
 
         println!("\n
+        IV° ESEMPIO LA TUPLA
         II°.B LA TUPLA (GRUPPO DI FUNZIONI  DELL'ESERCIZIO 4.1.01.07_Return_Values_and Scope)
         //---------------------------------------------------------------------------//
         Note: esempio di costruzione di una TUPLA per la restituzione di piu valori:           \n ");                                       
@@ -136,19 +154,19 @@ fn main() { //main
   
     
     
-    //              RITARDO DELLA SCHELL
-    //---------------------------------------------------------------------------//
-    // utilizzare questa libreria:
-    //'use::std::io;'
-    //'use std::io::stdin;'
+    // //              RITARDO DELLA SCHELL
+    // //---------------------------------------------------------------------------//
+    // // utilizzare questa libreria:
+    // //'use::std::io;'
+    // //'use std::io::stdin;'
 
-    let mut s = String::new();
-    println!("\n\n RITARDO DELLA SCHELL: premi invio per uscire!");
-    stdin()
-        .read_line(&mut s)
-        .expect("Did not enter a correct string");
+    // let mut s = String::new();
+    // println!("\n\n RITARDO DELLA SCHELL: premi invio per uscire!");
+    // stdin()
+    //     .read_line(&mut s)
+    //     .expect("Did not enter a correct string");
 
-    //---------------------------------------------------------------------------//
+    // //---------------------------------------------------------------------------//
 
 
 

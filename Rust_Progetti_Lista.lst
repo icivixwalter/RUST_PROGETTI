@@ -8,7 +8,11 @@ Capitolo_07
 Capitolo_08
 Capitolo_09
 Capitolo_10
+examples
+src
 
 
+*.md
+*.toml
 *.bat
 *.lst

@@ -1,6 +1,5 @@
 [package]
-#name = "prova" # old l'ho cambiato in dangle altrimenti non funzione nel progetto generale
-name = "dangle"
+name = "tmp"
 version = "0.1.0"
 edition = "2021"
 

@@ -3,8 +3,8 @@
     See `basic` for the version without the derive macro
 */
 
-extern crate guessing_game;
 extern crate data_type;
+extern crate guessing_game;
 extern crate native_windows_derive as nwd;
 extern crate native_windows_gui as nwg;
 
@@ -13,7 +13,7 @@ use nwg::NativeUi;
 // use std::{sync::Mutex, thread};
 // use std::sync::atomic::AtomicBool;
 // static spawned: Mutex<bool> = Mutex::new(false);
-
+const BUTTON_SIZE: (i32, i32) = (280, 30);
 #[derive(Default, NwgUi)]
 pub struct BasicApp {
     //CREA LA FINESTRA WINDOWS CON LE DIMENSIONI E LA POSIZIONE
@@ -48,22 +48,70 @@ pub struct BasicApp {
     hello_button: nwg::Button, //BOTTONE 1 CON L'ETICHETTA
     //---------------------------------------------------------------------------------------//
     #[nwg_control(text: "Cap 1 - Run BAT", 
-    size: (280, 30),    //larg + alt del bottone 
+    size: BUTTON_SIZE,    //larg + alt del bottone 
     position: (10, 100))]
     #[nwg_events( OnButtonClick: [BasicApp::fn_button_esercizio_01] )]
     button_01: nwg::Button,
     //---------------------------------------------------------------------------------------//
     #[nwg_control(text: "Cap 2 - Guessing Game", 
-        size: (280, 30),    //larg + alt del bottone 
+        size: BUTTON_SIZE,    //larg + alt del bottone 
         position: (10, 150))]
     #[nwg_events( OnButtonClick: [BasicApp::fn_button_esercizio_02] )]
     button_02: nwg::Button,
     //---------------------------------------------------------------------------------------//
     #[nwg_control(text: "Cap 3 - Data type", 
-        size: (280, 30),    //larg + alt del bottone 
+        size: BUTTON_SIZE,    //larg + alt del bottone 
         position: (10, 200))]
     #[nwg_events( OnButtonClick: [BasicApp::fn_button_esercizio_03] )]
     button_03: nwg::Button,
+    //---------------------------------------------------------------------------------------//
+
+    //---------------------------------------------------------------------------------------//
+    #[nwg_control(text: "Cap 3 - function bt_04", 
+    size: BUTTON_SIZE,    //larg + alt del bottone 
+    position: (10, 250))]
+    #[nwg_events( OnButtonClick: [BasicApp::fn_button_esercizio_04] )]
+    button_04: nwg::Button,
+    //---------------------------------------------------------------------------------------//
+
+    //---------------------------------------------------------------------------------------//
+    #[nwg_control(text: "Cap 3 - progetto loop - button 05", 
+    size: BUTTON_SIZE,    //larg + alt del bottone 
+    position: (10, 300))]
+    #[nwg_events( OnButtonClick: [BasicApp::fn_button_esercizio_05] )]
+    button_05: nwg::Button,
+    //---------------------------------------------------------------------------------------//
+
+    //---------------------------------------------------------------------------------------//
+    #[nwg_control(text: "Cap 3 - variabili & mutability bt_06", 
+    size: BUTTON_SIZE,    //larg + alt del bottone 
+    position: (10, 350))]
+    #[nwg_events( OnButtonClick: [BasicApp::fn_button_esercizio_06] )]
+    button_06: nwg::Button,
+    //---------------------------------------------------------------------------------------//
+
+    //---------------------------------------------------------------------------------------//
+    #[nwg_control(text: "Cap_04 - dangle - bt_07", 
+    size: BUTTON_SIZE,    //larg + alt del bottone 
+    position: (10, 400))]
+    #[nwg_events( OnButtonClick: [BasicApp::fn_button_esercizio_07] )]
+    button_07: nwg::Button,
+    //---------------------------------------------------------------------------------------//
+
+    //ATTENZIONE: deve essere rinominato il file main.rs a lib rs del progetto ownership che deve
+    //essere incluso nel file cargo.toml del progetto generale inoltre nel file lib.rs occorre
+    //rinominare la funzione principale main ---> run con tipo public: pub fn run() {...
+    //---------------------------------------------------------------------------------------//
+    //[nwg_control 	= creo un nuovo controllo con le proprieta text, size, position
+    #[nwg_control(text: "Cap_04 - ownership - bt_08", 
+	size: BUTTON_SIZE,    		//larg + alt del bottone 
+	position: (10, 450))]
+    //la posizione 10 X posizione + 50 Y
+    //nwg_events  	= attivo l'evento del controllo con la funzione OnButtonClick
+    //			la quale chiama la implementazione BasicApp e la funzione creata.
+    #[nwg_events( OnButtonClick: [BasicApp::fn_button_esercizio_08] )]
+    //creo il nuovo oggetto button con la libreria nwg
+    button_08: nwg::Button,
     //---------------------------------------------------------------------------------------//
 }
 
@@ -79,10 +127,33 @@ impl BasicApp {
         guessing_game::game(); // TODO spawna un thread che esegue game()
     }
 
-
     fn fn_button_esercizio_03(&self) {
-        data_type::run(); 
+        data_type::run();
     }
+
+    fn fn_button_esercizio_04(&self) {
+        function::run();
+    }
+
+    fn fn_button_esercizio_05(&self) {
+        progetto_loop::run();
+    }
+
+    fn fn_button_esercizio_06(&self) {
+        variables_and_mutability::run(); //button 06
+    }
+
+    fn fn_button_esercizio_07(&self) {
+        //button 07 - dangle
+        dangle::run();
+    }
+
+    //attivo la funzione con il parametro &self = this o se stesso
+    fn fn_button_esercizio_08(&self) {
+        //button_08 - progetto ---> ownership
+        ownership::run();
+    }
+
     //messaggio_01
     fn say_hello(&self) {
         nwg::modal_info_message(
