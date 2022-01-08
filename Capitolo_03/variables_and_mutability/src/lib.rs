@@ -1,6 +1,6 @@
 
 use std::io;        //libreria di imput
-use std::io::stdin;
+//use std::io::stdin;
 pub fn run () {
     let mut x = 5; //modificata con let mut per renderla da Static fina a variabile.
     println!("The value of x is: {}", x);
@@ -294,16 +294,16 @@ pub fn run () {
 
     }
 
-//---------------------------------------------------------------------------//
-// utilizzare questa libreria: 
-//use::std::io;
-//use std::io::stdin;
+// //---------------------------------------------------------------------------//
+// // utilizzare questa libreria: 
+// //use::std::io;
+// //use std::io::stdin;
 
-let mut s= String::new();
-println!("\n\n premi invio per uscire!");
-stdin().read_line(&mut s).expect("Did not enter a correct string");  
+// let mut s= String::new();
+// println!("\n\n premi invio per uscire!");
+// stdin().read_line(&mut s).expect("Did not enter a correct string");  
 
-//---------------------------------------------------------------------------//
+// //---------------------------------------------------------------------------//
 
 
 }

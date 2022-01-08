@@ -3,7 +3,7 @@
 
 
 
-use std::io::stdin;
+//use std::io::stdin;
 mod esempio_4;
 use crate::esempio_4::stampa_4_pfunct;
 mod esempio_5;
@@ -25,7 +25,7 @@ use crate::esempio_7_slices::stampa_7_slices_pfunct;
 *in una raccolta piuttosto che nell'intera raccolta.
 *
 */
-fn main() {
+pub fn run() {
     // 0° ESEMPIO BASE DI GIACOMO PER IL CONTROLLO DIRETTO
     println!(
         "
@@ -225,24 +225,24 @@ fn main() {
     
 
 
-    //              RITARDO DELLA SCHELL
-    //---------------------------------------------------------------------------//
-    // utilizzare questa libreria:
-    //'use::std::io;'
-    //use std::io::stdin;
+    // //              RITARDO DELLA SCHELL
+    // //---------------------------------------------------------------------------//
+    // // utilizzare questa libreria:
+    // //'use::std::io;'
+    // //use std::io::stdin;
 
-    let mut x = String::new();
-    println!("\n\n RITARDO DELLA SHELL: premi invio per uscire!");
-    stdin()
-        .read_line(&mut x)
-        .expect("Did not enter a correct string");
+    // let mut x = String::new();
+    // println!("\n\n RITARDO DELLA SHELL: premi invio per uscire!");
+    // stdin()
+    //     .read_line(&mut x)
+    //     .expect("Did not enter a correct string");
 
-    //---------------------------------------------------------------------------//
-} /*FINE MAIN  */
+    // //---------------------------------------------------------------------------//
+} /*FINE run  */
 
 //*******************************************************************************************/
 //                          funzioni esterne  INIZIO
-// fuori dal main la funzione = FUNZIONI DI UTILITA
+// fuori dal run la funzione = FUNZIONI DI UTILITA
 //*******************************************************************************************/
 //LA FUNZIONE FIRST WORLD
 fn first_word(s: &String) -> usize {

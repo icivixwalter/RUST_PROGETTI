@@ -19,5 +19,9 @@ variables_and_mutability={path="Capitolo_03/variables_and_mutability"} #button 0
 #capitolo 04----------------------
 #sistemati:
 dangle={path="Capitolo_04/dangle"} #button 07 - c:\CASA\PROGRAMMI\RUST_PROGETTI\Capitolo_04\dangle\
+ownership={path="Capitolo_04/ownership"} #button 08 - c:\CASA\PROGRAMMI\RUST_PROGETTI\Capitolo_04\ownership\
+references_and_borrowing={path="Capitolo_04/references_and_borrowing"} #button 09 - c:\CASA\PROGRAMMI\RUST_PROGETTI\Capitolo_04\references_and_borrowing\
 
-ownership={path="Capitolo_04/ownership"} #button 07 - c:\CASA\PROGRAMMI\RUST_PROGETTI\Capitolo_04\ownership\
+
+the_slice_type={path="Capitolo_04/the_slice_type"} #button 10 - c:\CASA\PROGRAMMI\RUST_PROGETTI\Capitolo_04\the_slice_type\
+

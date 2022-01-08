@@ -1,12 +1,12 @@
-use std::io::stdin;
+//use std::io::stdin;
 
 /*CAPITOLO 4 - 4.2.00_References_and_Borrowing_Referenze_e_Prestito
 //____________________________________________________________________________//
 *NOTE: Oggetto con reference
 *
 */
-fn main() {
-    // main
+pub fn run() {
+    // run
     println!(
         "
     /*CAPITOLO 4 - 4.2.00_References_and_Borrowing_Referenze_e_Prestito
@@ -106,17 +106,17 @@ fn main() {
     walter(&mut s);  // se metto riferimento &mut = presto il riferimento mutabile
     println!("stampo la stringa restituita dalla funzione walter() {}",s);
 
-    println!("\n\n RITARDO DELLA SCHELL: premi invio per uscire!");
-    stdin()
-        .read_line(&mut s)
-        .expect("Did not enter a correct string");
+    // println!("\n\n RITARDO DELLA SCHELL: premi invio per uscire!");
+    // stdin()
+    //     .read_line(&mut s)
+    //     .expect("Did not enter a correct string");
 
     //---------------------------------------------------------------------------//
-} // *** fine *** main
+} // *** fine *** run
 
 //*******************************************************************************************/
 //                          funzioni esterne  INIZIO
-// fuori dal main la funzione
+// fuori dal run la funzione
 //*******************************************************************************************/
 // III° GRUPPO DI FUNZIONI ESERCIZIO 4.2.00_References_and_Borrowing_Referenze_e_Prestito
 //-------------------------------------------------------------------------------------------//
@@ -138,7 +138,7 @@ fn change(some_string: &mut String) {
 
 //*******************************************************************************************/
 //                          funzioni esterne  Inizio
-// fuori dal main la funzione
+// fuori dal run la funzione
 //*******************************************************************************************/
 //-------------------------------------------------------------------------------------------//
 
@@ -148,5 +148,5 @@ fn walter(stringa: &mut String) {
 
 //*******************************************************************************************/
 //                          funzioni esterne  FINE
-// fuori dal main la funzione
+// fuori dal run la funzione
 //*******************************************************************************************/

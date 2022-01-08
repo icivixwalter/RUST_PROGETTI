@@ -13,7 +13,22 @@ use nwg::NativeUi;
 // use std::{sync::Mutex, thread};
 // use std::sync::atomic::AtomicBool;
 // static spawned: Mutex<bool> = Mutex::new(false);
-const BUTTON_SIZE: (i32, i32) = (280, 30);
+
+//I° FILA DI 10 BOTTONI - DA 1-10
+const FILA_01_BUTTON_SIZE: (i32, i32) = (310, 30);       //larghezza + altezza fissi
+
+//II° FILA DI 10 BOTTONI - DA 11-20 *** da utilizzare ***
+//const FILA_02_BUTTON_SIZE: (i32 , i32) = (310, 90);       //larghezza + altezza fissi
+//const FILA_02_BUTTON_POSIZIONE: (i32, i32)=(10,10);                              //posizione della II° FILA DI BOTTONI
+
+
+//LA FINESTRA WINDOWS
+const DIMENSIONI_WINDOWS:(i32,      i32)=(800,600);    // (800,600)---> larghezza e posizione della finestra windows con 20 bottoni
+//con 10 bottoni posizione e la grandezza della finestra windows era di (600, 635)
+//con 2 bottoni posizione originale della finestra windows (300,135)
+
+
+
 #[derive(Default, NwgUi)]
 pub struct BasicApp {
     //CREA LA FINESTRA WINDOWS CON LE DIMENSIONI E LA POSIZIONE
@@ -22,12 +37,22 @@ pub struct BasicApp {
     //la posizione base è questa position: (300, 300) cambio in ----> 300,10
     //paer avere la finestra centrale
     //con 600,435 entrano = 2 bottoni
-    #[nwg_control(size: (600, 635), position: (300, 10), //cambio in ----> 300,10
+    //ORIGINALE ----> #[nwg_control(size: (600, 635), position: (300, 10), //cambio in ----> 300,10
+    #[nwg_control(size: DIMENSIONI_WINDOWS, position: (300, 10), //cambio in ----> 300,10
+    
                 title: "Basic example", 
                 flags: "WINDOW|VISIBLE")]
     #[nwg_events( OnWindowClose: [BasicApp::say_goodbye] )] //evento messaggio 02
     window: nwg::Window,
     //---------------------------------------------------------------------------------------//
+
+    
+
+
+
+
+//---------------------------------------------------------------------------------------//
+
 
     //CASELLA DI TESTO Con la stringa - EDITABILE
     //---------------------------------------------------------------------------------------//
@@ -47,52 +72,52 @@ pub struct BasicApp {
     #[nwg_events( OnButtonClick: [BasicApp::say_hello] )]
     hello_button: nwg::Button, //BOTTONE 1 CON L'ETICHETTA
     //---------------------------------------------------------------------------------------//
-    #[nwg_control(text: "Cap 1 - Run BAT", 
-    size: BUTTON_SIZE,    //larg + alt del bottone 
+    #[nwg_control(text: "01) Cap 1 - Run BAT", 
+    size: FILA_01_BUTTON_SIZE,    //I° FILA DI 10 BOTTONI: larg + alt       del bottone 
     position: (10, 100))]
     #[nwg_events( OnButtonClick: [BasicApp::fn_button_esercizio_01] )]
     button_01: nwg::Button,
     //---------------------------------------------------------------------------------------//
-    #[nwg_control(text: "Cap 2 - Guessing Game", 
-        size: BUTTON_SIZE,    //larg + alt del bottone 
+    #[nwg_control(text: "02) Cap 2 - Guessing Game", 
+        size: FILA_01_BUTTON_SIZE,    //I° FILA DI 10 BOTTONI: larg + alt       del bottone 
         position: (10, 150))]
     #[nwg_events( OnButtonClick: [BasicApp::fn_button_esercizio_02] )]
     button_02: nwg::Button,
     //---------------------------------------------------------------------------------------//
-    #[nwg_control(text: "Cap 3 - Data type", 
-        size: BUTTON_SIZE,    //larg + alt del bottone 
+    #[nwg_control(text: "03) Cap 3 - Data type", 
+        size: FILA_01_BUTTON_SIZE,    //I° FILA DI 10 BOTTONI: larg + alt       del bottone 
         position: (10, 200))]
     #[nwg_events( OnButtonClick: [BasicApp::fn_button_esercizio_03] )]
     button_03: nwg::Button,
     //---------------------------------------------------------------------------------------//
 
     //---------------------------------------------------------------------------------------//
-    #[nwg_control(text: "Cap 3 - function bt_04", 
-    size: BUTTON_SIZE,    //larg + alt del bottone 
+    #[nwg_control(text: "04) Cap 3 - function", 
+    size: FILA_01_BUTTON_SIZE,    //I° FILA DI 10 BOTTONI: larg + alt       del bottone 
     position: (10, 250))]
     #[nwg_events( OnButtonClick: [BasicApp::fn_button_esercizio_04] )]
     button_04: nwg::Button,
     //---------------------------------------------------------------------------------------//
 
     //---------------------------------------------------------------------------------------//
-    #[nwg_control(text: "Cap 3 - progetto loop - button 05", 
-    size: BUTTON_SIZE,    //larg + alt del bottone 
+    #[nwg_control(text: "05) Cap 3 - progetto loop", 
+    size: FILA_01_BUTTON_SIZE,    //I° FILA DI 10 BOTTONI: larg + alt       del bottone 
     position: (10, 300))]
     #[nwg_events( OnButtonClick: [BasicApp::fn_button_esercizio_05] )]
     button_05: nwg::Button,
     //---------------------------------------------------------------------------------------//
 
     //---------------------------------------------------------------------------------------//
-    #[nwg_control(text: "Cap 3 - variabili & mutability bt_06", 
-    size: BUTTON_SIZE,    //larg + alt del bottone 
+    #[nwg_control(text: "06) Cap 3 - variabili & mutability", 
+    size: FILA_01_BUTTON_SIZE,    //I° FILA DI 10 BOTTONI: larg + alt       del bottone 
     position: (10, 350))]
     #[nwg_events( OnButtonClick: [BasicApp::fn_button_esercizio_06] )]
     button_06: nwg::Button,
     //---------------------------------------------------------------------------------------//
 
     //---------------------------------------------------------------------------------------//
-    #[nwg_control(text: "Cap_04 - dangle - bt_07", 
-    size: BUTTON_SIZE,    //larg + alt del bottone 
+    #[nwg_control(text: "07) Cap_04 - dangle", 
+    size: FILA_01_BUTTON_SIZE,    //I° FILA DI 10 BOTTONI: larg + alt       del bottone 
     position: (10, 400))]
     #[nwg_events( OnButtonClick: [BasicApp::fn_button_esercizio_07] )]
     button_07: nwg::Button,
@@ -103,8 +128,8 @@ pub struct BasicApp {
     //rinominare la funzione principale main ---> run con tipo public: pub fn run() {...
     //---------------------------------------------------------------------------------------//
     //[nwg_control 	= creo un nuovo controllo con le proprieta text, size, position
-    #[nwg_control(text: "Cap_04 - ownership - bt_08", 
-	size: BUTTON_SIZE,    		//larg + alt del bottone 
+    #[nwg_control(text: "08) Cap_04 - ownership", 
+	size: FILA_01_BUTTON_SIZE,    		//I° FILA DI 10 BOTTONI: larg + alt         del bottone 
 	position: (10, 450))]
     //la posizione 10 X posizione + 50 Y
     //nwg_events  	= attivo l'evento del controllo con la funzione OnButtonClick
@@ -113,6 +138,38 @@ pub struct BasicApp {
     //creo il nuovo oggetto button con la libreria nwg
     button_08: nwg::Button,
     //---------------------------------------------------------------------------------------//
+
+    
+    //ATTENZIONE: deve essere rinominato il file main.rs a lib rs del progetto references_and_borrowing che deve
+    //essere incluso nel file cargo.toml del progetto generale inoltre nel file lib.rs occorre
+    //rinominare la funzione principale main ---> run con tipo public: pub fn run() {...
+    //---------------------------------------------------------------------------------------//
+        //[nwg_control 	= creo un nuovo controllo con le proprieta text, size, position
+        #[nwg_control(text: "09) Cap_04 - references_and_borrowing", 
+        size: FILA_01_BUTTON_SIZE,    		//I° FILA DI 10 BOTTONI: larg CON LA COSTANTE + alt del bottone NUMERICA
+        position: (10, 500))]		        //la posizione 10 X posizione + 50 Y
+        //nwg_events  	= attivo l'evento del controllo con la funzione OnButtonClick
+        //			la quale chiama la implementazione BasicApp e la funzione creata.
+        #[nwg_events( OnButtonClick: [BasicApp::fn_button_esercizio_09] )]
+        //creo il nuovo oggetto button con la libreria nwg
+        button_0: nwg::Button,		
+    //---------------------------------------------------------------------------------------//
+
+     //ATTENZIONE: deve essere rinominato il file main.rs a lib rs del progetto the_slice_type che deve essere incluso nel file cargo.toml del progetto generale inoltre nel file lib.rs occorre
+    //rinominare la funzione principale main ---> run con tipo public: pub fn run() {...
+    //---------------------------------------------------------------------------------------//
+        //[nwg_control 	= creo un nuovo controllo con le proprieta text, size, position
+        #[nwg_control(text: "10) Cap_04 - the_slice_type", 
+        size: FILA_01_BUTTON_SIZE,    		//I° FILA DI 10 BOTTONI: larg CON LA COSTANTE + alt del bottone NUMERICA
+        position: (10, 550))]		        //la posizione 10 X posizione + 50 Y
+        //nwg_events  	= attivo l'evento del controllo con la funzione OnButtonClick
+        //			la quale chiama la implementazione BasicApp e la funzione creata.
+        #[nwg_events( OnButtonClick: [BasicApp::fn_button_esercizio_10] )]
+        //creo il nuovo oggetto button con la libreria nwg
+        button_10: nwg::Button,		
+    //---------------------------------------------------------------------------------------//
+
+
 }
 
 //le funzioni esterne
@@ -155,6 +212,17 @@ impl BasicApp {
         //button_08 - progetto ---> ownership
         ownership::run();
     }
+
+     //attivo la funzione con il parametro &self = this o se stesso
+     fn fn_button_esercizio_09(&self) { //button_09 - progetto ---> references_and_borrowing
+        references_and_borrowing::run(); 
+    }
+
+    //attivo la funzione con il parametro &self = this o se stesso
+    fn fn_button_esercizio_10(&self) { //button_10 - progetto ---> the_slice_type
+        the_slice_type::run(); 
+    }
+
 
     //messaggio_01
     fn say_hello(&self) {
