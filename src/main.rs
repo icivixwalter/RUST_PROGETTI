@@ -20,12 +20,9 @@ const FILA_01_BUTTON_SIZE: (i32, i32) = (310, 30);       //larghezza + altezza f
 //II° FILA DI 10 BOTTONI - DA 11-20 *** da utilizzare ***
 //
     const FILA_02_BUTTON_SIZE: (i32 , i32) = (310, 30);       //larghezza + altezza fissi
-//
-    const FILA_02_BUTTON_POSIZIONE: (i32, i32)=(350,100);                              //posizione della II° FILA DI BOTTONI
-
 
 //LA FINESTRA WINDOWS
-const DIMENSIONI_WINDOWS:(i32,      i32)=(800,600);    // (800,600)---> larghezza e posizione della finestra windows con 20 bottoni
+const DIMENSIONI_WINDOWS:(i32, i32)=(800,600);    // (800,600)---> larghezza e posizione della finestra windows con 20 bottoni
 //con 10 bottoni posizione e la grandezza della finestra windows era di (600, 635)
 //con 2 bottoni posizione originale della finestra windows (300,135)
 
@@ -175,14 +172,24 @@ pub struct BasicApp {
     //****************************************************************************************//
     //          II° FILA DI BOTTONI
     
-        //---------------------------------------------------------------------------------------//
-        #[nwg_control(text: "12) II FILA BUTTON", 
-        size: FILA_02_BUTTON_SIZE,    //II° FILA DI 10 BOTTONI: larg + alt       del bottone 
-        //position: (10, 100))]
-        position: FILA_02_BUTTON_POSIZIONE)]
-        #[nwg_events( OnButtonClick: [BasicApp::fn_button_esercizio_02] )]
-        button_12: nwg::Button,
+    //BUTTON_11
     //---------------------------------------------------------------------------------------//
+        #[nwg_control(text: "11) II FILA BUTTON", 
+        //le dimensioni della Button è impostato in modo fissa dalla COSTANTE.
+        size: FILA_02_BUTTON_SIZE,    //II° FILA DI 10 BOTTONI: larg + alt       del bottone 
+        /*POSIZIONE DEL BUTTON è incrementale di 2,4,6,8,10 ecc.. partendo dalla posizione 100 
+            si ha una automatica disposizione della casella text  INCREMENTANDO DI UN MULTIPLO
+            DI 2
+        */
+        position: (350, 100+(0*25)))]
+        
+
+        #[nwg_events( OnButtonClick: [BasicApp::fn_button_esercizio_02] )]
+        button_11: nwg::Button,
+    //---------------------------------------------------------------------------------------//
+
+
+
     
     //****************************************************************************************//
     // endregion: II_FILA_BUTTON_DA_11-20   
@@ -197,7 +204,7 @@ impl BasicApp {
     fn fn_button_esercizio_01(&self) {
        // call_exe::call("APRI_FILE_{guessing_game}.bat");
        //2 ° call con path
-       call_exe::call("c:\\CASA\\PROGRAMMI\\RUST_PROGETTI\\APRI_FILE_{guessing_game}.bat");
+       call_exe::call("c:\\CASA\\PROGRAMMI\\RUST_PROGETTI\\Capitolo_01\\APRI_FILE_{HelloWord_eseguibile}.bat");
     }
 
     //buttone 2

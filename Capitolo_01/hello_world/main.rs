@@ -16,4 +16,9 @@ fn main() {
 
 pub fn hello() {
     println!("Hello, world! \n lezione 1.2. Ciao, Mondo!");
+
 }
+
+
+
+          

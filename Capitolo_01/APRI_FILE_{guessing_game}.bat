@@ -3,7 +3,7 @@
   path relativa es. ---> "\CASA\PRES3000_07\WALTER_ATTI\WALTER_TIM_SCHEDA_PENNETTA_3662631843_(WIFI_ALCATEL).msg" &^ exit
   path assoluta es. ---> START "APRI" /i "c:\CASA\PRES3000_07\WALTER_ATTI\WALTER_TIM_SCHEDA_PENNETTA_3662631843_(WIFI_ALCATEL).msg" &^ exit
  
-  la procedura di start attiva con la path relativa è valida solo per i disco c: mentre in caso di rete occorre quella assoluta.
+  la procedura di start attiva con la path relativa ï¿½ valida solo per i disco c: mentre in caso di rete occorre quella assoluta.
   Inoltre questo esempio imposta un indirizzo assoluto con 3 variabili :
     			DISCO_s + PATH_s + FILE_s 
     			ATTENZIONE a non inserire spazi nel comando SET es. set DISCO_s=Y: (ok) set DISCO_s= Y: (NON FUNZIONA)
@@ -43,8 +43,8 @@
 
 :------------------------------- IMPOSTO le variabili DISCO, PATH E FILE attenzione senza spazi dopo l'uguale
 SET DISCO_s=c:
-SET PATH_s=\CASA\PROGRAMMI\GIT_DESKTOP\CASA\PROGRAMMI\RUST_PROGETTI\
-SET FILE_s=README_RUST_PROGETTI_TUTORIAL.md
+SET PATH_s=\CASA\PROGRAMMI\RUST_PROGETTI\Capitolo_01\hello_world\
+SET FILE_s=main.exe
 
 
 
