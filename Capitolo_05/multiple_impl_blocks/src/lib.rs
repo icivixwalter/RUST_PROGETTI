@@ -25,7 +25,7 @@ impl Rectangle {
     }
 }
 
-fn main() {
+pub fn run() {
     
     let rect1 = Rectangle {
         width: 30,

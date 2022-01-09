@@ -3,7 +3,7 @@
 //si trova in: C:\CASA\PROGRAMMI\RUST_PROGETTI\Capitolo_05\operator_c\src\main.rs
 
 #![allow(unused)]
-fn main() {
+pub fn run() {
     #[derive(Debug, Copy, Clone)]
     //crea una struttura point ma la firma e l'impmentazione è esterna.
     struct Point {

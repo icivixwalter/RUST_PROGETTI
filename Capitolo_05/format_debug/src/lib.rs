@@ -1,10 +1,10 @@
 
 #[derive(Debug)]
 struct Rectangle {
-    width: u32,
+    width: u32,         //todo : di sola lettura come eliminare il warning??
     height: u32,
 }
-fn main() {
+pub fn run() {
     println!(
         "
     5.2.03_Adding Useful Functionality with Derived Traits_Aggiunta 

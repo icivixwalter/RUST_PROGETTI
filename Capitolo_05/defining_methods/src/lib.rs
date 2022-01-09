@@ -17,7 +17,7 @@ impl Rectanglenw {
 }
 
 // region: main
-fn main() {
+pub fn run() {
 	/* VARIABILE OGGETTO rect1 =  quando viene istanziata avvengono due procedimenti,
 		1) istanzio la struttura struct Rectanglenw;
 		2) attivo l'implementazione impl Rectanglenw e di conseguenza

@@ -31,3 +31,55 @@ rust. Viene creato ul bottone ed una funzione
     }
 
 
+## 03) CREARE BUTTON INCREMENTALE 
+Per creare una fila di oggetti button con posizione automatica incrementale, occorre per prima cosa 
+impostare le costanti sia della FINESTRA DI WINDOWS  e siA LA COSTANTE DELLE DIMENSIONI DEGLI OGGETTI BUTTON.
+
+## LE COSTANTI PRELIMINARI DELLA LARGHEZZA E DELLA ALTEZZA DEI BUTTON INCREMENTALI
+Per prima cosa occorre definire le costanti dei button incrementali e della finestra:
+viene definita la costante che imposta le dimensioni largh+alte del button da utilizzare 
+per tutti gli oggetti button
+    //II° FILA DI 10 BOTTONI - DA 11-20 *** da utilizzare ***
+    const FILA_02_BUTTON_SIZE: (i32 , i32) = (310, 30);       //larghezza + altezza fissi
+
+    //LA FINESTRA WINDOWS
+    const DIMENSIONI_WINDOWS:(i32, i32)=(800,600);    // (800,600)---> larghezza e posizione della finestra windows con 20 bottoni
+    
+### LA CREAZIONE DEL BUTTON INCREMENTALE CON LA COSTANTE PREDEFINITA
+La seconda operazione è creare l'oggetto button incrementale la cui funzione di attivazione rimane la stessa
+indicata sopra.
+
+    //      II° FILA DI BUTTON 
+    //============================================================================================================/
+    
+    //BUTTON 15) - II FILA DA 11 - 20 - PROGETTO ---> operator_c
+    //---------------------------------------------------------------------------------------//
+        #[nwg_control(text: "15) Cap_05 - operator_c", 
+        //le dimensioni della Button è impostato in modo fissa dalla COSTANTE.
+        size: FILA_02_BUTTON_SIZE,    //II° FILA DI 10 BOTTONI: larg + alt       del bottone 
+        /*POSIZIONE DEL BUTTON è incrementale di 2,4,6,8,10 ecc.. partendo dalla posizione 100 
+        si ha una automatica disposizione della casella text  INCREMENTANDO DI UN MULTIPLO
+        DI 2 - Oggetto Button per il progetto - operator_c
+        */
+        position: (350, 100+(6*25)))]  //posizione incrementale dell'oggetto button, basta cambiare lo 0 con                            //un multiplo di due
+
+
+        #[nwg_events( OnButtonClick: [BasicApp::fn_button_esercizio_15] )]
+        button_15: nwg::Button,
+    //---------------------------------------------------------------------------------------//
+
+       
+### LA FUNZIONE DEL BUTTON INCREMENTALE
+la funzione che viene chiamata dal bottone incrementale:
+
+     //attivo la funzione con il parametro &self = this o se stesso
+    fn fn_button_esercizio_15(&self) { //button_15 - progetto ---> operator_c
+        operator_c::run(); 
+    }
+
+### FILE TOML PER IL BUTTON INCREMENTALE
+nel file toml occorre impostare la seguente dicitura per il bottone incrementale
+
+    operator_c={path="Capitolo_05/operator_c"} #button_15 - c:\CASA\PROGRAMMI\RUST_PROGETTI\Capitolo_05\operator_c\
+
+

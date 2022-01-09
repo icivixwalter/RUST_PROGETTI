@@ -8,7 +8,7 @@ struct Rectangle {
 }
 
 impl Rectangle {
-    fn area(&self) -> u32 {
+    fn area(&self) -> u32 { //parametri sola lettura se vengono passati con rect4.area()); senza &
         self.width * self.height
     }
 
@@ -17,7 +17,7 @@ impl Rectangle {
     }
 }
 
-fn main() {
+pub fn run() {
     println!(
         "\n
     //   I° ESERCIZIO DEL PARAGRAFO   5.3.03_Methods with More Parameters_Metodi con più parametri
@@ -51,6 +51,30 @@ fn main() {
         height: 45,
     };
 
-    println!("Can rect1 hold rect2? {}", rect1.can_hold(&rect2));
-    println!("Can rect1 hold rect3? {}", rect1.can_hold(&rect3));
+    //per chiamare la funzine con 1 parametro corre sempre qualificare la variabile
+    //oggetto e chiamarla con questo sistema di lettura : rect4.area());
+    let rect4= Rectangle{
+        width: 10,
+        height: 20,
+    };
+
+    //todo: da chiamare 
+    println!("\n
+    AREA DEL QUADRATO  con 1 parametro in SOLA LETTURA  mediante questo tipo di istruzione:
+        fn area(&self) -> u32 {{
+            self.width * self.height
+        }}
+        costruisce questa area:     
+    area rettangolo con  1 parametro {}", rect4.area());
+    println!("\n
+    AREA DEL RETTANGOLO 2 CON PARAMETRI E CON RISULTATO MODIFICABILE: 
+        FUNZIONE: ---->   fn can_hold(&self, other: &Rectangle) -> bool {{
+                            self.width > other.width && self.height > other.height
+                        }}
+    DA QUESTO RISULTATO                 
+    Can rect1 hold rect2? {}", rect1.can_hold(&rect2));
+    println!("\n
+    AREA DEL RETTANGOLO 2 CON PARAMETRI E CON RISULTATO MODIFICABILE: 
+    come sopra con questo risultato:
+    Can rect1 hold rect3? {}", rect1.can_hold(&rect3));
 } //main

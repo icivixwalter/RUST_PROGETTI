@@ -40,6 +40,8 @@ pub struct BasicApp {
     
                 title: "Basic example", 
                 flags: "WINDOW|VISIBLE")]
+
+    //EVENTO DI CHIUSURA DELL'APPLICAZIONE.
     #[nwg_events( OnWindowClose: [BasicApp::say_goodbye] )] //evento messaggio 02
     window: nwg::Window,
     //---------------------------------------------------------------------------------------//
@@ -170,22 +172,95 @@ pub struct BasicApp {
     // region: II_FILA_BUTTON_DA_11-20
     //****************************************************************************************//
     //          II° FILA DI BOTTONI
-    
-    //BUTTON_11
+   	
+    //BUTTON_11 - II FILA DA 11 - 20
     //---------------------------------------------------------------------------------------//
-        #[nwg_control(text: "11) II FILA BUTTON", 
+        #[nwg_control(text: "11) Cap_05 - can_old", 
         //le dimensioni della Button è impostato in modo fissa dalla COSTANTE.
         size: FILA_02_BUTTON_SIZE,    //II° FILA DI 10 BOTTONI: larg + alt       del bottone 
         /*POSIZIONE DEL BUTTON è incrementale di 2,4,6,8,10 ecc.. partendo dalla posizione 100 
             si ha una automatica disposizione della casella text  INCREMENTANDO DI UN MULTIPLO
-            DI 2
+            DI 2 - Oggetto Button per il progetto - can_old
         */
-        position: (350, 100+(0*25)))]
+        position: (350, 100+(0*25)))]  //posizione incrementale dell'oggetto button, basta cambiare lo 0 con                            //un multiplo di due
         
 
-        #[nwg_events( OnButtonClick: [BasicApp::fn_button_esercizio_02] )]
+        #[nwg_events( OnButtonClick: [BasicApp::fn_button_esercizio_11] )]
         button_11: nwg::Button,
     //---------------------------------------------------------------------------------------//
+    
+    
+    
+    //BUTTON_12 - II FILA DA 11 - 20 - PROGETTO ---> defining_methods
+    //---------------------------------------------------------------------------------------//
+        #[nwg_control(text: "12) Cap_05 - defining_methods", 
+        //le dimensioni della Button è impostato in modo fissa dalla COSTANTE.
+        size: FILA_02_BUTTON_SIZE,    //II° FILA DI 10 BOTTONI: larg + alt       del bottone 
+        /*POSIZIONE DEL BUTTON è incrementale di 2,4,6,8,10 ecc.. partendo dalla posizione 100 
+            si ha una automatica disposizione della casella text  INCREMENTANDO DI UN MULTIPLO
+            DI 2 - Oggetto Button per il progetto - defining_methods
+        */
+        position: (350, 100+(2*25)))]  //posizione incrementale dell'oggetto button, basta cambiare lo 0 con                            //un multiplo di due
+        
+
+        #[nwg_events( OnButtonClick: [BasicApp::fn_button_esercizio_12] )]
+        button_12: nwg::Button,
+    //---------------------------------------------------------------------------------------//
+
+    
+
+
+    //BUTTON 13) - II FILA DA 11 - 20 - PROGETTO ---> format_debug
+    //---------------------------------------------------------------------------------------//
+        #[nwg_control(text: "13) Cap_05 - format_debug", 
+        //le dimensioni della Button è impostato in modo fissa dalla COSTANTE.
+        size: FILA_02_BUTTON_SIZE,    //II° FILA DI 10 BOTTONI: larg + alt       del bottone 
+        /*POSIZIONE DEL BUTTON è incrementale di 2,4,6,8,10 ecc.. partendo dalla posizione 100 
+        si ha una automatica disposizione della casella text  INCREMENTANDO DI UN MULTIPLO
+        DI 2 - Oggetto Button per il progetto - format_debug
+        */
+        position: (350, 100+(4*25)))]  //posizione incrementale dell'oggetto button, basta cambiare lo 0 con                            //un multiplo di due
+
+
+        #[nwg_events( OnButtonClick: [BasicApp::fn_button_esercizio_13] )]
+        button_13: nwg::Button,
+    //---------------------------------------------------------------------------------------//
+
+//BUTTON 14) - II FILA DA 11 - 20 - PROGETTO ---> multiple_impl_blocks
+//---------------------------------------------------------------------------------------//
+    #[nwg_control(text: "14) Cap_05 - multiple_impl_blocks", 
+    //le dimensioni della Button è impostato in modo fissa dalla COSTANTE.
+    size: FILA_02_BUTTON_SIZE,    //II° FILA DI 10 BOTTONI: larg + alt       del bottone 
+    /*POSIZIONE DEL BUTTON è incrementale di 2,4,6,8,10 ecc.. partendo dalla posizione 100 
+    si ha una automatica disposizione della casella text  INCREMENTANDO DI UN MULTIPLO
+    DI 2 - Oggetto Button per il progetto - multiple_impl_blocks
+    */
+    position: (350, 100+(6*25)))]  //posizione incrementale dell'oggetto button, basta cambiare lo 0 con                            //un multiplo di due
+
+
+    #[nwg_events( OnButtonClick: [BasicApp::fn_button_esercizio_14] )]
+    button_14: nwg::Button,
+//---------------------------------------------------------------------------------------//
+
+
+    //BUTTON 15) - II FILA DA 11 - 20 - PROGETTO ---> operator_c
+    //---------------------------------------------------------------------------------------//
+    #[nwg_control(text: "15) Cap_05 - operator_c", 
+    //le dimensioni della Button è impostato in modo fissa dalla COSTANTE.
+    size: FILA_02_BUTTON_SIZE,    //II° FILA DI 10 BOTTONI: larg + alt       del bottone 
+    /*POSIZIONE DEL BUTTON è incrementale di 2,4,6,8,10 ecc.. partendo dalla posizione 100 
+    si ha una automatica disposizione della casella text  INCREMENTANDO DI UN MULTIPLO
+    DI 2 - Oggetto Button per il progetto - operator_c
+    */
+    position: (350, 100+(8*25)))]  //posizione incrementale dell'oggetto button, basta cambiare lo 0 con                            //un multiplo di due
+
+
+    #[nwg_events( OnButtonClick: [BasicApp::fn_button_esercizio_15] )]
+    button_15: nwg::Button,
+//---------------------------------------------------------------------------------------//
+
+
+
 
 
 
@@ -206,6 +281,7 @@ impl BasicApp {
        call_exe::call("c:\\CASA\\PROGRAMMI\\RUST_PROGETTI\\Capitolo_01\\APRI_FILE_{HelloWord_eseguibile}.bat");
     }
 
+//region : I° FILA DELLA FUNZIONI BUTTON
     //buttone 2
     fn fn_button_esercizio_02(&self) {
         guessing_game::game(); // TODO spawna un thread che esegue game()
@@ -248,6 +324,41 @@ impl BasicApp {
         the_slice_type::run(); 
     }
 
+    //endregion : II° FILA DELLA FUNZIONI BUTTON
+
+//region : II° FILA DELLA FUNZIONI BUTTON
+// II° FILA DI BUTTON
+//-------------------------------------------------------------------------------//
+    
+   //attivo la funzione con il parametro &self = this o se stesso
+   fn fn_button_esercizio_11(&self) { //button_11 - progetto ---> can_old
+    can_old::run(); 
+    }
+
+    //attivo la funzione con il parametro &self = this o se stesso
+    fn fn_button_esercizio_12(&self) { //button_12 - progetto ---> defining_methods
+        defining_methods::run(); 
+    }
+
+    //attivo la funzione con il parametro &self = this o se stesso
+    fn fn_button_esercizio_13(&self) { //button_13 - progetto ---> format_debug
+        format_debug::run(); 
+    }
+
+    
+   //attivo la funzione con il parametro &self = this o se stesso
+   fn fn_button_esercizio_14(&self) { //button_14 - progetto ---> multiple_impl_blocks
+    multiple_impl_blocks::run(); 
+    }
+
+       //attivo la funzione con il parametro &self = this o se stesso
+       fn fn_button_esercizio_15(&self) { //button_15 - progetto ---> operator_c
+        operator_c::run(); 
+    }
+
+
+//-------------------------------------------------------------------------------//
+//endregion : II° FILA DELLA FUNZIONI BUTTON
 
     //messaggio_01
     fn say_hello(&self) {
