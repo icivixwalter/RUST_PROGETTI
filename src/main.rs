@@ -18,8 +18,7 @@ use nwg::NativeUi;
 const FILA_01_BUTTON_SIZE: (i32, i32) = (310, 30);       //larghezza + altezza fissi
 
 //II° FILA DI 10 BOTTONI - DA 11-20 *** da utilizzare ***
-//
-    const FILA_02_BUTTON_SIZE: (i32 , i32) = (310, 30);       //larghezza + altezza fissi
+const FILA_02_BUTTON_SIZE: (i32 , i32) = (310, 30);       //larghezza + altezza fissi
 
 //LA FINESTRA WINDOWS
 const DIMENSIONI_WINDOWS:(i32, i32)=(800,600);    // (800,600)---> larghezza e posizione della finestra windows con 20 bottoni
