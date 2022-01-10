@@ -83,3 +83,50 @@ nel file toml occorre impostare la seguente dicitura per il bottone incrementale
     operator_c={path="Capitolo_05/operator_c"} #button_15 - c:\CASA\PROGRAMMI\RUST_PROGETTI\Capitolo_05\operator_c\
 
 
+
+
+# STRUTTURE DATI
+Costruire e chiamare una struttura dati.
+
+
+    /*faq:@struttura.dati, @richiamare.una.struttura_dati,@come.richiamare.
+          @costruire.una.struttura.dati
+    */
+
+    //STRUTTURA DATI - COME COSTRUIRLA E CHIAMARLA
+    //-------------------------------------------------------------------------------------------//
+    //Note: la struttura viene costruita con diversi campi
+    una.struttura.dati
+    //La struttura data viene costruita assegnando ad una variabile l'intera struttura:
+
+        //struttura dati
+            let user1 = User {
+                email: String::from("someone@example.com"),
+                username: String::from("someusername123"),
+                active: true,
+                sign_in_count: 1,
+            };
+        
+        //Per chiamare la struttura dati occorre qualificare la variabile privata con l'assegnazione 
+        //mediante let e poi utilizzare il seguente costrutto: variabile.elementoStruttura, es.
+        println!("
+                //      Ownership_2 of Struct Data --- ESEMPIO STRUTTURA USER --
+                ----------------------------------------------------------------------------------------//
+                Note: in questo esempio, viene costruita una struttura ed assegnata alla variabile user1,
+                è possibile richiamare i componenti della struttura qualificando la variabile oggetto.elemento
+                come in questo esempio:
+
+                La struttura costruita --->         let user1 = User {{
+                                email: String::from('someone@example.com'),
+                                username: String::from('someusername123'),
+                                active: true,
+                                sign_in_count: 1,
+                                }};
+                Richiamo i singoli elementi:
+                user1.email         :                {}
+                user1.username      :                {}
+                user.sign_in_count  :                {}",user1.email, user1.username, user1.sign_in_count);
+            
+    //-------------------------------------------------------------------------------------------//
+        
+   

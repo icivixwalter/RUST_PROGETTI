@@ -1,4 +1,4 @@
-use std::io::stdin; //libreria io
+//use std::io::stdin; //libreria io
 
 //per usare la funzione del calcolo aree
 
@@ -13,7 +13,7 @@ struct Rectangle {
 }
 
 // region: main
-fn main() {
+pub fn main() {
     println!("AREA DEL RETTANGOLO\n");
 
     //imposto le variabili per l'area
@@ -75,11 +75,11 @@ fn main() {
     //'use::std::io;'
     //use std::io::stdin;
 
-    let mut s = String::new();
-    println!("\n\n RITARDO DELLA SCHELL: premi invio per uscire!");
-    stdin()
-        .read_line(&mut s)
-        .expect("Did not enter a correct string");
+    // let mut s = String::new();
+    // println!("\n\n RITARDO DELLA SCHELL: premi invio per uscire!");
+    // stdin()
+    //     .read_line(&mut s)
+    //     .expect("Did not enter a correct string");
 
     //---------------------------------------------------------------------------//
 }
