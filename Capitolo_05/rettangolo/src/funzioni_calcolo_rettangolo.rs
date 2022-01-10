@@ -1,13 +1,27 @@
 
-//nome precedente del file: funzioni_calcolo_rettangolo
-struct Rectangle { width: u32, height: u32, } 
+
+struct RectangleNw { width:u32, height:u32, } 
+
+
+//per utilizzarla la struttura del rettangolo usare impl
+impl RectangleNw {
+    // metodo statico non richiede l'istanza ma basta il nome del tipo es. Rectangle::square(20)
+    // in java era public static Rectangle square (int size)
+    fn square(size: u32) -> RectangleNw {
+        return RectangleNw {//utilizzo Rectangle per restituire un oggetto Rectangle che rappresenta un quadrato
+            width: size,    //in quanto ricevento un solo parametro u32 si valorizza la larghezza e l'altezza
+            height: size,   //CON LO STESSO VALORE lxl = quadrato.
+        };
+    }
+}
+
+
 pub fn calcolo_rettangolo(){
         
-    let rect_1 = Rectangle {
+    let _rect_1 = RectangleNw {
         width: 30,
         height: 50,
     };
-
   
 
 }

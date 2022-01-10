@@ -13,7 +13,7 @@ impl Rectangle {
     }
 }
 
-//per utilizzarla usare 
+//per utilizzarla la struttura del rettangolo usare impl
 impl Rectangle {
     // metodo statico non richiede l'istanza ma basta il nome del tipo es. Rectangle::square(20)
     // in java era public static Rectangle square (int size)

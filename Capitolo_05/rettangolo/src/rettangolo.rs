@@ -13,7 +13,7 @@ struct Rectangle {
 }
 
 // region: main
-pub fn main() {
+pub fn run() {
     println!("AREA DEL RETTANGOLO\n");
 
     //imposto le variabili per l'area

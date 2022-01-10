@@ -1,9 +1,9 @@
-use std::io::stdin;
+//use std::io::stdin;
 mod esempio_5_1_02;
 mod esempio_struttura;
 use crate::{esempio_5_1_02::esempio_5_1_2_pfunct, esempio_struttura::User};
 
-fn main() {
+pub fn run() {
     //modificato con let mut - per usare user occorre la definizione del file::User
     let mut user1 = esempio_struttura::User {
         email: String::from("someone@example.com"),
@@ -64,13 +64,13 @@ fn main() {
     //'use::std::io;'
     //use std::io::stdin;
 
-    let mut s = String::new();
-    println!("\n\n RITARDO DELLA SCHELL: premi invio per uscire!");
-    stdin()
-        .read_line(&mut s)
-        .expect("Did not enter a correct string");
+    // let mut s = String::new();
+    // println!("\n\n RITARDO DELLA SCHELL: premi invio per uscire!");
+    // stdin()
+    //     .read_line(&mut s)
+    //     .expect("Did not enter a correct string");
 
     //---------------------------------------------------------------------------//
-} //main *** fine ***
+} //run *** fine ***
 
 
