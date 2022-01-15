@@ -255,24 +255,83 @@ pub struct BasicApp {
     //---------------------------------------------------------------------------------------//
 
 
-  //BUTTON 17) - II FILA DA 11 - 20 - PROGETTO ---> funzioni_calcolo_rettangolo
+
+  //BUTTON 17) - II FILA DA 11 - 20 - PROGETTO ---> rettangolo
   //---------------------------------------------------------------------------------------//
-    // #[nwg_control(text: "17) Cap_05 - funzioni_calcolo_rettangolo", 
-    // //le dimensioni della Button è impostato in modo fissa dalla COSTANTE.
-    // size: FILA_02_BUTTON_SIZE,    //II° FILA DI 10 BOTTONI: larg + alt       del bottone 
-    // /*POSIZIONE DEL BUTTON è incrementale di 2,4,6,8,10 ecc.. partendo dalla posizione 100 
-    // si ha una automatica disposizione della casella text  INCREMENTANDO DI UN MULTIPLO
-    // DI 2 - Oggetto Button per il progetto - funzioni_calcolo_rettangolo
-    // */
-    // position: (350, 100+(12*25)))]  //posizione incrementale dell'oggetto button, basta cambiare lo 0 con                            
-    //                 //un multiplo di due
+  #[nwg_control(text: "17) Cap_05 - rettangolo", 
+  //le dimensioni della Button è impostato in modo fissa dalla COSTANTE.
+  size: FILA_02_BUTTON_SIZE,    //II° FILA DI 10 BOTTONI: larg + alt       del bottone 
+  /*POSIZIONE DEL BUTTON è incrementale di 2,4,6,8,10 ecc.. partendo dalla posizione 100 
+  si ha una automatica disposizione della casella text  INCREMENTANDO DI UN MULTIPLO
+  DI 2 - Oggetto Button per il progetto - rettangolo
+  */
+  position: (350, 100+(12*25)))]  //posizione incrementale dell'oggetto button, basta cambiare lo 0 con                            
+                  //un multiplo di due
 
 
-    // #[nwg_events( OnButtonClick: [BasicApp::fn_button_esercizio_17] )]
-    // button_17: nwg::Button,
+  #[nwg_events( OnButtonClick: [BasicApp::fn_button_esercizio_17] )]
+  button_17: nwg::Button,
+
+  //---------------------------------------------------------------------------------------//
+
+  
+  //BUTTON 18) - II FILA DA 11 - 20 - PROGETTO ---> struct_struttura
+  //---------------------------------------------------------------------------------------//
+    #[nwg_control(text: "18) Cap_05 - struct_struttura", 
+    //le dimensioni della Button è impostato in modo fissa dalla COSTANTE.
+    size: FILA_02_BUTTON_SIZE,    //II° FILA DI 10 BOTTONI: larg + alt       del bottone 
+    /*POSIZIONE DEL BUTTON è incrementale di 2,4,6,8,10 ecc.. partendo dalla posizione 100 
+    si ha una automatica disposizione della casella text  INCREMENTANDO DI UN MULTIPLO
+    DI 2 - Oggetto Button per il progetto - struct_struttura
+    */
+    position: (350, 100+(14*25)))]  //posizione incrementale dell'oggetto button, basta cambiare lo 0 con                            
+                    //un multiplo di due
+
+
+    #[nwg_events( OnButtonClick: [BasicApp::fn_button_esercizio_18] )]
+    button_18: nwg::Button,
+
+  //---------------------------------------------------------------------------------------//
+
+
+ //BUTTON 19) - II FILA DA 11 - 20 - PROGETTO ---> control_flow
+ //---------------------------------------------------------------------------------------//
+    #[nwg_control(text: "19) Cap_06 - control_flow", 
+    //le dimensioni della Button è impostato in modo fissa dalla COSTANTE.
+    size: FILA_02_BUTTON_SIZE,    //II° FILA DI 10 BOTTONI: larg + alt       del bottone 
+    /*POSIZIONE DEL BUTTON è incrementale di 2,4,6,8,10 ecc.. partendo dalla posizione 100 
+    si ha una automatica disposizione della casella text  INCREMENTANDO DI UN MULTIPLO
+    DI 2 - Oggetto Button per il progetto - control_flow
+    */
+    position: (350, 100+(16*25)))]  //posizione incrementale dell'oggetto button, basta cambiare lo 0 con                            
+    //un multiplo di due
+
+
+    #[nwg_events( OnButtonClick: [BasicApp::fn_button_esercizio_19] )]
+    button_19: nwg::Button,
+
 //---------------------------------------------------------------------------------------//
 
-   
+  //BUTTON 20) - II FILA DA 11 - 20 - PROGETTO ---> bind_values
+  //---------------------------------------------------------------------------------------//
+  #[nwg_control(text: "20) Cap_06 - bind_values", 
+  //le dimensioni della Button è impostato in modo fissa dalla COSTANTE.
+  size: FILA_02_BUTTON_SIZE,    //II° FILA DI 10 BOTTONI: larg + alt       del bottone 
+  /*POSIZIONE DEL BUTTON è incrementale di 2,4,6,8,10 ecc.. partendo dalla posizione 100 
+  si ha una automatica disposizione della casella text  INCREMENTANDO DI UN MULTIPLO
+  DI 2 - Oggetto Button per il progetto - bind_values
+  */
+  position: (350, 100+(18*25)))]  //posizione incrementale dell'oggetto button, basta cambiare lo 0 con                            
+  //un multiplo di due
+
+
+  #[nwg_events( OnButtonClick: [BasicApp::fn_button_esercizio_20] )]
+  button_20: nwg::Button,
+
+//---------------------------------------------------------------------------------------//
+
+
+
 
 
     //****************************************************************************************//
@@ -377,10 +436,27 @@ impl BasicApp {
         ownership_2::run();
     }
 
+      //attivo la funzione con il parametro &self = this o se stesso
+      fn fn_button_esercizio_17(&self) { //button_17 - progetto ---> rettangolo
+        rettangolo::run(); 
+    }
+
     //attivo la funzione con il parametro &self = this o se stesso
-    // fn fn_button_esercizio_17(&self) { //button_17 - progetto ---> funzioni_calcolo_rettangolo
-    //     funzioni_calcolo_rettangolo::run(); 
-    //}
+    fn fn_button_esercizio_18(&self) { //button_18 - progetto ---> struct_struttura
+        struct_struttura::run(); 
+    }
+    
+    //attivo la funzione con il parametro &self = this o se stesso
+    fn fn_button_esercizio_19(&self) { //button_19 - progetto ---> control_flow
+        control_flow::run(); 
+    }
+
+    
+    //attivo la funzione con il parametro &self = this o se stesso
+    fn fn_button_esercizio_20(&self) { //button_20 - progetto ---> bind_values
+        bind_values::run(); 
+    }
+    
 
     //-------------------------------------------------------------------------------//
     //endregion : II° FILA DELLA FUNZIONI BUTTON

@@ -185,6 +185,7 @@ Tutte le costanti devono essere rappresentate con lettere MAIUSCOLE SEPARATA DA 
 rust due tipi di dati: SCALARI  e  COMPOSTO
 
 #### Tipo scalare
+@tipo.scalare
 
 Il tipo scalare è formato da 4 tipi:
 
@@ -287,10 +288,10 @@ NOTA: sono le parole chiave per attivare funzioni in Rust. Le paro chiave sono r
 è possibile utilizzarle come nome di VARIABILI O FUNZIONI. L'elenco delle parole chiave si trovano
 nell' APPENDICE A.
 
-# A  LettInRust
+# A  
 
-## Array InRust
-
+## Array 
+@push.in.Rust
 CICLO FOR  AD INTERVALLO INVERTITO, DA 1 a 4
 Si prevede il conto alla rovescia tramite .rev.
 Tale ciclo è stato modifcato costruendo un ciclo sempre avendo
@@ -320,22 +321,60 @@ esempio di array con il ciclo for che permette il controllo perfetto dell'indice
             println!(" fine array : LIFTOFF!!!  \n\n"); 
 ```
 
-# B LettInRust
+# B
+@B.lettera.B.in.Rust
 
-# C LettInRust
+# C 
+@C.lettera.C.in.Rust
 
-# D LettInRust
+# D 
+@D.lettera.D.in.Rust
 
-## DICHIARAZIONI InRust
+## DICHIARAZIONI 
+@DICHIARAZIONI.in@push.in.Rust.Rust
 
 Le DICHIARAZIONI (Statements) in rust sono ISTRUZIONI che eseguono alcune azioni e
 non restituiscono un valore. I corpi funzione sono costituiti da una serie di istruzioni che terminano facoltativamente con un'espressione. Le funzioni possono avere una ESPRESSIONE FINALE cioè una
 espressione che restituisce un valore (vedi le espressioni).
 vedi Esempio di utilizzo della macro [ESEMPIO DI MACRO] ```[ESEMPIO DI MACRO]-macro-debug-122-nrust)
 
-# E  LettInRust
+# E  
+@E.lettera.E.inRust
+## enum
+@enum.in.rust, @enumeratori.in.rust, 
 
-## Espressioni InRust
+gli enumeratori in rust si costruiscono cosi con la parola chiave 1) enum, 2) poi la funzione di scelta e 3) il modo di chiarama:
+
+	//ENUMERATORE = enumeratore con 4 scelte mono linea ogni braccio restituisce 1 valore
+	//---------------------------------------------------------------------------------//
+		//1)
+		//COSTRUZIONE DI ENUMERATORE
+			enum Coin {
+			Penny,
+			Nickel,
+			Dime,
+			Quarter,
+		}
+
+		//2)
+		//la funzione di scelta con 4 bracci 
+		fn value_in_cents(coin: Coin) -> u8 {
+			match coin {
+				Coin::Penny => 1,
+				Coin::Nickel => 5,
+				Coin::Dime => 10,
+				Coin::Quarter => 25,
+			}
+		}
+		//3)
+		//chiami l'enumeratore e restituisce un valore
+		let ni:u8= value_in_cents(Coin::Nickel);
+	//---------------------------------------------------------------------------------//
+
+
+
+## Espressioni 
+@Espressioni.in@push.in.Rust.Rust
 
 Le espressioni vengono valutate in un valore risultante (ESPRESSIONE FINALE).
 Le espressioni in rust  VALUTANO UN VALORE e possono essere parti di una istruzione
@@ -366,7 +405,8 @@ faq_Istruzioni
 Le istruzioni non sono associate a nulla e quindi
 non restituiscono valori
 
-## Etichetta - label InRust
+## Etichetta - label 
+@Etichetta.label.in.R@push.in.Rustust
 
 in rust l'etichetta viene costruita con 'counting_up:
 
@@ -384,11 +424,14 @@ in rust l'etichetta viene costruita con 'counting_up:
 
 [An internal link](#atext) to arbitrary text.
 
-# F  LettInRust
+# F 
+@F.lettera.F.in.Rust 
 
-## fn InRust
+## fn 
+@fn.fu@push.in.Rustnzioni.in.Rust
 
-#### DEFINIZIONE DELLE FUNZIONI InRust
+#### DEFINIZIONE DELLE FUNZIONI 
+@definizione.delle.funzioni.in.R@push.in.Rustust
 
 ```
 Le funzioni vengono definite con la parola chiave:
@@ -445,13 +488,17 @@ faq_Funzione
 	meglio sul libro!!)
 ```
 
-# G LettInRust
+# G 
+@G.lettera.G.in.Rust
 
-# H  LettInRust
+# H  
+@H.lettera.H.in.Rust
 
-# I  LettInRust
+# I  
+@I.lettera.I.in.Rust
 
-## if InRust
+## if 
+@if.co@push.in.Rustndzione.in.Rust., @struttura.if.in.Rust, @costrutto.if.in.Rust
 
 vedi: 3.5.01 if Expressions
 
@@ -468,8 +515,8 @@ esempio di if con l'opzione else facoltativa:
 		}
 ```
 
-## if con let InRust
-
+## if con let 
+@push.in.Rust
 Vedi 3.5.03 Using if in a let Statement - Utilizzo di if in un'istruzione let
 Poiché if è un'espressione, possiamo usarla sul lato destro di un'istruzione let.
 Nella if i valori che hanno il potenziale per il  risultato per  ciascun braccio dell'if
@@ -497,10 +544,11 @@ else if number % 2 == 0 {
 else { println!("number is not divisible by 4, 3, or 2"); } 
 ```
 
-# L LettInRust
+# L 
+@L.lettera.L.in.Rust
 
-## let InRust
-
+## let 
+@push.in.Rust
 COMANDO LET assegna valore ALLE VARIABILI  (java = var) in rust le assegnazioni sono Final o costanti
 per renderli MUTEVOLI occorre mut. TIPO DI VARIABILI non è necessario definirle
 in rust perchè le deduce il compilatore.
@@ -526,7 +574,8 @@ new line di imput e poi trasformare la strina in intero u32.
  let guess: u32 = guess.trim().parse().expect("Please type a number!");
 ```
 
-## loop InRust
+## loop 
+@loop.in@push.in.Rust.Rust
 
 NOTE:  Rust ha tre tipi di loop:  `loop, while e for `
 
@@ -564,7 +613,8 @@ Loop base - esempio di doppio ciclo loop
     }
 ```
 
-## loop while InRust
+## loop while 
+@loop.while.in@push.in.Rust.Rust, @ciclo.while.in.Rust
 
 Loop con while
 Il ciclo while presuppone che finche la condizione sia vera il ciclo viene eseguito quando è
@@ -585,18 +635,20 @@ Esempio di ciclo while :
 ```
 
 ## loop for rust
+@for.in.Rust, @ciclo.for.in.Rust
 
 loop con for
 
-# M LettInRust
+# M 
 
 (rust M - comandi con la lettera M)
 
-## match InRust
-
+## match 
+@push.in.Rust
 rifattorizzazione delle condizioni else .....
 
-## mut InRust
+## mut 
+@mut.in@push.in.Rust.Rust
 
 mut = variabili mutevole altrimenti di default sono final.
 es.
@@ -605,16 +657,19 @@ es.
 mut a=10;
 ```
 
-# N LettInRust
+# N 
+@N.lettera.N.in.Rust
 
-# O LettInRust
+# O 
+@O.lettera.O.in.Rust
 
-# P LettInRust
+# P 
+@P.lettera.P.in.Rust
 
 (rust P - comandi con la lettera P)
 
-## push InRust
-
+## push 
+@push.in.Rust
 ```
 comando rust dedicato alla stringhe che permette l'aggiunta ad una variabile di 
 un ulteriore pezzo di stringa come ad es.
@@ -642,19 +697,19 @@ un ulteriore pezzo di stringa come ad es.
 //--------------------------------------------------------------------------------------------------//
 ```
 
-# Q LettInRust
+# Q 
 
-# R LettInRust
+# R 
 
-# S LettInRust
+# S 
 
-# T LettInRust
+# T 
 
-# U LettInRust
+# U 
 
-# V LettInRust
+# V 
 
-# Z LettInRust
+# Z 
 
 # XX FINE ------------------------------------------------------------------------
 
@@ -662,16 +717,16 @@ un ulteriore pezzo di stringa come ad es.
 
 Le appendici in rust da studiare:
 
-### APPENDICE A InRust
-
-### APPENDICE B InRust
-
-### APPENDICE C InRust
-
-### APPENDICE D InRust
-
-# APPENDICE A InRust - ELENCO PAROLE CHIAVE IN RUST -
-
+### APPENDICE A 
+@push.in.Rust
+### APPENDICE B 
+@push.in.Rust
+### APPENDICE C 
+@push.in.Rust
+### APPENDICE D 
+@push.in.Rust
+# APPENDICE A  - ELENCO PAROLE CHIAVE IN RUST -
+@push.in.Rust
 | PAROLA CHIAVE | definizione parola chiave                                                              |
 | ------------- | -------------------------------------------------------------------------------------- |
 | as            | - perform primitive casting, disambiguate the specific trait containing an item, or    |
@@ -714,8 +769,8 @@ Le appendici in rust da studiare:
 | where         | - denote clauses that constrain a type                                                 |
 | while         | - loop conditionally based on the result of an expression                              |
 
-# APPENDICE B InRust - Gli Operatori  -
-
+# APPENDICE B  - Gli Operatori  -
+@push.in.Rust
 Operator	Example	Explanation	Overloadable?
 
 ```
@@ -834,8 +889,8 @@ Utilizzo del comando debug in rust mediante il comand dbg! che puo stampare la r
 
 
 # P MacroInRust
-## println! InRust
-	println!("text,tex");	
+## println! 
+	println!@push.in.Rust("text,tex");	
 La macro di stampa che sono esterne al compilatore. viene espansa dal
 compilatore in una serie di istruzioni
 La macro  println! in rust permette di stampare sul flusso della console di output standard (stdout).
@@ -1023,8 +1078,8 @@ la versione semantic version per la gestione le dipendenze ossia versioni compat
 
 # ESEMPI InRUST
 Esempi di utilizzo di vari codici in rust
-## 01) Esempio_01 Struttura dati InRust
-[ESEMPIO MACRO DEBUG](#esempio-macro-debug)
+## 01) Esempio_01 Struttura dati 
+[ESEMPIO MACRO DEBUG](#esempio-ma@push.in.Rustcro-debug)
 	.... esempio di struttura dati da inserire nell'intestazione del file
 		#[derive(Debug)]
 		sruct
@@ -1047,8 +1102,8 @@ Esempi di utilizzo di vari codici in rust
 
 
 
-## 02) ESEMPIO_02 InRust
-	....todo: da fare
+## 02) ESEMPIO_02 
+	....todo: da f@push.in.Rustare
 
 
 

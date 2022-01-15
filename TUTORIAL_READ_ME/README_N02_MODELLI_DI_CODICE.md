@@ -48,6 +48,14 @@ per tutti gli oggetti button
 ### LA CREAZIONE DEL BUTTON INCREMENTALE CON LA COSTANTE PREDEFINITA
 La seconda operazione è creare l'oggetto button incrementale la cui funzione di attivazione rimane la stessa indicata sopra. ESEMPIO COMPLETO DI CREAZIONE DI UN OGGETTO BUTTON INCREMENTALE
 
+    /*faq:  @bottone.incrementale, @come.costruire.u.bottone.incrementale,
+            @procedura.completa.per.costruire.un.button.incrementale
+            @procedura.completa.per.un.button.incrementale
+            @chiamata.funzione, @creare.una.funzione.button, @funzione.evento.button
+            @button.evento.click
+    
+    */  
+
     
   //BUTTON 18) - II FILA DA 11 - 20 - PROGETTO ---> struct_struttura
   //---------------------------------------------------------------------------------------//
@@ -76,24 +84,6 @@ La seconda operazione è creare l'oggetto button incrementale la cui funzione di
     #nel file toml
     struct_struttura={path="Capitolo_05/struct_struttura"} #button_18 - c:\CASA\PROGRAMMI\RUST_PROGETTI\Capitolo_05\struct_struttura\
     
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 
        

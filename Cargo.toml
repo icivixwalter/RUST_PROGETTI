@@ -32,7 +32,12 @@ format_debug={path="Capitolo_05/format_debug"} #button_13 - c:\CASA\PROGRAMMI\RU
 multiple_impl_blocks={path="Capitolo_05/multiple_impl_blocks"} #button_14 - c:\CASA\PROGRAMMI\RUST_PROGETTI\Capitolo_05\multiple_impl_blocks\
 operator_c={path="Capitolo_05/operator_c"} #button_15 - c:\CASA\PROGRAMMI\RUST_PROGETTI\Capitolo_05\operator_c\
 ownership_2={path="Capitolo_05/ownership_2"} #button_16 - c:\CASA\PROGRAMMI\RUST_PROGETTI\Capitolo_05\ownership_2\
-#funzioni_calcolo_rettangolo={path="Capitolo_05/funzioni_calcolo_rettangolo"} #button_17 - c:\CASA\PROGRAMMI\RUST_PROGETTI\Capitolo_05\funzioni_calcolo_rettangolo\
+#
+#
+rettangolo={path="Capitolo_05/rettangolo"} #button_17 - c:\CASA\PROGRAMMI\RUST_PROGETTI\Capitolo_05\rettangolo\
+struct_struttura={path="Capitolo_05/struct_struttura"} #button_18 - c:\CASA\PROGRAMMI\RUST_PROGETTI\Capitolo_05\struct_struttura\
+control_flow={path="Capitolo_06/control_flow"} #button_19 - c:\CASA\PROGRAMMI\RUST_PROGETTI\Capitolo_06\control_flow\
+bind_values={path="Capitolo_06/bind_values"} #button_20 - c:\CASA\PROGRAMMI\RUST_PROGETTI\Capitolo_06\bind_values\
 
 
 
