@@ -52,12 +52,10 @@ La seconda operazione è creare l'oggetto button incrementale la cui funzione di
             @procedura.completa.per.costruire.un.button.incrementale
             @procedura.completa.per.un.button.incrementale
             @chiamata.funzione, @creare.una.funzione.button, @funzione.evento.button
-            @button.evento.click
+            @button.event
     
     */  
-
-    
-  //BUTTON 18) - II FILA DA 11 - 20 - PROGETTO ---> struct_struttura
+   //BUTTON 18) - II FILA DA 11 - 20 - PROGETTO ---> struct_struttura
   //---------------------------------------------------------------------------------------//
         #[nwg_control(text: "18) Cap_05 - struct_struttura", 
         //le dimensioni della Button è impostato in modo fissa dalla COSTANTE.

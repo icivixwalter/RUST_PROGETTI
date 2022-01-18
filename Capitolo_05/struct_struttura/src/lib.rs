@@ -14,7 +14,7 @@ pub fn run() {
 
     // user1.email = String::from("anotheremail@example.com"); //per modificare l'email è stata inserito mut
     //ho chiamato il meto setEmail per cambiare il nome dell'email per riferimento &str
-    user1.setEmail("anotheremail@example.com");
+    user1.set_email("anotheremail@example.com");
     println!(
         "
         //      ESEMPIO I CREATA UNA STRUTTURA  - USER 1

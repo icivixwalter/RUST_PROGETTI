@@ -5,18 +5,20 @@
         ESERCIZIO CAPITOLO 6 bind_values
         Listing 6-4: A Coin enum in which the Quarter variant also holds a UsState value
         ESEMPIO DI ASSOCIAZIONE DI DUE STRUTTURE
+        richiama una struttura associata ad un'altra struttura:
 
+        II° STRUTTURA
         enum UsState {{ 
             Alabama, 
             Alaska, // --snip taglia-- 
         }} 
 
-        e
+        I STRUTTURA ASSOCIATA ALLA II°
         enum Coin {{
             Penny,
             Nickel,
             Dime,
-            Quarter(UsState),
+            Quarter(UsState),   // per richiamarla occorre --> l'itruzione value_in_cents(Coin::Quarter(UsState::Alaska))
         }}
 
         risultato l'ultima con Quarter chiamo lo stato associrato e restituisce il valore:
@@ -55,7 +57,9 @@
 			    //così possiamo ispezionare lo stato in un minuto
 
 
-//struttura stati
+//struttura DATI associata: MONETE + STATI
+
+//struttura STATI
 enum UsState { 
 	Alabama, 
 	Alaska, // --snip taglia-- 
@@ -69,6 +73,7 @@ enum Coin {
 	Quarter(UsState),       //associazione all'altra struttura
     } 
 
+    
 fn value_in_cents(coin: Coin) -> u8 { 
     match coin 
     { Coin::Penny => 1, 

@@ -1,5 +1,6 @@
 
 #[derive(Debug)]
+#[allow(dead_code)] // annotazione che permette l'utilizzo del codice non utilizzato
 struct Rectangle {
     width: u32,         //todo : di sola lettura come eliminare il warning??
     height: u32,

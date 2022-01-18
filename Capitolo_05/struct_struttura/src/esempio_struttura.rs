@@ -24,15 +24,14 @@ impl Display for User{//Display è una intefaccia (trait)
 
 // metodi per la struct User (come i metodi di una classe Java)
 impl User {
-    pub fn setEmail(&mut self, email :&str){// pub fn = metodo pubblico
+    pub fn set_email(&mut self, email :&str){// pub fn = metodo pubblico
         self.email = email.to_string();
     }
 }
 
 //      tutte le funzioni
 //------------------------------------------------------------------------------//
-
-//le funzioni:
+#[allow(dead_code)]
 fn build_user(email: String, username: String) -> User {
     return User {
         email,
@@ -43,6 +42,7 @@ fn build_user(email: String, username: String) -> User {
 }
 
 //LA FUNZIONE BUILD USER MODIFICATA
+#[allow(dead_code)]
 fn build_user2(email: String, username: String) -> User {
     User {
         email,

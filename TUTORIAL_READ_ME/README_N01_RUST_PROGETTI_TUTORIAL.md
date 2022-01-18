@@ -341,7 +341,8 @@ vedi Esempio di utilizzo della macro [ESEMPIO DI MACRO] ```[ESEMPIO DI MACRO]-ma
 # E  
 @E.lettera.E.inRust
 ## enum
-@enum.in.rust, @enumeratori.in.rust, 
+@enum.in.rust, @enumeratori.in.rust, @strutture.in.rust
+@le.strutture.in.rust
 
 gli enumeratori in rust si costruiscono cosi con la parola chiave 1) enum, 2) poi la funzione di scelta e 3) il modo di chiarama:
 
@@ -371,6 +372,48 @@ gli enumeratori in rust si costruiscono cosi con la parola chiave 1) enum, 2) po
 		let ni:u8= value_in_cents(Coin::Nickel);
 	//---------------------------------------------------------------------------------//
 
+
+@faq:
+@come.richiamare.una.struttura.associata.ad.un'altra.struttura
+@struttura.associata.ad.un'altra.struttura
+
+Inoltre per vedere un esempio di una struttura che richiama un'altra struttura occorre fare
+riferimento al Capitolo 6 esercizio bind_values 
+
+	//STRUTTURA CHE RICHIAMA UN'ALTRA STRUTTUA
+	//---------------------------------------------------------------------------------//
+	//ESERCIZIO COMPLETO NEL CAPITOLO 6 bind_values ....
+
+			//struttura STATI
+			enum UsState { 
+				Alabama, 
+				Alaska, // --snip taglia-- 
+			} 
+
+			//struttura monete
+			enum Coin { 
+				Penny, 
+				Nickel, 
+				Dime, 
+				Quarter(UsState),       //associazione all'altra struttura
+				} 
+
+				
+			fn value_in_cents(coin: Coin) -> u8 { 
+				match coin 
+				{ Coin::Penny => 1, 
+				Coin::Nickel => 5, 
+				Coin::Dime => 10, 
+				Coin::Quarter(state) => { 
+					println!("State quarter from {:?}!", state); 25 } 
+				} 
+			} 
+				
+		//PER RICHIAMARE la struttura Stati associata alla struttura monete:
+			value_in_cents(Coin::Quarter(UsState::Alaska))
+			
+
+	//---------------------------------------------------------------------------------//
 
 
 ## Espressioni 
@@ -422,16 +465,46 @@ in rust l'etichetta viene costruita con 'counting_up:
    }
 ```
 
+## ERRORI IN RUST
+faq:
+@errori.in.rust,  @error.in.rust
+Gli errori in rust vengono classificato per numero con la soluzione
+### error[E0463]
+faq:
+@error[E0463]
+
+	01)
+	error[E0463]: can't find crate for `native_windows_gui`
+
+	Quando nel file originale si ha questo riferimento:
+	extern crate native_windows_gui as nwg;
+	per evitare questo occorre inserire nelle dipendenze del toml questo comando:
+	[dependencies]
+	native-windows-gui = "1.0.12"
+
+	02)
+	error[E0463]: can't find crate for `native_windows_derive`
+
+	Quando nel file originale è stato inserito questo riferimento: 
+	extern crate native_windows_derive as nwd;  // Optional. Only if the derive macro is used.
+	Per evitare questo  tipo di errore è perchè non trova questa libreria nel file .toml
+		
+	inserire tra le dipendenze
+	[dependencies]
+	native-windows-derive = "1.0.4" # Optional. Only if the derive macro is used.
+
+
 [An internal link](#atext) to arbitrary text.
 
 # F 
 @F.lettera.F.in.Rust 
 
 ## fn 
-@fn.fu@push.in.Rustnzioni.in.Rust
+@fn.push.in.Rust,  @fn.funzioni.in.Rust, @la.funzione.in.Rust, @costruire.una.funzione.in.Rust
+@fn.comando.funzione.in.Rust
 
 #### DEFINIZIONE DELLE FUNZIONI 
-@definizione.delle.funzioni.in.R@push.in.Rustust
+@definizione.delle.funzioni.in.Rustust
 
 ```
 Le funzioni vengono definite con la parola chiave:
@@ -498,7 +571,7 @@ faq_Funzione
 @I.lettera.I.in.Rust
 
 ## if 
-@if.co@push.in.Rustndzione.in.Rust., @struttura.if.in.Rust, @costrutto.if.in.Rust
+@if.con.push.in.Rustndzione.in.Rust., @condizione.if.in.Rust, @costrutto.if.in.Rust
 
 vedi: 3.5.01 if Expressions
 
@@ -516,6 +589,7 @@ esempio di if con l'opzione else facoltativa:
 ```
 
 ## if con let 
+@if.con.let
 @push.in.Rust
 Vedi 3.5.03 Using if in a let Statement - Utilizzo di if in un'istruzione let
 Poiché if è un'espressione, possiamo usarla sul lato destro di un'istruzione let.

@@ -4,6 +4,7 @@ struct User {
     username: String,       //corretta con String al posto di &str che dava errore
     email: String,
     sign_in_count: u64,
+    #[allow(dead_code)]
     active: bool,
 }
 

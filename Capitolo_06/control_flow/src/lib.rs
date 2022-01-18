@@ -39,6 +39,7 @@ println!("\n
 enum Coin {
     Penny,
     Nickel,
+    #[allow(dead_code)]
     Dime,
     Quarter,
 }
