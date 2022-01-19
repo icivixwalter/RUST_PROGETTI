@@ -1,6 +1,7 @@
 
 //PER APRIRE UN FILE ESTERNO
 //----------------------------------------------------------------------------//
+//FAQ: @apro.comando.bat; @attivo.cmd  @eseguo.un.bat; @comando.bat
 use std::process::Command; //libreria per eseguire i comandi (cmd)
 //---------------------------------------------------------------------------//
 

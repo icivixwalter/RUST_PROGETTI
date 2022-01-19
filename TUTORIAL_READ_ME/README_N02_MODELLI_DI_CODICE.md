@@ -101,6 +101,131 @@ nel file toml occorre impostare la seguente dicitura per il bottone incrementale
 
 
 
+
+
+
+# LA FORM ESTERNA CREAZIONE ED APERTURA
+Come creare ed aprire una form esterna
+faq: @aprire.una.form.esterna; @creare.una.form.esterna; @
+     @creare.la.struttura.della.form.esterna; @chiama.la.form.esterna
+     @la.form.esterna.come.si.crea; @form.esterna.creazione; @crea.la.form.esterna
+## 01) CREA LA FORM ESTERNA
+Per creare una form esterna occorre per prima cosa :
+    01) CREARE UNA STRUTTURA DELLA FORM
+    02) CREARE UNA IMPLEMENTAZIONE
+    03) ATTIVARE L'EVENTO DI APERTURA DELLA FORM
+
+            
+                    // region:LA_FORM_ESTERNA
+
+            // LA FORM ESTERNA - STRUTTURA ED IMPLEMENTAZIONE
+            //=======================================================================================//
+            // 01) LE LIBRERIE ESTERNE : native windwos + nwg
+            // 02) LE VARIABILI ISTANZA DELLE FORM E DEL TREAD
+            // 03) LA MACRO DA CUI DERIVA LA FORM
+            // 04) LA STRUTTURA DI COSTRUZIONE DELLA FORM
+            // 05) LA IMPLEMENTAZIONE
+
+            // region: Le_Variabili_Oggetto
+            // 01) LE LIBRERIE ESTERNE : native windwos + nwg
+            extern crate native_windows_gui as nwg;
+            extern crate native_windows_derive as nwd;
+
+            // 02) LE VARIABILI ISTANZA DELLE FORM E DEL TREAD
+            use nwd::NwgUi;
+            use nwg::NativeUi;
+            use std::{thread, cell::RefCell};
+
+
+            // 03) LA MACRO DA CUI DERIVA LA FORM
+            #[derive(Default, NwgUi)]  //@II.FORM.04.Struttura.oggetto.form
+            // endregion: Le_Variabili_Oggetto
+
+            // region: struttura_YesNodDialog
+            // 04) LA STRUTTURA DI COSTRUZIONE DELLA FORM
+            pub struct YesNoDialog {
+                data: RefCell<Option<String>>,
+
+                #[nwg_control(size: (300, 115), position: (650, 300), title: "A dialog", flags: "WINDOW|VISIBLE")]
+                #[nwg_events( OnWindowClose: [YesNoDialog::close] )]
+                window: nwg::Window,
+
+                #[nwg_control(text: "YES", position: (10, 10), size: (130, 95))]
+                #[nwg_events( OnButtonClick: [YesNoDialog::choose(SELF, CTRL)] )]
+                choice_yes: nwg::Button,
+
+                #[nwg_control(text: "NO", position: (160, 10), size: (130, 95), focus: true)]
+                #[nwg_events( OnButtonClick: [YesNoDialog::choose(SELF, CTRL)] )]
+                choice_no: nwg::Button,
+            }
+            // endregion: struttura_YesNodDialog
+
+            // region: Implementazione_YesNodDialog
+            // 05) LA IMPLEMENTAZIONE
+            //@II.FORM.05.Implementazione.oggetto.form
+            impl YesNoDialog {
+            
+                /// Create the dialog UI on a new thread. The dialog result will be returned by the thread handle.
+                /// To alert the main GUI that the dialog completed, this function takes a notice sender object.
+                //TODO:NON E' USATA
+                fn popup(sender: nwg::NoticeSender) -> thread::JoinHandle<String> {
+                    thread::spawn(move || {
+                        // Create the UI just like in the main function
+                        let app = YesNoDialog::build_ui(Default::default()).expect("Failed to build UI");
+                        nwg::dispatch_thread_events();
+                        
+                        // Notice the main thread that the dialog completed
+                        sender.notice();
+
+                        // Return the dialog data
+                        app.data.take().unwrap_or("Cancelled!".to_owned())
+                    })
+                }
+
+                fn close(&self) {
+                    nwg::stop_thread_dispatch();
+                }
+
+                fn choose(&self, btn: &nwg::Button) {
+                    let mut data = self.data.borrow_mut();
+                    if btn == &self.choice_no {
+                        *data = Some("No!".to_string());
+                    } else if btn == &self.choice_yes {
+                        *data = Some("Yes!".to_string());
+                    }
+
+                    self.window.close();
+                }
+
+            }
+            // endregion: Implementazione_YesNodDialog
+
+            //LA FORM ESTERNA - STRUTTURA ED IMPLEMENTAZIONE *** FINE ***
+            //=======================================================================================//
+
+            // endregion:LA_FORM_ESTERNA
+
+
+## 02) ATTIVA LA FORM ESTERNA
+
+
+            // region: attiva_la_form_esterna
+            //BOTTONE 2 APRI SECONDA FORM - open_ii_form
+            //---------------------------------------------------------------------------------------//
+            /*APRO LA SECONDA FORM = mediante la creazione di un nuovo button  che attiva l'evento
+                open_ii_form, questa FORM  contine gli ulteriori bottoni da 20 bottoni a 40 da creare. 
+                    faq: @II.form, @apri.seconda.form, @crea.la.form.esterna; @apri.la.form.esterna 
+                        @II.FORM.01.creo.BUTTON; @attiva.la.form.esterna; @chiama.la.form.esterna
+            
+            */
+            #[nwg_control(text: "APRI LA II FORM", 
+                        size: (230, 30),    //larg + alt del bottone da 280, 70 ---> ridotto 280, 30
+                        position: (350, 50))]
+            #[nwg_events( OnButtonClick: [BasicApp::open_ii_form] )]
+            open_ii_form: nwg::Button, //BOTTONE 2 APRI SECONDA FORM - attiva l'evento Btn
+            //---------------------------------------------------------------------------------------//
+        // endregion: attiva_la_form_esterna
+
 # STRUTTURE DATI
 Costruire e chiamare una struttura dati.
 

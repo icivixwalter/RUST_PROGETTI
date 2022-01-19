@@ -8,6 +8,12 @@ extern crate guessing_game;
 extern crate native_windows_derive as nwd;
 extern crate native_windows_gui as nwg;
 
+//per usare la II° GUI
+mod seconda_gui;
+
+//la II form
+//use  crate seconda_gui::YesNoDialog;
+
 use nwd::NwgUi;
 use nwg::NativeUi;
 // use std::{sync::Mutex, thread};
@@ -32,7 +38,7 @@ pub struct BasicApp {
     //controllo base è questo size: (300, 135), position: (300, 300), per un bottone
     //la posizione base è questa position: (300, 300) cambio in ----> 300,10
     //paer avere la finestra centrale
-    //con 600,435 entrano = 2 bottoni
+    //con 600,435 entrano = 2 bottoni; @form.master
     //ORIGINALE ----> #[nwg_control(size: (600, 635), position: (300, 10), //cambio in ----> 300,10
     #[nwg_control(size: DIMENSIONI_WINDOWS, position: (300, 10), //cambio in ----> 300,10
                 title: "Basic example", 
@@ -62,6 +68,24 @@ pub struct BasicApp {
     #[nwg_events( OnButtonClick: [BasicApp::say_hello] )]
     hello_button: nwg::Button, //BOTTONE 1 CON L'ETICHETTA
     //---------------------------------------------------------------------------------------//
+
+    // region: attiva_la_form_esterna
+    //BOTTONE 2 APRI SECONDA FORM - open_ii_form
+    //---------------------------------------------------------------------------------------//
+    /*APRO LA SECONDA FORM = mediante la creazione di un nuovo button  che attiva l'evento
+        open_ii_form, questa FORM  contine gli ulteriori bottoni da 20 bottoni a 40 da creare. 
+            faq: @II.form, @apri.seconda.form, @crea.la.form.esterna; @apri.la.form.esterna 
+                 @II.FORM.01.creo.BUTTON; @attiva.la.form.esterna; @chiama.la.form.esterna
+    
+    */
+    #[nwg_control(text: "APRI LA II FORM", 
+                size: (230, 30),    //larg + alt del bottone da 280, 70 ---> ridotto 280, 30
+                position: (350, 50))]
+    #[nwg_events( OnButtonClick: [BasicApp::open_ii_form] )]
+    open_ii_form: nwg::Button, //BOTTONE 2 APRI SECONDA FORM - attiva l'evento Btn
+    //---------------------------------------------------------------------------------------//
+   // endregion: attiva_la_form_esterna
+
     #[nwg_control(text: "01) Cap 1 - Run BAT", 
     size: FILA_01_BUTTON_SIZE,    //I° FILA DI 10 BOTTONI: larg + alt       del bottone 
     position: (10, 100))]
@@ -340,7 +364,7 @@ pub struct BasicApp {
 
 //le funzioni esterne
 impl BasicApp {
-    //buttone 1
+    //buttone 1 @esegui.bat, @attiva.cmd
     fn fn_button_esercizio_01(&self) {
         // call_exe::call("APRI_FILE_{guessing_game}.bat");
         //2 ° call con path
@@ -469,6 +493,29 @@ impl BasicApp {
             &format!("Hello {}", self.name_edit.text()),
         );
     }
+
+    //@II.FORM.02.evento.APRI_LA_FORM_(open_ii_form)
+    //APRO LA NUOVA FORM II
+      fn open_ii_form(&self) {
+        
+        // nwg::modal_info_message(
+        //     &self.window,
+        //     "DEVO APRIRE LA II FORM  message box",
+        //     &format!("APRO LA FORM II {}", self.name_edit.text()),
+        // );
+    
+        /* EVENTO APRO LA FORM ESTERNA:
+         per aprile al form esterna occorrer fare riferimento alla classe oggetto e cioè
+            YesNoDialog con l'evento build
+            @II.FORM.03.attivo.oggetto.form
+    
+        */
+        let _app = seconda_gui::YesNoDialog::build_ui(Default::default()).expect("APRO LA II GUI - Failed to build UI");
+        
+        nwg::dispatch_thread_events();
+    }
+
+
 
     fn say_goodbye(&self) {
         nwg::modal_info_message(
