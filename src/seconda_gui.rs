@@ -18,15 +18,15 @@ extern crate native_windows_derive as nwd;
 
 // 02) LE VARIABILI ISTANZA DELLE FORM E DEL TREAD
 use nwd::NwgUi;
-use nwg::NativeUi;
-use std::{thread, cell::RefCell};
+// use nwg::NativeUi;
+ //use std::{thread, cell::RefCell};
 
 
 //I° FILA DI 10 BOTTONI - DA 1-10
 const FILA_01_BUTTON_SIZE: (i32, i32) = (310, 30); //larghezza + altezza fissi
 
 //II° FILA DI 10 BOTTONI - DA 11-20 *** da utilizzare ***
-const FILA_02_BUTTON_SIZE: (i32, i32) = (310, 30); //larghezza + altezza fissi
+// const FILA_02_BUTTON_SIZE: (i32, i32) = (310, 30); //larghezza + altezza fissi
 
 //LA FINESTRA WINDOWS
 const DIMENSIONI_WINDOWS: (i32, i32) = (800, 600); // (800,600)---> larghezza e posizione della finestra windows con 20 bottoni
@@ -43,7 +43,7 @@ const DIMENSIONI_WINDOWS: (i32, i32) = (800, 600); // (800,600)---> larghezza e 
 // region: struttura_YesNodDialog
 // 04) LA STRUTTURA DI COSTRUZIONE DELLA FORM
 pub struct YesNoDialog {
-    data: RefCell<Option<String>>,
+    // data: RefCell<Option<String>>,
 
     //#[nwg_control(size: (300, 115), position: (650, 300), title: "A dialog", flags: "WINDOW|VISIBLE")]
     #[nwg_control(size: DIMENSIONI_WINDOWS, position: (150, 50), title: "A dialog", flags: "WINDOW|VISIBLE")]
@@ -76,22 +76,22 @@ pub struct YesNoDialog {
 //@II.FORM.05.Implementazione.oggetto.form
 impl YesNoDialog {
   
-    /// Create the dialog UI on a new thread. The dialog result will be returned by the thread handle.
-    /// To alert the main GUI that the dialog completed, this function takes a notice sender object.
-    //TODO:NON E' USATA
-    fn popup(sender: nwg::NoticeSender) -> thread::JoinHandle<String> {
-        thread::spawn(move || {
-            // Create the UI just like in the main function
-            let app = YesNoDialog::build_ui(Default::default()).expect("Failed to build UI");
-            nwg::dispatch_thread_events();
+    // /// Create the dialog UI on a new thread. The dialog result will be returned by the thread handle.
+    // /// To alert the main GUI that the dialog completed, this function takes a notice sender object.
+    // //TODO:NON E' USATA
+    // fn popup(sender: nwg::NoticeSender) -> thread::JoinHandle<String> {
+    //     thread::spawn(move || {
+    //         // Create the UI just like in the main function
+    //         let app = YesNoDialog::build_ui(Default::default()).expect("Failed to build UI");
+    //         nwg::dispatch_thread_events();
             
-            // Notice the main thread that the dialog completed
-            sender.notice();
+    //         // Notice the main thread that the dialog completed
+    //         sender.notice();
 
-            // Return the dialog data
-            app.data.take().unwrap_or("Cancelled!".to_owned())
-        })
-    }
+    //         // Return the dialog data
+    //         app.data.take().unwrap_or("Cancelled!".to_owned())
+    //     })
+    // }
 
     fn close(&self) {
         nwg::stop_thread_dispatch();
@@ -100,11 +100,11 @@ impl YesNoDialog {
   
 
     fn choose(&self, btn: &nwg::Button) {
-        let mut data = self.data.borrow_mut();
+        // let mut data = self.data.borrow_mut();
         if btn == &self.choice_no {
-            *data = Some("No!".to_string());
+        //    *data = Some("No!".to_string());
         } else if btn == &self.choice_yes {
-            *data = Some("Yes!".to_string());
+        //    *data = Some("Yes!".to_string());
         }
 
         self.window.close();
