@@ -16,6 +16,7 @@
 extern crate native_windows_gui as nwg;
 extern crate native_windows_derive as nwd;
 
+
 // 02) LE VARIABILI ISTANZA DELLE FORM E DEL TREAD
 use nwd::NwgUi;
 // use nwg::NativeUi;
@@ -58,7 +59,7 @@ pub struct YesNoDialog {
     #[nwg_events( OnButtonClick: [YesNoDialog::choose(SELF, CTRL)] )]
     choice_no: nwg::Button,
 
-    
+    //@button_21.definizione
     #[nwg_control(text: "21) Cap 7 - BUTTON_21", 
     size: FILA_01_BUTTON_SIZE,    //III° FILA DI 10 BOTTONI: larg + alt       del bottone 
     position: (20, 100))]
@@ -111,17 +112,27 @@ impl YesNoDialog {
     }
 
     //BUTTON_21
+    //@button_21.funzione
     fn fn_button_esercizio_21(&self) {
-        //variables_and_mutability::run(); //button_21
+        //        variables_and_mutability::run(); //button_21
 
-        nwg::modal_info_message(
+          //attivo la funzione con il parametro &self = this o se stesso
+          //
+            // non funziona catch:run(); 
+          //
+          //  
+          catch_all::run(); 
+
+          nwg::modal_info_message(
             &self.window,
-            "MESSAGGIO EVENTO BUTTON",
-            &format!("da sistemare l'evento DI QUESTO BUTTON_21")
+            "ATTIVATO EVENTO BUTTON",
+            &format!("EVENTO DEL  BUTTON_21")
         );
-
+        
+    }
     
-            }
+    
+            
 
 
 }

@@ -39,5 +39,10 @@ struct_struttura={path="Capitolo_05/struct_struttura"} #button_18 - c:\CASA\PROG
 control_flow={path="Capitolo_06/control_flow"} #button_19 - c:\CASA\PROGRAMMI\RUST_PROGETTI\Capitolo_06\control_flow\
 bind_values={path="Capitolo_06/bind_values"} #button_20 - c:\CASA\PROGRAMMI\RUST_PROGETTI\Capitolo_06\bind_values\
 
+#II FORM ESTERNA
+catch_all={path="Capitolo_06/catch_all"} #button_21 - c:\CASA\PROGRAMMI\RUST_PROGETTI\Capitolo_06\catch_all\
+
+
+
 
 
