@@ -60,11 +60,23 @@ pub struct YesNoDialog {
     choice_no: nwg::Button,
 
     //@button_21.definizione
-    #[nwg_control(text: "21) Cap 7 - BUTTON_21", 
+    #[nwg_control(text: "21) Cap 6 - BUTTON_21", 
     size: FILA_01_BUTTON_SIZE,    //III° FILA DI 10 BOTTONI: larg + alt       del bottone 
     position: (20, 100))]
     #[nwg_events( OnButtonClick: [YesNoDialog::fn_button_esercizio_21] )]
     button_21: nwg::Button,
+
+
+    
+    //@button_22.definizione
+    #[nwg_control(text: "22) Cap_06 - BUTTON_22", 
+    size: FILA_01_BUTTON_SIZE,    //III° FILA DI 10 BOTTONI: larg + alt       del bottone 
+    position: (20, 140))]
+    #[nwg_events( OnButtonClick: [YesNoDialog::fn_button_esercizio_22] )]
+    button_22: nwg::Button,
+
+
+
     //---------------------------------------------------------------------------------------//
 
   
@@ -131,6 +143,21 @@ impl YesNoDialog {
         
     }
     
+    
+    //BUTTON_22
+    //@button_22.funzione
+    fn fn_button_esercizio_22(&self) {
+        //        variables_and_mutability::run(); //button_22
+
+          dice_roll::run(); 
+
+          nwg::modal_info_message(
+            &self.window,
+            "ATTIVATO EVENTO BUTTON",
+            &format!("EVENTO DEL  BUTTON_22")
+        );
+        
+    }
     
             
 

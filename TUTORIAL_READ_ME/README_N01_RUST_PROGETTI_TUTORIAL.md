@@ -601,6 +601,7 @@ let number = if condition { 5 } else {6}; //I DUE BRACCI DEVONO AVERE LO STESSO 
 ```
 
 ## if con piu condizioni else
+faq:	@if.then; @condizione.if;  @if.then.else
 
 vedi : 3.5.02 Handling Multiple Conditions with else if - Gestire più condizioni con else if
 
@@ -699,7 +700,7 @@ Questo costrutto elimina molti annidamenti che sarebbero necessari se si utilizz
 Esempio di ciclo while :
 
  				let mut number = 3; 
-                //finche è diverso da zero continua la stama
+                //finche è diverso da zero continua la stampa
                 while number != 0 { 
                     println!("CONTEGGIO ALL'INDIETRO {}!", number); number -= 1; //=-1 per conteggio all'indietro
                 } 

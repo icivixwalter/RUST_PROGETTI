@@ -41,6 +41,8 @@ bind_values={path="Capitolo_06/bind_values"} #button_20 - c:\CASA\PROGRAMMI\RUST
 
 #II FORM ESTERNA
 catch_all={path="Capitolo_06/catch_all"} #button_21 - c:\CASA\PROGRAMMI\RUST_PROGETTI\Capitolo_06\catch_all\
+dice_roll={path="Capitolo_06/dice_roll"} #button_22 - c:\CASA\PROGRAMMI\RUST_PROGETTI\Capitolo_06\dice_roll\
+
 
 
 
