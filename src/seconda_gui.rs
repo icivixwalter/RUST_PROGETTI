@@ -1,4 +1,3 @@
-
 // region:LA_FORM_ESTERNA
 // nome del file della form esterna: seconda_gui.rs
 
@@ -10,18 +9,15 @@
 // 04) LA STRUTTURA DI COSTRUZIONE DELLA FORM
 // 05) LA IMPLEMENTAZIONE
 
-
 // region: Le_Variabili_Oggetto
 // 01) LE LIBRERIE ESTERNE : native windwos + nwg
-extern crate native_windows_gui as nwg;
 extern crate native_windows_derive as nwd;
-
+extern crate native_windows_gui as nwg;
 
 // 02) LE VARIABILI ISTANZA DELLE FORM E DEL TREAD
 use nwd::NwgUi;
 // use nwg::NativeUi;
- //use std::{thread, cell::RefCell};
-
+//use std::{thread, cell::RefCell};
 
 //I° FILA DI 10 BOTTONI - DA 1-10
 const FILA_01_BUTTON_SIZE: (i32, i32) = (310, 30); //larghezza + altezza fissi
@@ -35,11 +31,8 @@ const DIMENSIONI_WINDOWS: (i32, i32) = (800, 600); // (800,600)---> larghezza e 
                                                    //con 2 bottoni posizione originale della finestra windows (300,135)
 
 // 03) LA MACRO DA CUI DERIVA LA FORM
-#[derive(Default, NwgUi)]  //@II.FORM.04.Struttura.oggetto.form
-// endregion: Le_Variabili_Oggetto
-
-
-
+#[derive(Default, NwgUi)] //@II.FORM.04.Struttura.oggetto.form
+                          // endregion: Le_Variabili_Oggetto
 
 // region: struttura_YesNodDialog
 // 04) LA STRUTTURA DI COSTRUZIONE DELLA FORM
@@ -66,8 +59,6 @@ pub struct YesNoDialog {
     #[nwg_events( OnButtonClick: [YesNoDialog::fn_button_esercizio_21] )]
     button_21: nwg::Button,
 
-
-    
     //@button_22.definizione
     #[nwg_control(text: "22) Cap_06 - BUTTON_22", 
     size: FILA_01_BUTTON_SIZE,    //III° FILA DI 10 BOTTONI: larg + alt       del bottone 
@@ -75,12 +66,13 @@ pub struct YesNoDialog {
     #[nwg_events( OnButtonClick: [YesNoDialog::fn_button_esercizio_22] )]
     button_22: nwg::Button,
 
-
-
+    //@button_23.definizione
+    #[nwg_control(text: "23) Cap_06 - BUTTON_23", 
+    size: FILA_01_BUTTON_SIZE,    //III° FILA DI 10 BOTTONI: larg + alt       del bottone 
+    position: (20, 180))]
+    #[nwg_events( OnButtonClick: [YesNoDialog::fn_button_esercizio_23] )]
+    button_23: nwg::Button,
     //---------------------------------------------------------------------------------------//
-
-  
-
 }
 // endregion: struttura_YesNodDialog
 
@@ -88,7 +80,6 @@ pub struct YesNoDialog {
 // 05) LA IMPLEMENTAZIONE
 //@II.FORM.05.Implementazione.oggetto.form
 impl YesNoDialog {
-  
     // /// Create the dialog UI on a new thread. The dialog result will be returned by the thread handle.
     // /// To alert the main GUI that the dialog completed, this function takes a notice sender object.
     // //TODO:NON E' USATA
@@ -97,7 +88,7 @@ impl YesNoDialog {
     //         // Create the UI just like in the main function
     //         let app = YesNoDialog::build_ui(Default::default()).expect("Failed to build UI");
     //         nwg::dispatch_thread_events();
-            
+
     //         // Notice the main thread that the dialog completed
     //         sender.notice();
 
@@ -110,14 +101,12 @@ impl YesNoDialog {
         nwg::stop_thread_dispatch();
     }
 
-  
-
     fn choose(&self, btn: &nwg::Button) {
         // let mut data = self.data.borrow_mut();
         if btn == &self.choice_no {
-        //    *data = Some("No!".to_string());
+            //    *data = Some("No!".to_string());
         } else if btn == &self.choice_yes {
-        //    *data = Some("Yes!".to_string());
+            //    *data = Some("Yes!".to_string());
         }
 
         self.window.close();
@@ -128,40 +117,52 @@ impl YesNoDialog {
     fn fn_button_esercizio_21(&self) {
         //        variables_and_mutability::run(); //button_21
 
-          //attivo la funzione con il parametro &self = this o se stesso
-          //
-            // non funziona catch:run(); 
-          //
-          //  
-          catch_all::run(); 
+        //attivo la funzione con il parametro &self = this o se stesso
+        //
+        // non funziona catch:run();
+        //
+        //
+        catch_all::run();
 
-          nwg::modal_info_message(
+        nwg::modal_info_message(
             &self.window,
             "ATTIVATO EVENTO BUTTON",
-            &format!("EVENTO DEL  BUTTON_21")
+            &format!("EVENTO DEL  BUTTON_21"),
         );
-        
     }
-    
-    
+
     //BUTTON_22
     //@button_22.funzione
     fn fn_button_esercizio_22(&self) {
         //        variables_and_mutability::run(); //button_22
 
-          dice_roll::run(); 
+        dice_roll::run();
 
-          nwg::modal_info_message(
+        nwg::modal_info_message(
             &self.window,
             "ATTIVATO EVENTO BUTTON",
-            &format!("EVENTO DEL  BUTTON_22")
+            &format!("EVENTO DEL  BUTTON_22"),
         );
-        
     }
-    
-            
 
+    //BUTTON_23
+    //@button_23.funzione
+    fn fn_button_esercizio_23(&self) {
+        //        variables_and_mutability::run(); //button_23
 
+        //attivo la funzione con il parametro &self = this o se stesso
+        //
+        // non funziona catch:run();
+        //
+        //
+        dice_roll_2::run();
+
+        nwg::modal_info_message(
+            &self.window,
+            "ATTIVATO EVENTO BUTTON",
+            &format!("EVENTO DEL  BUTTON_21"),
+        );
+    }
 }
 // endregion: Implementazione_YesNodDialog
 
