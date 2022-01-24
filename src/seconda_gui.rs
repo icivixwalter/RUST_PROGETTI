@@ -72,6 +72,15 @@ pub struct YesNoDialog {
     position: (20, 180))]
     #[nwg_events( OnButtonClick: [YesNoDialog::fn_button_esercizio_23] )]
     button_23: nwg::Button,
+
+    //@button_24.definizione
+    #[nwg_control(text: "24) Cap_06 - BUTTON_24", 
+    size: FILA_01_BUTTON_SIZE,    //III° FILA DI 10 BOTTONI: larg + alt       del bottone 
+    position: (20, 220))]
+    #[nwg_events( OnButtonClick: [YesNoDialog::fn_button_esercizio_24] )]
+    button_24: nwg::Button,
+
+
     //---------------------------------------------------------------------------------------//
 }
 // endregion: struttura_YesNodDialog
@@ -115,13 +124,7 @@ impl YesNoDialog {
     //BUTTON_21
     //@button_21.funzione
     fn fn_button_esercizio_21(&self) {
-        //        variables_and_mutability::run(); //button_21
-
-        //attivo la funzione con il parametro &self = this o se stesso
-        //
-        // non funziona catch:run();
-        //
-        //
+    
         catch_all::run();
 
         nwg::modal_info_message(
@@ -148,21 +151,30 @@ impl YesNoDialog {
     //BUTTON_23
     //@button_23.funzione
     fn fn_button_esercizio_23(&self) {
-        //        variables_and_mutability::run(); //button_23
+             //  dice_roll_2::run(); //button_23
+            dice_roll_2::run();
 
-        //attivo la funzione con il parametro &self = this o se stesso
-        //
-        // non funziona catch:run();
-        //
-        //
-        dice_roll_2::run();
+            nwg::modal_info_message(
+                &self.window,
+                "ATTIVATO EVENTO BUTTON",
+                &format!("EVENTO DEL  BUTTON_23"),
+            );
+        }
+
+    
+    //BUTTON_24
+    //@button_24.funzione
+    fn fn_button_esercizio_24(&self) {
+        
+        config_max::run();
 
         nwg::modal_info_message(
             &self.window,
             "ATTIVATO EVENTO BUTTON",
-            &format!("EVENTO DEL  BUTTON_21"),
+            &format!("EVENTO DEL  BUTTON_24"),
         );
     }
+
 }
 // endregion: Implementazione_YesNodDialog
 

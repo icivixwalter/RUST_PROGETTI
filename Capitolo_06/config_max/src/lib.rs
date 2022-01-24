@@ -1,4 +1,4 @@
-fn main() {
+pub fn run() {
     // Utilizzo di una stringa utilizzato l'heap e quindi variabile con mut
     let mut _my_string = String::from(
         "\n\t
@@ -80,6 +80,13 @@ fn main() {
     codice_breve();
 
     //III ESEMPIO UTILIZZO IF LET CON LE CARTE
+
+    println!(
+        "\n\t
+        //ALTRO ESEMPIO DI UTILIZZO IF LET CON PASSAGGIO DI UN VALORE NULLO CON None es. UTILIZZO DELL'OPZIONE
+        //---------------------------------------------------------------------------------------
+        Gioco delle carte\n\t");
+ 
     tira_carta();
 }
 
@@ -119,6 +126,8 @@ fn codice_breve() {
 }
 
 
+//  GIOCO DELLE CARTE - GESTIONE VALORE NULL
+//=====================================================================================================//
 //esempio carta e giocatori, con l'utilizzo della Option
 #[derive(Clone)]
 struct Carta(u8);
@@ -140,7 +149,7 @@ impl Giocatore {
 
 impl Carta {
     fn tira(&self) {
-        println!("Il giocatore ha tirato la carta {}", self.0); // self.0 = il primo elemento della struttura-tupla Carta
+        println!("\tIl giocatore ha tirato la carta {}", self.0); // self.0 = il primo elemento della struttura-tupla Carta
     }
 }
 
@@ -158,12 +167,14 @@ fn tira_carta() {
         //Some(...) = pattern
         Some(prima_carta) => prima_carta.tira(),
         //_  = pattern
-        _ => println!("non hai carte (1)"),
+        _ => println!("\tnon hai carte (1)"),
     }
     // metodo 3 con la if let
     if let Some(prima_carta_2) = giocatore.get_prima_carta() {
         prima_carta_2.tira();
     } else {
-        println!("Non hai carte (2)");
+        println!("\tNon hai carte (2)\n");
     }
 }
+
+//=====================================================================================================//
