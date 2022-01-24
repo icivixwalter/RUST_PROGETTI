@@ -1,6 +1,6 @@
 pub fn run() {
     println!(
-    "\n
+    "\n\t
     //II CASO IN CUI VENGONO IGNORATI TUTTI GLI ALTRI VALORI - UTILIZZO DI UNA TUPLA
     //-----------------------------------------------------------------------------//
     Nota: Con questo II esempio viene conformato il principio di esaustivita 
@@ -26,10 +26,13 @@ pub fn run() {
     
             if number % 4 == 1 {
                 let _dice_roll_2 = 9;  //qui chiama una tupla vuota
-                esegui(_dice_roll_2)
-            }
+                println!("\n\t
+            PRINCIPIO DI ESAUSTIVITA CONFERMATO
+            con il valore {} diverso dai precedenti (7 e 3) chiamo una tupla vuota!\n", number);
+                        esegui(_dice_roll_2)
+                    }
     
-            println!("CONTEGGIO ALL'INDIETRO {}!\n", number);
+            println!("\tCONTEGGIO ALL'INDIETRO {}!\n", number);
             number -= 1; //=-1 per conteggio all'indietro
         }
     println!(
@@ -50,10 +53,10 @@ pub fn run() {
         }
     
         fn add_fancy_hat(_dice_roll_2: u8) {
-            println!("\n add_fancy_hat è uguale a : {}", _dice_roll_2);
+            println!("\n\t add_fancy_hat è uguale a : {}", _dice_roll_2);
         }
         fn remove_fancy_hat(_dice_roll_2: u8) {
-            println!("\n remove_fancy_hat è uguale a : {}", _dice_roll_2);
+            println!("\n\t remove_fancy_hat è uguale a : {}", _dice_roll_2);
         }
 
         //NON USATA

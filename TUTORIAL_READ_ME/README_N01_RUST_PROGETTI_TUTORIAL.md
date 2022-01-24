@@ -737,6 +737,23 @@ mut a=10;
 
 # O 
 @O.lettera.O.in.Rust
+@Option; @Le.Optioni.in.rust; @Null.Option.gestione.dei.valori.nulli; @modulo.Optioni.in.rust
+
+## Option https://doc.rust-lang.org/std/option/
+Il modulo delle opzioni in rust che permette la gestione dei valori e del null.
+Le opzioni permettono:
+
+		Type Option rappresenta un valore facoltativo: ogni opzione è Some e contiene un valore, oppure Nonee non lo fa. I tipi di opzione sono molto comuni nel codice Rust, in quanto hanno un certo numero di usi:
+
+		Valori iniziali
+		Valori restituiti per funzioni non definite nell'intero intervallo di input (funzioni parziali)
+		Valore restituito per segnalare altrimenti errori semplici, dove Nessuno viene restituito per errore
+		Campi struct facoltativi
+		Campi struttura che possono essere prestati o "presi"
+		Argomenti facoltativi delle funzioni
+		Puntatori Nullable
+		Scambiare le cose da situazioni difficili
+		https://doc.rust-lang.org/std/option/
 
 # P 
 @P.lettera.P.in.Rust
@@ -777,6 +794,53 @@ un ulteriore pezzo di stringa come ad es.
 # R 
 
 # S 
+
+## S= Le stringhe in rust
+
+Faq: @le.stringhe.in.rust; @string.in.rust; @creare.una.stringa.in.rust
+	 @string.in.rust; @string::from; @stringa.sull'heap; @scrivere.una.stringa.sull'heap
+	 @heap.string
+
+### S= HEAP: Una stringa memorizzata nell'area di memoria chiamata heap.
+
+
+Le stringhe in rust vengono attivate con String::form (".."); ossia la funzione 
+stringa che permette di scrivere sull'heap, l'are di memoria variabile al quale utilizzando
+mut puoi rendere una stringa variabile al contrario di quella scritta sullo stack :
+
+	//esempio_01 di stringa sull'heap
+	let mut s = String::from("provo la stringa mutabile: ");
+	
+	//esempio_02 di stringa sull'heap
+		// Utilizzo di una stringa utilizzato l'heap e quindi variabile con mut
+		let mut _my_string = String::from("\n\t
+		
+		//UTILIZZO DELLE OPZIONI: MODIFICA CREATA LA FUNZIONE CHE ACCETTA 
+		//PARAMETRI NULL O NUMERICI
+		//------------------------------------------------------------------------------------//
+		Modulo std::opzione -
+		Il Type Option rappresenta un valore facoltativo: ogni opzione è Some e contiene un valore, 
+		oppure None = Null non contiene un  valore. 
+		I tipi di opzione sono molto comuni nel codice Rust, in quanto hanno un certo numero di usi:
+
+		Valori iniziali
+		Valori restituiti per funzioni non definite nell'intero intervallo di input 
+						(funzioni parziali)
+		Valore restituito per segnalare altrimenti errori semplici, dove Nessuno viene 
+						restituito per errore
+		Campi struct facoltativi
+		Campi struttura che possono essere prestati o 'presi'
+		Argomenti facoltativi delle funzioni
+		Puntatori Nullable
+		Scambiare le cose da situazioni difficili
+		Le opzionis sono comunemente abbinate alla corrispondenza dei modelli per interrogare 
+		la presenza di un valore e agire, tenendo sempre conto del caso Nessuno.
+		//------------------------------------------------------------------------------------//
+
+		");
+		
+		print!("messaggio: {}",_my_string );
+	
 
 # T 
 
