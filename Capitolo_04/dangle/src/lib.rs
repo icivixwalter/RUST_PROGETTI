@@ -1,5 +1,5 @@
 
-//use std::io::stdin;
+// use std::io::stdin;
 
 /*CAPITOLO 4 - 4.2.02_Dangling References_Riferimenti_pendenti
 //____________________________________________________________________________//

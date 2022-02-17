@@ -327,6 +327,15 @@ esempio di array con il ciclo for che permette il controllo perfetto dell'indice
 # C 
 @C.lettera.C.in.Rust
 
+## Commenti in rust
+@commenti.rust, @rust.commenti
+I commenti i rust possono essere eseguita con tripla barra a destra per costruire una documentazione,
+padre figlio. La radice è la tripla barra /// e il figlio e la doppia con il punto interrogativo. es.
+
+	/// radice
+		//!
+		//! figlio.
+
 # D 
 @D.lettera.D.in.Rust
 

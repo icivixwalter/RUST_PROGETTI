@@ -11,8 +11,12 @@ use std::process::Command; //libreria per eseguire i comandi (cmd)
     es. ----> call_exe::call("c:\\CASA\\PROGRAMMI\\RUST_PROGETTI\\APRI_FILE_{guessing_game}.bat");
 */
 
+
+/// CHIAMA FILE ESTERNO @chiama.file.esterno
 pub fn call(path: &str) {//CHIAMA UN PROCESSO FIGLIO
-    // chiama il Bat e a sua volta EXE
+    //! 
+    //!chiama il Bat e a sua volta EXE 
+    //!
     Command::new(path)
             .output()
             .expect("failed to execute process");

@@ -1,13 +1,16 @@
 // region:LA_FORM_ESTERNA
 // nome del file della form esterna: seconda_gui.rs
 
-// LA FORM ESTERNA - STRUTTURA ED IMPLEMENTAZIONE
-//=======================================================================================//
-// 01) LE LIBRERIE ESTERNE : native windwos + nwg
-// 02) LE VARIABILI ISTANZA DELLE FORM E DEL TREAD
-// 03) LA MACRO DA CUI DERIVA LA FORM
-// 04) LA STRUTTURA DI COSTRUZIONE DELLA FORM
-// 05) LA IMPLEMENTAZIONE
+/// LA SECONDA FORM
+
+/// LA FORM ESTERNA - STRUTTURA ED IMPLEMENTAZIONE -- @la.form.esterna, @seconda.form
+///=======================================================================================//
+/// 01) LE LIBRERIE ESTERNE : native windwos + nwg
+/// 02) LE VARIABILI ISTANZA DELLE FORM E DEL TREAD
+/// 03) LA MACRO DA CUI DERIVA LA FORM
+/// 04) LA STRUTTURA DI COSTRUZIONE DELLA FORM
+/// 05) LA IMPLEMENTAZIONE
+
 
 // region: Le_Variabili_Oggetto
 // 01) LE LIBRERIE ESTERNE : native windwos + nwg
@@ -30,24 +33,32 @@ const DIMENSIONI_WINDOWS: (i32, i32) = (800, 600); // (800,600)---> larghezza e 
                                                    //con 10 bottoni posizione e la grandezza della finestra windows era di (600, 635)
                                                    //con 2 bottoni posizione originale della finestra windows (300,135)
 
-// 03) LA MACRO DA CUI DERIVA LA FORM
+///@macro.deriva.la.form
+/// 03) LA MACRO DA CUI DERIVA LA FORM
+/*
+@II.form.costruisci,  @la.II.form.struttura
+region: struttura_YesNodDialog
+04) LA STRUTTURA DI COSTRUZIONE DELLA FORM
+*/
 #[derive(Default, NwgUi)] //@II.FORM.04.Struttura.oggetto.form
                           // endregion: Le_Variabili_Oggetto
 
-// region: struttura_YesNodDialog
-// 04) LA STRUTTURA DI COSTRUZIONE DELLA FORM
 pub struct YesNoDialog {
     // data: RefCell<Option<String>>,
 
     //#[nwg_control(size: (300, 115), position: (650, 300), title: "A dialog", flags: "WINDOW|VISIBLE")]
+    /// @CREA.FINESTRA.II
+    /// 
     #[nwg_control(size: DIMENSIONI_WINDOWS, position: (150, 50), title: "A dialog", flags: "WINDOW|VISIBLE")]
     #[nwg_events( OnWindowClose: [YesNoDialog::close] )]
     window: nwg::Window,
 
+    //@button.yes
     #[nwg_control(text: "YES", position: (10, 10), size: (30, 35))]
     #[nwg_events( OnButtonClick: [YesNoDialog::choose(SELF, CTRL)] )]
     choice_yes: nwg::Button,
 
+    //@button.no
     #[nwg_control(text: "NO", position: (160, 10), size: (30, 35), focus: true)]
     #[nwg_events( OnButtonClick: [YesNoDialog::choose(SELF, CTRL)] )]
     choice_no: nwg::Button,
@@ -80,6 +91,7 @@ pub struct YesNoDialog {
     #[nwg_events( OnButtonClick: [YesNoDialog::fn_button_esercizio_24] )]
     button_24: nwg::Button,
 
+    
 
     //---------------------------------------------------------------------------------------//
 }

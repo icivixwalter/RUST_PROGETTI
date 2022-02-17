@@ -3,6 +3,9 @@
     See `basic` for the version without the derive macro
 */
 
+
+
+
 extern crate data_type;
 extern crate guessing_game;
 extern crate native_windows_derive as nwd;
@@ -32,7 +35,9 @@ const DIMENSIONI_WINDOWS: (i32, i32) = (800, 600); // (800,600)---> larghezza e 
                                                    //con 2 bottoni posizione originale della finestra windows (300,135)
 
 #[derive(Default, NwgUi)]
+/// LA SECONDA FORM IMPOSTAZIONI  @seconda.form
 pub struct BasicApp {
+    
     //CREA LA FINESTRA WINDOWS CON LE DIMENSIONI E LA POSIZIONE
     //---------------------------------------------------------------------------------------//
     //controllo base è questo size: (300, 135), position: (300, 300), per un bottone
@@ -50,10 +55,10 @@ pub struct BasicApp {
 
     //---------------------------------------------------------------------------------------//
 
-    //CASELLA DI TESTO Con la stringa - EDITABILE
-    //---------------------------------------------------------------------------------------//
-    //originale:
-    // #[nwg_control(text: "Heisenberg", size: (280, 35), position: (10, 10), focus: true)]
+    ///CASELLA DI TESTO Con la stringa - EDITABILE
+    ///---------------------------------------------------------------------------------------//
+    ///originale:
+    /// #[nwg_control(text: "Heisenberg", size: (280, 35), position: (10, 10), focus: true)]
     #[nwg_control(text: "Hello ", 
                 size: (230, 35),                    //casella di testo largh + alt originale 280,35 ---- > 230,35
                 position: (10, 10), focus: true)] //casella posizione x,y
@@ -364,6 +369,8 @@ pub struct BasicApp {
 
 //le funzioni esterne
 impl BasicApp {
+    
+    ///ESEGUI EXE ESTERNA
     //buttone 1 @esegui.bat, @attiva.cmd
     fn fn_button_esercizio_01(&self) {
         // call_exe::call("APRI_FILE_{guessing_game}.bat");
@@ -536,7 +543,7 @@ fn main() {
     nwg::Font::set_global_family("Segoe UI").expect("Failed to set default font");
 
     let _app = BasicApp::build_ui(Default::default()).expect("Failed to build UI");
-
+            
     //EVENTI
     nwg::dispatch_thread_events();
 }
