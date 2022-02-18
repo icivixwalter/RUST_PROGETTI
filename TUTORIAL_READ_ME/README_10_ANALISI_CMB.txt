@@ -47,7 +47,7 @@ use std::ops::Deref;
 
 
 
-02 CREO UNA STRUTTURA
+02 CREO UNA STRUTTURA BASIC UP
 
 
 #[derive(Default)]
@@ -57,6 +57,17 @@ pub struct BasicApp {
     //@cmb.imposta la variabile
     combo: nwg::ComboBox<&'static str>,
 }
+
+impl BasicApp {
+    // nella implementazione RICHIAMO UN MSG DI USCITA
+    fn say_goodbye(&self) {
+        nwg::simple_message("Goodbye", "Goodbye Walter");
+        nwg::stop_thread_dispatch();
+    }
+}
+
+
+
 
 
 
@@ -102,23 +113,7 @@ pub struct BasicAppUi {
 		//---------------------------------------------------------------------------------------//
 
 
-    //CREA LA FINESTRA WINDOWS CON LE DIMENSIONI E LA POSIZIONE
-    //---------------------------------------------------------------------------------------//
-    //controllo base è questo size: (300, 135), position: (300, 300), per un bottone
-    //la posizione base è questa position: (300, 300) cambio in ----> 300,10
-    //paer avere la finestra centrale
-    //con 600,435 entrano = 2 bottoni; @form.master
-    //ORIGINALE ----> #[nwg_control(size: (600, 635), position: (300, 10), //cambio in ----> 300,10
-    
-    #[nwg_control(size: DIMENSIONI_WINDOWS, position: (300, 10), //cambio in ----> 300,10
-                title: "Basic example", 
-                flags: "WINDOW|VISIBLE")
-                ]
-    //EVENTO DI CHIUSURA DELL'APPLICAZIONE.
-    #[nwg_events( OnWindowClose: [BasicApp::say_goodbye] )] //evento messaggio 02
-    window: nwg::Window,
-    //---------------------------------------------------------------------------------------//
-
+ 
 
 
 
