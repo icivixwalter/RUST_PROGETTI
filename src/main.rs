@@ -46,8 +46,8 @@ pub struct BasicApp {
     //con 600,435 entrano = 2 bottoni; @form.master
     //ORIGINALE ----> #[nwg_control(size: (600, 635), position: (300, 10), //cambio in ----> 300,10
     #[nwg_control(size: DIMENSIONI_WINDOWS, position: (300, 10), //cambio in ----> 300,10
-                title: "Basic example", 
-                flags: "WINDOW|VISIBLE")]
+                  title: "Basic example", 
+                  flags: "WINDOW|VISIBLE")]
     //EVENTO DI CHIUSURA DELL'APPLICAZIONE.
     #[nwg_events( OnWindowClose: [BasicApp::say_goodbye] )] //evento messaggio 02
     window: nwg::Window,

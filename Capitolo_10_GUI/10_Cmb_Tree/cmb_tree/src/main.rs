@@ -257,7 +257,7 @@ mod partial_demo_ui {
                 default_handler: Default::default(),
             });
 
-            // Events
+            // @handle.windows = principale a cui appendi i 3 oggetti
             let mut window_handles = vec![&ui.window.handle];
             //APPEND sulla finestra le 3 ui
             window_handles.append(&mut ui.people_ui.handles());

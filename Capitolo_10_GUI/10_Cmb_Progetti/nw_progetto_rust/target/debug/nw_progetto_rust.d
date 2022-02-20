@@ -1,0 +1,1 @@
+C:\CASA\PROGRAMMI\RUST_PROGETTI\Capitolo_10_GUI\10_Cmb_Progetti\nw_progetto_rust\target\debug\nw_progetto_rust.exe: C:\CASA\PROGRAMMI\RUST_PROGETTI\Capitolo_10_GUI\10_Cmb_Progetti\nw_progetto_rust\src\main.rs
