@@ -1,0 +1,1 @@
+C:\CASA\PROGRAMMI\RUST_PROGETTI\NATIVE_WINDOWS_GUI\Capitolo_03_BASIC\06_Basic\barebone\target\debug\barebone.exe: C:\CASA\PROGRAMMI\RUST_PROGETTI\NATIVE_WINDOWS_GUI\Capitolo_03_BASIC\06_Basic\barebone\src\main.rs

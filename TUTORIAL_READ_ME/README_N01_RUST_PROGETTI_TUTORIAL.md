@@ -28,6 +28,11 @@ README_RUST_PROGETTI_TUTORIAL.md
 3. su VS code installare plug-in di rust Su IJ installare plug-in di rust
 4. Vai su gitub e copia URL del progetto: https://github.com/redjack96/first_rust
 
+LINK
+RUST IN ITALIANO - CARLO MILANESI  @rust.link.italiano. @rust.tutorial.italiano
+https://carlomilanesi.github.io/linguaggio-rust/mutability.html
+
+
 > ATTENZIONE se manca Visual Studio 2019 "linker `link.exe` not found"
 > occorre installare Visual C++
 > scaricalo qui:
