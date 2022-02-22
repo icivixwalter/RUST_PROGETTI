@@ -1,6 +1,5 @@
 use std::io;
 use std::io::stdin;
-// TODO: impossibile trovare rand
 //aggiornare il file .toml   con le nuove dipendenze prima di utilizzare rand
 use rand::Rng;
 use std::cmp::Ordering; // libreria per gli

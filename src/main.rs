@@ -1,606 +1,242 @@
-/*!
-    A very simple application that show your name in a message box.
-    See `basic` for the version without the derive macro
+/*
+PROGETTO APP NWG
+con l'utilizzo delle derive, con tutti i punti  sotto elencati.
+
+    NO 1. [solo se servono dati] Definisci una struttura che conterrà i dati dell'applicazione non GUI
+
+    2. Definire tutte le strutture GUI che conterranno i controlli(Button, Window, ecc.) e dei dati (la struct al passo 1)
+
+    NO 3. [solo se servono dati] Aggiungi la struttura dei dati non-GUI ai membri della struttura GUI dentro un Refcell<>
+
+    4. Definisci le funzioni delle GUI implementando le strutture della GUI
+
+    5. Implementa NativeUi per la struttura della GUI (manualmente o con derive(NwGui))
+
+Nella funzione main():
+    6. inizializzare la struttura dell'applicazione e la struttura della GUI
+    7. Chiama build_ui con i dati inizializzati
+    8. Avvia l'elaborazione degli eventi
+
+
+   COSTRUISCO UNA FORM BASE con una
+
 */
-
-
-
 
 extern crate data_type;
 extern crate guessing_game;
 extern crate native_windows_derive as nwd;
 extern crate native_windows_gui as nwg;
 
-//per usare la II° GUI
 mod seconda_gui;
+mod main2;
 
-//la II form
-//use  crate seconda_gui::YesNoDialog;
+use std::cell::RefCell;
+use std::ops::Deref;
+use std::rc::Rc;
+// use nwd::NwgUi;
+use nwg::{NativeUi, NwgError, WindowFlags};
+use nwg::stretch::geometry::Rect;
+use nwg::stretch::style::FlexDirection;
 
-use nwd::NwgUi;
-use nwg::NativeUi;
-// use std::{sync::Mutex, thread};
-// use std::sync::atomic::AtomicBool;
-// static spawned: Mutex<bool> = Mutex::new(false);
+const DIMENSIONI_WINDOWS: (i32, i32) = (800, 600);
+const DIMENSIONI_CONTROL: (i32, i32) = (230, 35);
 
-//I° FILA DI 10 BOTTONI - DA 1-10
-const FILA_01_BUTTON_SIZE: (i32, i32) = (310, 30); //larghezza + altezza fissi
 
-//II° FILA DI 10 BOTTONI - DA 11-20 *** da utilizzare ***
-const FILA_02_BUTTON_SIZE: (i32, i32) = (310, 30); //larghezza + altezza fissi
-
-//LA FINESTRA WINDOWS
-const DIMENSIONI_WINDOWS: (i32, i32) = (800, 600); // (800,600)---> larghezza e posizione della finestra windows con 20 bottoni
-                                                   //con 10 bottoni posizione e la grandezza della finestra windows era di (600, 635)
-                                                   //con 2 bottoni posizione originale della finestra windows (300,135)
-
-#[derive(Default, NwgUi)]
 /// LA SECONDA FORM IMPOSTAZIONI  @seconda.form
-pub struct BasicApp {
-    
-    //CREA LA FINESTRA WINDOWS CON LE DIMENSIONI E LA POSIZIONE
-    //---------------------------------------------------------------------------------------//
-    //controllo base è questo size: (300, 135), position: (300, 300), per un bottone
-    //la posizione base è questa position: (300, 300) cambio in ----> 300,10
-    //paer avere la finestra centrale
-    //con 600,435 entrano = 2 bottoni; @form.master
-    //ORIGINALE ----> #[nwg_control(size: (600, 635), position: (300, 10), //cambio in ----> 300,10
-    #[nwg_control(size: DIMENSIONI_WINDOWS, position: (300, 10), //cambio in ----> 300,10
-                  title: "Basic example", 
-                  flags: "WINDOW|VISIBLE")]
-    //EVENTO DI CHIUSURA DELL'APPLICAZIONE.
-    #[nwg_events( OnWindowClose: [BasicApp::say_goodbye] )] //evento messaggio 02
+#[derive(Default)]
+pub struct BasicAppCmb {
+    // #[nwg_control(size: DIMENSIONI_WINDOWS, position: (300, 10), //cambio in ----> 300,10
+    // title: "Rust Progetti con Combobox",
+    // flags: "WINDOW|VISIBLE")] //evento messaggio 02
     window: nwg::Window,
     //---------------------------------------------------------------------------------------//
 
-    //---------------------------------------------------------------------------------------//
+    // myflexbox: nwg::FlexboxLayout,
 
-    ///CASELLA DI TESTO Con la stringa - EDITABILE
-    ///---------------------------------------------------------------------------------------//
-    ///originale:
-    /// #[nwg_control(text: "Heisenberg", size: (280, 35), position: (10, 10), focus: true)]
-    #[nwg_control(text: "Hello ", 
-                size: (230, 35),                    //casella di testo largh + alt originale 280,35 ---- > 230,35
-                position: (10, 10), focus: true)] //casella posizione x,y
+    // #[nwg_control(text: "Hello ",
+    // size: (230, 35),                    //casella di testo largh + alt originale 280,35 ---- > 230,35
+    // position: (10, 10), focus: true)] //casella posizione x,y
     name_edit: nwg::TextInput,
-    //---------------------------------------------------------------------------------------//
 
-    //BOTTONE 1 CON L'ETICHETTA
-    //---------------------------------------------------------------------------------------//
-    #[nwg_control(text: "Say my name", 
-                size: (230, 30),    //larg + alt del bottone da 280, 70 ---> ridotto 280, 30
-                position: (10, 50))]
-    #[nwg_events( OnButtonClick: [BasicApp::say_hello] )]
-    hello_button: nwg::Button, //BOTTONE 1 CON L'ETICHETTA
-    //---------------------------------------------------------------------------------------//
+    mycmb: nwg::ComboBox<&'static str>,
+    mycmb2: nwg::ComboBox<&'static str>,
 
-    // region: attiva_la_form_esterna
-    //BOTTONE 2 APRI SECONDA FORM - open_ii_form
-    //---------------------------------------------------------------------------------------//
-    /*APRO LA SECONDA FORM = mediante la creazione di un nuovo button  che attiva l'evento
-        open_ii_form, questa FORM  contine gli ulteriori bottoni da 20 bottoni a 40 da creare. 
-            faq: @II.form, @apri.seconda.form, @crea.la.form.esterna; @apri.la.form.esterna 
-                 @II.FORM.01.creo.BUTTON; @attiva.la.form.esterna; @chiama.la.form.esterna
-    
-    */
-    #[nwg_control(text: "APRI LA II FORM", 
-                size: (230, 30),    //larg + alt del bottone da 280, 70 ---> ridotto 280, 30
-                position: (350, 50))]
-    #[nwg_events( OnButtonClick: [BasicApp::open_ii_form] )]
-    open_ii_form: nwg::Button, //BOTTONE 2 APRI SECONDA FORM - attiva l'evento Btn
-    //---------------------------------------------------------------------------------------//
-   // endregion: attiva_la_form_esterna
-
-    #[nwg_control(text: "01) Cap 1 - Run BAT", 
-    size: FILA_01_BUTTON_SIZE,    //I° FILA DI 10 BOTTONI: larg + alt       del bottone 
-    position: (10, 100))]
-    #[nwg_events( OnButtonClick: [BasicApp::fn_button_esercizio_01] )]
-    button_01: nwg::Button,
-    //---------------------------------------------------------------------------------------//
-    #[nwg_control(text: "02) Cap 2 - Guessing Game", 
-        size: FILA_01_BUTTON_SIZE,    //I° FILA DI 10 BOTTONI: larg + alt       del bottone 
-        position: (10, 150))]
-    #[nwg_events( OnButtonClick: [BasicApp::fn_button_esercizio_02] )]
-    button_02: nwg::Button,
-    //---------------------------------------------------------------------------------------//
-    #[nwg_control(text: "03) Cap 3 - Data type", 
-        size: FILA_01_BUTTON_SIZE,    //I° FILA DI 10 BOTTONI: larg + alt       del bottone 
-        position: (10, 200))]
-    #[nwg_events( OnButtonClick: [BasicApp::fn_button_esercizio_03] )]
-    button_03: nwg::Button,
-    //---------------------------------------------------------------------------------------//
-
-    //---------------------------------------------------------------------------------------//
-    #[nwg_control(text: "04) Cap 3 - function", 
-    size: FILA_01_BUTTON_SIZE,    //I° FILA DI 10 BOTTONI: larg + alt       del bottone 
-    position: (10, 250))]
-    #[nwg_events( OnButtonClick: [BasicApp::fn_button_esercizio_04] )]
-    button_04: nwg::Button,
-    //---------------------------------------------------------------------------------------//
-
-    //---------------------------------------------------------------------------------------//
-    #[nwg_control(text: "05) Cap 3 - progetto loop", 
-    size: FILA_01_BUTTON_SIZE,    //I° FILA DI 10 BOTTONI: larg + alt       del bottone 
-    position: (10, 300))]
-    #[nwg_events( OnButtonClick: [BasicApp::fn_button_esercizio_05] )]
-    button_05: nwg::Button,
-    //---------------------------------------------------------------------------------------//
-
-    //---------------------------------------------------------------------------------------//
-    #[nwg_control(text: "06) Cap 3 - variabili & mutability", 
-    size: FILA_01_BUTTON_SIZE,    //I° FILA DI 10 BOTTONI: larg + alt       del bottone 
-    position: (10, 350))]
-    #[nwg_events( OnButtonClick: [BasicApp::fn_button_esercizio_06] )]
-    button_06: nwg::Button,
-    //---------------------------------------------------------------------------------------//
-
-    //---------------------------------------------------------------------------------------//
-    #[nwg_control(text: "07) Cap_04 - dangle", 
-    size: FILA_01_BUTTON_SIZE,    //I° FILA DI 10 BOTTONI: larg + alt       del bottone 
-    position: (10, 400))]
-    #[nwg_events( OnButtonClick: [BasicApp::fn_button_esercizio_07] )]
-    button_07: nwg::Button,
-    //---------------------------------------------------------------------------------------//
-
-    //ATTENZIONE: deve essere rinominato il file main.rs a lib rs del progetto ownership che deve
-    //essere incluso nel file cargo.toml del progetto generale inoltre nel file lib.rs occorre
-    //rinominare la funzione principale main ---> run con tipo public: pub fn run() {...
-    //---------------------------------------------------------------------------------------//
-    //[nwg_control 	= creo un nuovo controllo con le proprieta text, size, position
-    #[nwg_control(text: "08) Cap_04 - ownership", 
-	size: FILA_01_BUTTON_SIZE,    		//I° FILA DI 10 BOTTONI: larg + alt         del bottone 
-	position: (10, 450))]
-    //la posizione 10 X posizione + 50 Y
-    //nwg_events  	= attivo l'evento del controllo con la funzione OnButtonClick
-    //			la quale chiama la implementazione BasicApp e la funzione creata.
-    #[nwg_events( OnButtonClick: [BasicApp::fn_button_esercizio_08] )]
-    //creo il nuovo oggetto button con la libreria nwg
-    button_08: nwg::Button,
-    //---------------------------------------------------------------------------------------//
-
-    //ATTENZIONE: deve essere rinominato il file main.rs a lib rs del progetto references_and_borrowing che deve
-    //essere incluso nel file cargo.toml del progetto generale inoltre nel file lib.rs occorre
-    //rinominare la funzione principale main ---> run con tipo public: pub fn run() {...
-    //---------------------------------------------------------------------------------------//
-    //[nwg_control 	= creo un nuovo controllo con le proprieta text, size, position
-    #[nwg_control(text: "09) Cap_04 - references_and_borrowing", 
-        size: FILA_01_BUTTON_SIZE,    		//I° FILA DI 10 BOTTONI: larg CON LA COSTANTE + alt del bottone NUMERICA
-        position: (10, 500))]
-    //la posizione 10 X posizione + 50 Y
-    //nwg_events  	= attivo l'evento del controllo con la funzione OnButtonClick
-    //			la quale chiama la implementazione BasicApp e la funzione creata.
-    #[nwg_events( OnButtonClick: [BasicApp::fn_button_esercizio_09] )]
-    //creo il nuovo oggetto button con la libreria nwg
-    button_0: nwg::Button,
-    //---------------------------------------------------------------------------------------//
-
-    //ATTENZIONE: deve essere rinominato il file main.rs a lib rs del progetto the_slice_type che deve essere incluso nel file cargo.toml del progetto generale inoltre nel file lib.rs occorre
-    //rinominare la funzione principale main ---> run con tipo public: pub fn run() {...
-    //---------------------------------------------------------------------------------------//
-    //[nwg_control 	= creo un nuovo controllo con le proprieta text, size, position
-    #[nwg_control(text: "10) Cap_04 - the_slice_type", 
-        size: FILA_01_BUTTON_SIZE,    		//I° FILA DI 10 BOTTONI: larg CON LA COSTANTE + alt del bottone NUMERICA
-        position: (10, 550))]
-    //la posizione 10 X posizione + 50 Y
-    //nwg_events  	= attivo l'evento del controllo con la funzione OnButtonClick
-    //			la quale chiama la implementazione BasicApp e la funzione creata.
-    #[nwg_events( OnButtonClick: [BasicApp::fn_button_esercizio_10] )]
-    //creo il nuovo oggetto button con la libreria nwg
-    button_10: nwg::Button,
-    //---------------------------------------------------------------------------------------//
-
-    // region: II_FILA_BUTTON_DA_11-20
-    //****************************************************************************************//
-    //          II° FILA DI BOTTONI
-
-    //BUTTON_11 - II FILA DA 11 - 20
-    //---------------------------------------------------------------------------------------//
-    #[nwg_control(text: "11) Cap_05 - can_old", 
-        //le dimensioni della Button è impostato in modo fissa dalla COSTANTE.
-        size: FILA_02_BUTTON_SIZE,    //II° FILA DI 10 BOTTONI: larg + alt       del bottone 
-        /*POSIZIONE DEL BUTTON è incrementale di 2,4,6,8,10 ecc.. partendo dalla posizione 100 
-            si ha una automatica disposizione della casella text  INCREMENTANDO DI UN MULTIPLO
-            DI 2 - Oggetto Button per il progetto - can_old
-        */
-        position: (350, 100+(0*25)))]
-    //posizione incrementale dell'oggetto button, basta cambiare lo 0 con                            //un multiplo di due
-    #[nwg_events( OnButtonClick: [BasicApp::fn_button_esercizio_11] )]
-    button_11: nwg::Button,
-    //---------------------------------------------------------------------------------------//
-
-    //BUTTON_12 - II FILA DA 11 - 20 - PROGETTO ---> defining_methods
-    //---------------------------------------------------------------------------------------//
-    #[nwg_control(text: "12) Cap_05 - defining_methods", 
-        //le dimensioni della Button è impostato in modo fissa dalla COSTANTE.
-        size: FILA_02_BUTTON_SIZE,    //II° FILA DI 10 BOTTONI: larg + alt       del bottone 
-        /*POSIZIONE DEL BUTTON è incrementale di 2,4,6,8,10 ecc.. partendo dalla posizione 100 
-            si ha una automatica disposizione della casella text  INCREMENTANDO DI UN MULTIPLO
-            DI 2 - Oggetto Button per il progetto - defining_methods
-        */
-        position: (350, 100+(2*25)))]
-    //posizione incrementale dell'oggetto button, basta cambiare lo 0 con                            //un multiplo di due
-    #[nwg_events( OnButtonClick: [BasicApp::fn_button_esercizio_12] )]
-    button_12: nwg::Button,
-    //---------------------------------------------------------------------------------------//
-
-    //BUTTON 13) - II FILA DA 11 - 20 - PROGETTO ---> format_debug
-    //---------------------------------------------------------------------------------------//
-    #[nwg_control(text: "13) Cap_05 - format_debug", 
-        //le dimensioni della Button è impostato in modo fissa dalla COSTANTE.
-        size: FILA_02_BUTTON_SIZE,    //II° FILA DI 10 BOTTONI: larg + alt       del bottone 
-        /*POSIZIONE DEL BUTTON è incrementale di 2,4,6,8,10 ecc.. partendo dalla posizione 100 
-        si ha una automatica disposizione della casella text  INCREMENTANDO DI UN MULTIPLO
-        DI 2 - Oggetto Button per il progetto - format_debug
-        */
-        position: (350, 100+(4*25)))]
-    //posizione incrementale dell'oggetto button, basta cambiare lo 0 con                            //un multiplo di due
-    #[nwg_events( OnButtonClick: [BasicApp::fn_button_esercizio_13] )]
-    button_13: nwg::Button,
-    //---------------------------------------------------------------------------------------//
-
-    //BUTTON 14) - II FILA DA 11 - 20 - PROGETTO ---> multiple_impl_blocks
-    //---------------------------------------------------------------------------------------//
-    #[nwg_control(text: "14) Cap_05 - multiple_impl_blocks", 
-    //le dimensioni della Button è impostato in modo fissa dalla COSTANTE.
-    size: FILA_02_BUTTON_SIZE,    //II° FILA DI 10 BOTTONI: larg + alt       del bottone 
-    /*POSIZIONE DEL BUTTON è incrementale di 2,4,6,8,10 ecc.. partendo dalla posizione 100 
-    si ha una automatica disposizione della casella text  INCREMENTANDO DI UN MULTIPLO
-    DI 2 - Oggetto Button per il progetto - multiple_impl_blocks
-    */
-    position: (350, 100+(6*25)))]
-    //posizione incrementale dell'oggetto button, basta cambiare lo 0 con                            //un multiplo di due
-    #[nwg_events( OnButtonClick: [BasicApp::fn_button_esercizio_14] )]
-    button_14: nwg::Button,
-    //---------------------------------------------------------------------------------------//
-
-    //BUTTON 15) - II FILA DA 11 - 20 - PROGETTO ---> operator_c
-    //---------------------------------------------------------------------------------------//
-    #[nwg_control(text: "15) Cap_05 - operator_c", 
-    //le dimensioni della Button è impostato in modo fissa dalla COSTANTE.
-    size: FILA_02_BUTTON_SIZE,    //II° FILA DI 10 BOTTONI: larg + alt       del bottone 
-    /*POSIZIONE DEL BUTTON è incrementale di 2,4,6,8,10 ecc.. partendo dalla posizione 100 
-    si ha una automatica disposizione della casella text  INCREMENTANDO DI UN MULTIPLO
-    DI 2 - Oggetto Button per il progetto - operator_c
-    */
-    position: (350, 100+(8*25)))]
-    //posizione incrementale dell'oggetto button, basta cambiare lo 0 con                            //un multiplo di due
-    #[nwg_events( OnButtonClick: [BasicApp::fn_button_esercizio_15] )]
-    button_15: nwg::Button,
-    //---------------------------------------------------------------------------------------//
-
-    //BUTTON 16) - II FILA DA 11 - 20 - PROGETTO ---> ownership_2
-    //---------------------------------------------------------------------------------------//
-    #[nwg_control(text: "16) Cap_05 - ownership_2", 
-    //le dimensioni della Button è impostato in modo fissa dalla COSTANTE.
-    size: FILA_02_BUTTON_SIZE,    //II° FILA DI 10 BOTTONI: larg + alt       del bottone 
-    /*POSIZIONE DEL BUTTON è incrementale di 2,4,6,8,10 ecc.. partendo dalla posizione 100 
-    si ha una automatica disposizione della casella text  INCREMENTANDO DI UN MULTIPLO
-    DI 2 - Oggetto Button per il progetto - ownership_2
-    */
-    position: (350, 100+(10*25)))]
-    //posizione incrementale dell'oggetto button, basta cambiare lo 0 con                            //un multiplo di due
-    #[nwg_events( OnButtonClick: [BasicApp::fn_button_esercizio_16] )]
-    button_16: nwg::Button,
-    //---------------------------------------------------------------------------------------//
-
-
-
-  //BUTTON 17) - II FILA DA 11 - 20 - PROGETTO ---> rettangolo
-  //---------------------------------------------------------------------------------------//
-  #[nwg_control(text: "17) Cap_05 - rettangolo", 
-  //le dimensioni della Button è impostato in modo fissa dalla COSTANTE.
-  size: FILA_02_BUTTON_SIZE,    //II° FILA DI 10 BOTTONI: larg + alt       del bottone 
-  /*POSIZIONE DEL BUTTON è incrementale di 2,4,6,8,10 ecc.. partendo dalla posizione 100 
-  si ha una automatica disposizione della casella text  INCREMENTANDO DI UN MULTIPLO
-  DI 2 - Oggetto Button per il progetto - rettangolo
-  */
-  position: (350, 100+(12*25)))]  //posizione incrementale dell'oggetto button, basta cambiare lo 0 con                            
-                  //un multiplo di due
-
-
-  #[nwg_events( OnButtonClick: [BasicApp::fn_button_esercizio_17] )]
-  button_17: nwg::Button,
-
-  //---------------------------------------------------------------------------------------//
-
-  
-  //BUTTON 18) - II FILA DA 11 - 20 - PROGETTO ---> struct_struttura
-  //---------------------------------------------------------------------------------------//
-    #[nwg_control(text: "18) Cap_05 - struct_struttura", 
-    //le dimensioni della Button è impostato in modo fissa dalla COSTANTE.
-    size: FILA_02_BUTTON_SIZE,    //II° FILA DI 10 BOTTONI: larg + alt       del bottone 
-    /*POSIZIONE DEL BUTTON è incrementale di 2,4,6,8,10 ecc.. partendo dalla posizione 100 
-    si ha una automatica disposizione della casella text  INCREMENTANDO DI UN MULTIPLO
-    DI 2 - Oggetto Button per il progetto - struct_struttura
-    */
-    position: (350, 100+(14*25)))]  //posizione incrementale dell'oggetto button, basta cambiare lo 0 con                            
-                    //un multiplo di due
-
-
-    #[nwg_events( OnButtonClick: [BasicApp::fn_button_esercizio_18] )]
-    button_18: nwg::Button,
-
-  //---------------------------------------------------------------------------------------//
-
-
- //BUTTON 19) - II FILA DA 11 - 20 - PROGETTO ---> control_flow
- //---------------------------------------------------------------------------------------//
-    #[nwg_control(text: "19) Cap_06 - control_flow", 
-    //le dimensioni della Button è impostato in modo fissa dalla COSTANTE.
-    size: FILA_02_BUTTON_SIZE,    //II° FILA DI 10 BOTTONI: larg + alt       del bottone 
-    /*POSIZIONE DEL BUTTON è incrementale di 2,4,6,8,10 ecc.. partendo dalla posizione 100 
-    si ha una automatica disposizione della casella text  INCREMENTANDO DI UN MULTIPLO
-    DI 2 - Oggetto Button per il progetto - control_flow
-    */
-    position: (350, 100+(16*25)))]  //posizione incrementale dell'oggetto button, basta cambiare lo 0 con                            
-    //un multiplo di due
-
-
-    #[nwg_events( OnButtonClick: [BasicApp::fn_button_esercizio_19] )]
-    button_19: nwg::Button,
-
-//---------------------------------------------------------------------------------------//
-
-  //BUTTON 20) - II FILA DA 11 - 20 - PROGETTO ---> bind_values
-  //---------------------------------------------------------------------------------------//
-  #[nwg_control(text: "20) Cap_06 - bind_values", 
-  //le dimensioni della Button è impostato in modo fissa dalla COSTANTE.
-  size: FILA_02_BUTTON_SIZE,    //II° FILA DI 10 BOTTONI: larg + alt       del bottone 
-  /*POSIZIONE DEL BUTTON è incrementale di 2,4,6,8,10 ecc.. partendo dalla posizione 100 
-  si ha una automatica disposizione della casella text  INCREMENTANDO DI UN MULTIPLO
-  DI 2 - Oggetto Button per il progetto - bind_values
-  */
-  position: (350, 100+(18*25)))]  //posizione incrementale dell'oggetto button, basta cambiare lo 0 con                            
-  //un multiplo di due
-
-
-  #[nwg_events( OnButtonClick: [BasicApp::fn_button_esercizio_20] )]
-  button_20: nwg::Button,
-
-//---------------------------------------------------------------------------------------//
-
-
-
-
-
-    //****************************************************************************************//
-    // endregion: II_FILA_BUTTON_DA_11-20
+    // TODO: per ogni capitolo, metti una combobox, che permette di scegliere gli esercizi
+    //  mycmb2: nwg::ComboBox<'&static str>
 }
 
-//le funzioni esterne
-impl BasicApp {
-    
-    ///ESEGUI EXE ESTERNA
-    //buttone 1 @esegui.bat, @attiva.cmd
-    fn fn_button_esercizio_01(&self) {
-        // call_exe::call("APRI_FILE_{guessing_game}.bat");
-        //2 ° call con path
-        call_exe::call(
-            "c:\\CASA\\PROGRAMMI\\RUST_PROGETTI\\Capitolo_01\\APRI_FILE_{HelloWord_eseguibile}.bat",
-        );
+//IMPLEMENTA COMBINATA
+impl BasicAppCmb {
+    fn fn_combo_box_cap_01(&self, selezionato: Option<usize>) {
+        //SELECT TRA INDICI SELEZIONATI
+        match selezionato {
+            //INDICE 0
+            Some(0) => {
+                //imposta la casella di testo : attenzione per ora non aggiorna subito risolvere con un thread
+                self.name_edit.set_text("call_exe");
+                call_exe::call(
+                    "c:\\CASA\\PROGRAMMI\\RUST_PROGETTI\\Capitolo_01\\APRI_FILE_{HelloWord_eseguibile}.bat",
+                );
+            }
+            //INDICE 1
+            Some(1) => {
+                //imposta la casella di testo
+                self.name_edit.set_text("guessing_game");
+                guessing_game::game(); // TODO: questo va spostato in fn_combo_box_cap_02()
+            }
+            _ => {}  //INDICE NULL
+        }
     }
 
-    //region : I° FILA DELLA FUNZIONI BUTTON
-    //buttone 2
-    fn fn_button_esercizio_02(&self) {
-        guessing_game::game(); // TODO spawna un thread che esegue game()
+    fn fn_combo_box_cap_02(&self, selezionato: Option<usize>) {
+        println!("evento della 2° cmb");
+        // TODO: Per ogni capitolo implementa un metodo con un match per ogni combobox
+        // match selezionato {
+        //     Some(_) => (),
+        //     _ => ()
+        // }
     }
+}
 
-    fn fn_button_esercizio_03(&self) {
-        data_type::run();
+//STRUTTURA BasicAppUi  con i dati di BasicApp + variabile handler
+pub struct BasicAppCmbUi {
+    //inner = una struttura Rc a cui attribuire un parametro T che in questo caso è
+    //la struttura stessa basic App.
+    inner: Rc<BasicAppCmb>,
+    //variabile del handler della form base
+    default_handler: RefCell<Option<nwg::EventHandler>>,
+}
+
+impl NativeUi<BasicAppCmbUi> for BasicAppCmb {
+    fn build_ui(mut basic_app_cmb: Self) -> Result<BasicAppCmbUi, NwgError> {
+        nwg::Window::builder()
+            .size(DIMENSIONI_WINDOWS)
+            .position((300, 10))
+            .title("Rust Progetti con Combobox")
+            .flags(WindowFlags::VISIBLE | WindowFlags::WINDOW)
+            .build(&mut basic_app_cmb.window)?;
+
+
+        // nwg::FlexboxLayout::builder()
+        //     .parent(&mut basic_app_cmb.window)
+        //     .flex_direction(FlexDirection::Column)
+        //     .auto_spacing(Some(10))
+        //     .build(&mut basic_app_cmb.myflexbox)?;
+        //attenezione ? = gli errorri vanno nel result al chiamante
+
+        nwg::TextInput::builder()
+            .text("ESEMPIO COMBO BOX")
+            .size((230, 35))
+            .position((10, 10))
+            .focus(true)
+            .parent(&mut basic_app_cmb.window)
+            .build(&mut basic_app_cmb.name_edit)?;
+
+        //LISTA DI CMB CON VETTORE
+        let vec_combo = vec![&mut basic_app_cmb.mycmb,
+                             &mut basic_app_cmb.mycmb2];
+        // Todo aggiungi la nuova combobox al vettore come sotto, 3,4 idem...:
+        //  vec![&mut basic_app_cmb.mycmb, &mut basic_app_cmb.mycmb2];
+
+        //VETTORE DI  comandi della cmb_01
+        let lista_di_vec: Vec<Vec<&str>> = vec![vec!["ESERCIZIO_01", "ESERCIZIO_02"],
+                                                vec!["10", "20", "60"]];
+        let mut i = 1;
+
+        //CICLO FOR sul vettore di combobox per le combobox per adesso ce ne una,
+        // + assegna la lista vettore indicizzata.
+        for combo in vec_combo {
+            //
+            let index: Vec<&str> = lista_di_vec[i - 1].clone();
+
+            nwg::ComboBox::builder()
+                .parent(&mut basic_app_cmb.window)
+                .position((10, 60 * i as i32))
+                .size(DIMENSIONI_CONTROL)
+                .collection(index)
+                .selected_index(None)
+                .build(combo)?;
+            i += 1;
+        }
+
+
+        let ui = BasicAppCmbUi {
+            //nuovo oggetto inner con i dati di dataBasicApp
+            inner: Rc::new(basic_app_cmb),
+            //variabile evento dell'oggetto.
+            default_handler: Default::default(),
+        };
+
+
+        /* EVENTI DI TUTTI GLI OGGETTI WINDOWS + FIGLI*/
+//-----------------------------------------------------------------------------//
+        let evt_ui = Rc::downgrade(&ui.inner);
+        /*LAMBDA = closure rust = funzione senza NOME,
+          move = sopsta la proprieta delle variabili utilizzate
+          dalla closure/lambda dentro la lambda */
+        let handle_events = move |evt, _evt_data, handle| {
+            if let Some(ui) = evt_ui.upgrade() {
+                //SELECT EVENTI DELLA FORM + FIGLI
+                match evt {
+                    nwg::Event::OnWindowClose => {
+                        nwg::stop_thread_dispatch(); //termina il Thread l'applicazione altrimenti rimane attivo gestione attivita
+                    }
+                    //qui sono gestite gli eventi DI TUTTE LE CMB CORRENTI + FUTURE
+                    nwg::Event::OnComboxBoxSelection => {
+                        //EVENTO CMB_01 FINITA
+                        if &handle == &ui.mycmb { // controlla che l'handle da cui proviene l'evento sia quello della Combobox
+                            // prendo l'indice dell'elemento selezionato della combobox
+                            let selection = ui.mycmb.selection();
+                            // Eseguo la funzione definita nella struct BasicAppCmb
+                            ui.fn_combo_box_cap_01(selection);
+                            //EVENTO CMB_02 DA FINIRE
+                        } else if &handle == &ui.mycmb2 { // TODO: usa mycmb2
+                            let selection = ui.mycmb2.selection(); // TODO: usa mycmb2
+                            ui.fn_combo_box_cap_02(selection); // DEFINIRE IL MEDOTO DELLA NUOVA FUNZIONALITA !!!!!!
+                        }
+                        //TODO : aggiungere un else if per ogni combobox di un capitolo
+                    }
+                    _ => {} //NULLO
+                }
+            }
+        }; //muoiono le variabili di evt_ui, definite fuori usate dentro
+
+        *ui.default_handler.borrow_mut() = Some(nwg::full_bind_event_handler(&ui.window.handle, handle_events));
+//-----------------------------------------------------------------------------//
+        //return
+        Ok(ui)
     }
+}
 
-    fn fn_button_esercizio_04(&self) {
-        function::run();
+//CANCELLO LA BASE APP UI
+impl Drop for BasicAppCmbUi {
+    /// To make sure that everything is freed without issues, the default handler must be unbound.
+    fn drop(&mut self) {
+        let handler = self.default_handler.borrow();
+        if handler.is_some() {
+            nwg::unbind_event_handler(handler.as_ref().unwrap());
+        }
     }
+}
 
-    fn fn_button_esercizio_05(&self) {
-        progetto_loop::run();
-    }
+//IMPLEMENTO LA BASE APP UI
+impl Deref for BasicAppCmbUi {
+    type Target = BasicAppCmb;
 
-    fn fn_button_esercizio_06(&self) {
-        variables_and_mutability::run(); //button 06
-    }
-
-    fn fn_button_esercizio_07(&self) {
-        //button 07 - dangle
-        dangle::run();
-    }
-
-    //attivo la funzione con il parametro &self = this o se stesso
-    fn fn_button_esercizio_08(&self) {
-        //button_08 - progetto ---> ownership
-        ownership::run();
-    }
-
-    //attivo la funzione con il parametro &self = this o se stesso
-    fn fn_button_esercizio_09(&self) {
-        //button_09 - progetto ---> references_and_borrowing
-        references_and_borrowing::run();
-    }
-
-    //attivo la funzione con il parametro &self = this o se stesso
-    fn fn_button_esercizio_10(&self) {
-        //button_10 - progetto ---> the_slice_type
-        the_slice_type::run();
-    }
-
-    //endregion : II° FILA DELLA FUNZIONI BUTTON
-
-    //region : II° FILA DELLA FUNZIONI BUTTON
-    // II° FILA DI BUTTON
-    //-------------------------------------------------------------------------------//
-
-    //attivo la funzione con il parametro &self = this o se stesso
-    fn fn_button_esercizio_11(&self) {
-        //button_11 - progetto ---> can_old
-        can_old::run();
-    }
-
-    //attivo la funzione con il parametro &self = this o se stesso
-    fn fn_button_esercizio_12(&self) {
-        //button_12 - progetto ---> defining_methods
-        defining_methods::run();
-    }
-
-    //attivo la funzione con il parametro &self = this o se stesso
-    fn fn_button_esercizio_13(&self) {
-        //button_13 - progetto ---> format_debug
-        format_debug::run();
-    }
-
-    //attivo la funzione con il parametro &self = this o se stesso
-    fn fn_button_esercizio_14(&self) {
-        //button_14 - progetto ---> multiple_impl_blocks
-        multiple_impl_blocks::run();
-    }
-
-    //attivo la funzione con il parametro &self = this o se stesso
-    fn fn_button_esercizio_15(&self) {
-        //button_15 - progetto ---> operator_c
-        operator_c::run();
-    }
-
-    //attivo la funzione con il parametro &self = this o se stesso
-    fn fn_button_esercizio_16(&self) {
-        //button_16 - progetto ---> ownership_2
-        ownership_2::run();
-    }
-
-      //attivo la funzione con il parametro &self = this o se stesso
-      fn fn_button_esercizio_17(&self) { //button_17 - progetto ---> rettangolo
-        rettangolo::run(); 
-    }
-
-    //attivo la funzione con il parametro &self = this o se stesso
-    fn fn_button_esercizio_18(&self) { //button_18 - progetto ---> struct_struttura
-        struct_struttura::run(); 
-    }
-    
-    //attivo la funzione con il parametro &self = this o se stesso
-    fn fn_button_esercizio_19(&self) { //button_19 - progetto ---> control_flow
-        control_flow::run(); 
-    }
-
-    
-    //attivo la funzione con il parametro &self = this o se stesso
-    fn fn_button_esercizio_20(&self) { //button_20 - progetto ---> bind_values
-        bind_values::run(); 
-    }
-    
-
-    //-------------------------------------------------------------------------------//
-    //endregion : II° FILA DELLA FUNZIONI BUTTON
-
-    //messaggio_01
-    fn say_hello(&self) {
-        nwg::modal_info_message(
-            &self.window,
-            "Esempio message box",
-            &format!("Hello {}", self.name_edit.text()),
-        );
-    }
-
-    //@II.FORM.02.evento.APRI_LA_FORM_(open_ii_form)
-    //APRO LA NUOVA FORM II
-      fn open_ii_form(&self) {
-        
-        // nwg::modal_info_message(
-        //     &self.window,
-        //     "DEVO APRIRE LA II FORM  message box",
-        //     &format!("APRO LA FORM II {}", self.name_edit.text()),
-        // );
-    
-        /* EVENTO APRO LA FORM ESTERNA:
-         per aprile al form esterna occorrer fare riferimento alla classe oggetto e cioè
-            YesNoDialog con l'evento build
-            @II.FORM.03.attivo.oggetto.form
-    
-        */
-        let _app = seconda_gui::YesNoDialog::build_ui(Default::default()).expect("APRO LA II GUI - Failed to build UI");
-        
-        nwg::dispatch_thread_events();
-    }
-
-
-
-    fn say_goodbye(&self) {
-        nwg::modal_info_message(
-            &self.window,
-            "MESSAGGIO Goodbye",
-            &format!("Goodbye {}", self.name_edit.text()),
-        );
-
-        //tread stop
-        nwg::stop_thread_dispatch();
+    fn deref(&self) -> &BasicAppCmb {
+        &self.inner
     }
 }
 
 fn main() {
-    //SE FALLISCE LA COSTRUZIONE DELLA GUI MSG
-    nwg::init().expect("Failed to init Native Windows GUI");
-    //QUI METTE il tipo di testo ??
-    nwg::Font::set_global_family("Segoe UI").expect("Failed to set default font");
+    //VERSIONE VECCHIA = manin2
+    //richiamo il progetto originale
+    // main2::main2();
 
-    let _app = BasicApp::build_ui(Default::default()).expect("Failed to build UI");
-            
-    //EVENTI
-    nwg::dispatch_thread_events();
-}
+    //VERSIONE NUOVA = mani modificata togliendo tutte le derive
 
-// region:modello_originale
-/*
-modello originale:
-=========================================================================================
-/*!
-    A very simple application that show your name in a message box.
-    See `basic` for the version without the derive macro
-*/
-
-
-extern crate native_windows_gui as nwg;
-extern crate native_windows_derive as nwd;
-
-use nwd::NwgUi;
-use nwg::NativeUi;
-
-
-#[derive(Default, NwgUi)]
-pub struct BasicApp {
-    #[nwg_control(size: (300, 135), position: (300, 300), title: "Basic example", flags: "WINDOW|VISIBLE")]
-    #[nwg_events( OnWindowClose: [BasicApp::say_goodbye] )]
-    window: nwg::Window,
-
-    #[nwg_control(text: "Heisenberg", size: (280, 35), position: (10, 10), focus: true)]
-    name_edit: nwg::TextInput,
-
-    #[nwg_control(text: "Say my name", size: (280, 70), position: (10, 50))]
-    #[nwg_events( OnButtonClick: [BasicApp::say_hello] )]
-    hello_button: nwg::Button
-}
-
-impl BasicApp {
-
-    fn say_hello(&self) {
-        nwg::modal_info_message(&self.window, "Hello", &format!("Hello {}", self.name_edit.text()));
-    }
-
-    fn say_goodbye(&self) {
-        nwg::modal_info_message(&self.window, "Goodbye", &format!("Goodbye {}", self.name_edit.text()));
-        nwg::stop_thread_dispatch();
-    }
-
-}
-
-fn main() {
     nwg::init().expect("Failed to init Native Windows GUI");
     nwg::Font::set_global_family("Segoe UI").expect("Failed to set default font");
-
-    let _app = BasicApp::build_ui(Default::default()).expect("Failed to build UI");
-
+    let _app = BasicAppCmb::build_ui(Default::default()).expect("Failed to build UI");
     nwg::dispatch_thread_events();
 }
-
-*/
-
-// endregion:modello_originale

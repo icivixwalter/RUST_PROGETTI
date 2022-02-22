@@ -640,18 +640,22 @@ else { println!("number is not divisible by 4, 3, or 2"); }
 @push.in.Rust
 COMANDO LET assegna valore ALLE VARIABILI  (java = var) in rust le assegnazioni sono Final o costanti
 per renderli MUTEVOLI occorre mut. TIPO DI VARIABILI non è necessario definirle
-in rust perchè le deduce il compilatore.
-es.
+in rust perchè le deduce il compilatore, a partire dal suo valore (INFERENZA DEL TIPO -type inference). 
+@let  
+@inferenza.del.tipo  
 
-```
-let apples = 5;
-```
+	es.
 
-altro esempio di costante: tipo u32 : i secondi contenuti in 3h
+	```
+	let apples 		= 5;		// inferenza del tipo IL COMPILATORE deduce il tipo i32
+	let apples:i32 	= 5; 		//TIPO ESPLICITO (SCONSIGLIATO)
+	```
 
-```
-const THREE_HOURS_IN_SECONDS: u32 = 60 * 60 * 3;
-```
+	altro esempio di costante: tipo u32 : i secondi contenuti in 3h
+
+	```
+	const THREE_HOURS_IN_SECONDS: u32 = 60 * 60 * 3;
+	```
 
 shadowing = oscuramento e riutilizzo con altro valore
 se eiste nel pgramma un'altra variabile a cui è stato assegnato una stringa denominata
