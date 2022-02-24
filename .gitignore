@@ -1,7 +1,12 @@
 /target
+*/target/
+*/*/target/
+*/*/*/target/
+*/*/*/*/target/
+*/*/*/*/*/target/
+*/*/*/*/*/*/target/
 /AA_SALVATAGGI
 /.idea
-*/*/target/
 Cargo.lock
 .vscode/
 */.vscode/
