@@ -534,7 +534,7 @@ impl BasicApp {
         nwg::stop_thread_dispatch();
     }
 }
-
+#[allow(unused)]
 pub fn main2() {
     //SE FALLISCE LA COSTRUZIONE DELLA GUI MSG
     nwg::init().expect("Failed to init Native Windows GUI");

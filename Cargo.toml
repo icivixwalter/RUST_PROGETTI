@@ -11,6 +11,7 @@ native-windows-derive = "1.0.3" # Optional. Only if the derive macro is used.
 rand = "0.8.4"
 call_exe={path="Capitolo_01/call_exe"}
 guessing_game={path="Capitolo_02/guessing_game"}
+branches={path="Capitolo_03/branches"}
 data_type={path="Capitolo_03/data_type"}
 function={path="Capitolo_03/function"}
 progetto_loop={path="Capitolo_03/progetto_loop"} #button 05

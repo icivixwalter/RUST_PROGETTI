@@ -23,6 +23,7 @@ Nella funzione main():
 */
 
 extern crate data_type;
+extern crate branches;
 extern crate guessing_game;
 extern crate native_windows_derive as nwd;
 extern crate native_windows_gui as nwg;
@@ -35,13 +36,11 @@ use std::ops::Deref;
 use std::rc::Rc;
 // use nwd::NwgUi;
 use nwg::{NativeUi, NwgError, WindowFlags};
-use nwg::stretch::geometry::Rect;
-use nwg::stretch::style::FlexDirection;
 
 const DIMENSIONI_WINDOWS: (i32, i32) = (800, 600);
 const DIMENSIONI_CONTROL: (i32, i32) = (230, 35);
 
-
+//01
 /// LA SECONDA FORM IMPOSTAZIONI  @seconda.form
 #[derive(Default)]
 pub struct BasicAppCmb {
@@ -58,6 +57,7 @@ pub struct BasicAppCmb {
     // position: (10, 10), focus: true)] //casella posizione x,y
     name_edit: nwg::TextInput,
 
+    //@cmb.imposta.combobox,  @struttura.combobox, @struttura.cmb
     mycmb: nwg::ComboBox<&'static str>,
     mycmb2: nwg::ComboBox<&'static str>,
 
@@ -65,10 +65,17 @@ pub struct BasicAppCmb {
     //  mycmb2: nwg::ComboBox<'&static str>
 }
 
-//IMPLEMENTA COMBINATA
+//IMPLEMENTA COMBINATE 01,02... ECC..
 impl BasicAppCmb {
-    fn fn_combo_box_cap_01(&self, selezionato: Option<usize>) {
-        //SELECT TRA INDICI SELEZIONATI
+    /// IMPL METODO CMB_01
+    /// Imposta gli eventi a seconda dell'indice selezionato nella combo box
+    /// # Arguments
+    /// * `selezionato`: è l'indice della casella combinata selezionato. E' un Option di usize,
+    /// intero senza segno  la cui dimensione usize la adatta a 32 o 64 bit a seconda del s.o.
+    ///
+    /// returns: ()
+    fn fn_combo_box_cap_01_02_03(&self, selezionato: Option<usize>){
+        //SELECT TRA INDICI SELEZIONATI DELLA COMBINATA
         match selezionato {
             //INDICE 0
             Some(0) => {
@@ -78,23 +85,36 @@ impl BasicAppCmb {
                     "c:\\CASA\\PROGRAMMI\\RUST_PROGETTI\\Capitolo_01\\APRI_FILE_{HelloWord_eseguibile}.bat",
                 );
             }
+            //@definizione.metodo.CMB_02
             //INDICE 1
             Some(1) => {
                 //imposta la casella di testo
                 self.name_edit.set_text("guessing_game");
                 guessing_game::game(); // TODO: questo va spostato in fn_combo_box_cap_02()
+            }            //@definizione.metodo.CMB_02
+            //INDICE 2
+            Some(2) => {
+                //imposta la casella di testo
+                self.name_edit.set_text("branches");
+                branches::run();
+            }//INDICE 3
+            Some(3) => {
+                //imposta la casella di testo
+                self.name_edit.set_text("data_type");
+                data_type::run();
             }
             _ => {}  //INDICE NULL
         }
     }
 
+    //FUNZIONE CMB_02
     fn fn_combo_box_cap_02(&self, selezionato: Option<usize>) {
         println!("evento della 2° cmb");
         // TODO: Per ogni capitolo implementa un metodo con un match per ogni combobox
-        // match selezionato {
-        //     Some(_) => (),
-        //     _ => ()
-        // }
+        match selezionato {
+            Some(_) => (),
+            _ => ()
+        }
     }
 }
 
@@ -139,7 +159,7 @@ impl NativeUi<BasicAppCmbUi> for BasicAppCmb {
         //  vec![&mut basic_app_cmb.mycmb, &mut basic_app_cmb.mycmb2];
 
         //VETTORE DI  comandi della cmb_01
-        let lista_di_vec: Vec<Vec<&str>> = vec![vec!["ESERCIZIO_01", "ESERCIZIO_02"],
+        let lista_di_vec: Vec<Vec<&str>> = vec![vec!["call_exe", "guessing_game", "branches"],
                                                 vec!["10", "20", "60"]];
         let mut i = 1;
 
@@ -167,8 +187,7 @@ impl NativeUi<BasicAppCmbUi> for BasicAppCmb {
             default_handler: Default::default(),
         };
 
-
-        /* EVENTI DI TUTTI GLI OGGETTI WINDOWS + FIGLI*/
+/* EVENTI DI TUTTI GLI OGGETTI WINDOWS + FIGLI*/
 //-----------------------------------------------------------------------------//
         let evt_ui = Rc::downgrade(&ui.inner);
         /*LAMBDA = closure rust = funzione senza NOME,
@@ -181,19 +200,23 @@ impl NativeUi<BasicAppCmbUi> for BasicAppCmb {
                     nwg::Event::OnWindowClose => {
                         nwg::stop_thread_dispatch(); //termina il Thread l'applicazione altrimenti rimane attivo gestione attivita
                     }
+                    //@CAPITOLO_01.CMB, @CMB.CAPITOLO_01
                     //qui sono gestite gli eventi DI TUTTE LE CMB CORRENTI + FUTURE
                     nwg::Event::OnComboxBoxSelection => {
-                        //EVENTO CMB_01 FINITA
+                        //EVENTO CMB_01 FINITA, //@definizione.metodo.CMB_01.evento, @cmb_01.metodo,  @evento.cmb_01
                         if &handle == &ui.mycmb { // controlla che l'handle da cui proviene l'evento sia quello della Combobox
                             // prendo l'indice dell'elemento selezionato della combobox
                             let selection = ui.mycmb.selection();
                             // Eseguo la funzione definita nella struct BasicAppCmb
-                            ui.fn_combo_box_cap_01(selection);
-                            //EVENTO CMB_02 DA FINIRE
+                            ui.fn_combo_box_cap_01_02_03(selection);
+
+                        //EVENTO CMB_02 DA FINIRE - //@definizione.metodo.CMB_02.evento, @evento.cmb_02
                         } else if &handle == &ui.mycmb2 { // TODO: usa mycmb2
                             let selection = ui.mycmb2.selection(); // TODO: usa mycmb2
-                            ui.fn_combo_box_cap_02(selection); // DEFINIRE IL MEDOTO DELLA NUOVA FUNZIONALITA !!!!!!
+                            ui.fn_combo_box_cap_02(selection); // DEFINIRE IL METODO DELLA NUOVA FUNZIONALITA !!!!!!
                         }
+
+
                         //TODO : aggiungere un else if per ogni combobox di un capitolo
                     }
                     _ => {} //NULLO
