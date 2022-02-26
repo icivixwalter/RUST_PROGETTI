@@ -30,6 +30,8 @@ extern crate native_windows_gui as nwg;
 
 mod seconda_gui;
 mod main2;
+mod main_derive;
+
 
 use std::cell::RefCell;
 use std::ops::Deref;
@@ -44,22 +46,21 @@ const DIMENSIONI_CONTROL: (i32, i32) = (230, 35);
 /// FORM BASE IMPOSTAZIONI  @form.master
 #[derive(Default)]
 pub struct BasicAppCmb {
-    // #[nwg_control(size: DIMENSIONI_WINDOWS, position: (300, 10), //cambio in ----> 300,10
-    // title: "Rust Progetti con Combobox",
-    // flags: "WINDOW|VISIBLE")] //evento messaggio 02
     window: nwg::Window,
     //---------------------------------------------------------------------------------------//
 
     // myflexbox: nwg::FlexboxLayout,
 
-    // #[nwg_control(text: "Hello ",
-    // size: (230, 35),                     //casella di testo largh + alt originale 280,35 ---- > 230,35
-    // position: (10, 10), focus: true)]    //casella posizione x,y
     name_edit: nwg::TextInput,
 
     //@cmb.imposta.combobox,  @struttura.combobox, @struttura.cmb
-    mycmb_01: nwg::ComboBox<&'static str>,             //@cmb_01.struct, @capitolo_01.cmb_01.struct
-    mycmb_02: nwg::ComboBox<&'static str>,            //@cmb_02.struct  @capitolo_02.cmb_02.struct
+    mycmb_01: nwg::ComboBox<&'static str>,
+    //@cmb_01.struct, @capitolo_01.cmb_01.struct
+    mylbl_01: nwg::Label,                               //@lbl_01.struct, @capitolo_01.lbl_01.struct
+
+    mycmb_02: nwg::ComboBox<&'static str>,
+    //@cmb_02.struct  @capitolo_02.cmb_02.struct
+    mylbl_02: nwg::Label,                               //@lbl_02.struct, @capitolo_04.lbl_02.struct
 
     // TODO: per ogni capitolo, metti una combobox, che permette di scegliere gli esercizi
     //  mycmb2: nwg::ComboBox<'&static str>
@@ -74,7 +75,7 @@ impl BasicAppCmb {
     /// intero senza segno  la cui dimensione usize la adatta a 32 o 64 bit a seconda del s.o.
     ///
     /// returns: ()
-    fn fn_combo_box_cap_01_02_03(&self, selezionato: Option<usize>){
+    fn fn_combo_box_cap_01_02_03(&self, selezionato: Option<usize>) {
         //SELECT TRA INDICI SELEZIONATI DELLA COMBINATA
         match selezionato {
             //INDICE 0
@@ -177,11 +178,18 @@ impl NativeUi<BasicAppCmbUi> for BasicAppCmb {
             .parent(&mut basic_app_cmb.window)
             .build(&mut basic_app_cmb.name_edit)?;
 
+
+        //LISTA LABEL CON VETTORE
+        let mut vec_label = vec![
+            &mut basic_app_cmb.mylbl_01,
+            &mut basic_app_cmb.mylbl_02];
+
         //LISTA DI CMB CON VETTORE, @cmb_01.vec
-        let vec_combo = vec![&mut basic_app_cmb.mycmb_01,
-                             &mut basic_app_cmb.mycmb_02];
+        let mut vec_combo = vec![
+            &mut basic_app_cmb.mycmb_01,
+            &mut basic_app_cmb.mycmb_02];
         // Todo aggiungi la nuova combobox al vettore come sotto, 3,4 idem...:
-        //  vec![&mut basic_app_cmb.mycmb, &mut basic_app_cmb.mycmb2];
+        //  vec![&mut basic_app_cmb.mycmb, &mut basic_app_cmb.mycmb2, ...];
 
         //@vettori.di.vettori.combinate
         //VETTORE DI  comandi della cmb_01, @capitolo_01.cmb_01.vettore; @I.VETTORE.CMB
@@ -189,28 +197,35 @@ impl NativeUi<BasicAppCmbUi> for BasicAppCmb {
         let lista_di_vec: Vec<Vec<&str>> = vec![vec!["01_call_exe",
                                                      "02_guessing_game",
                                                      "03_branches",
-                                                     "04_data_type" ,
-                                                     "05_function" ,
-                                                     "06_progetto_loop" ,
-                                                     "07_variables_and_mutability" ],
+                                                     "04_data_type",
+                                                     "05_function",
+                                                     "06_progetto_loop",
+                                                     "07_variables_and_mutability"],
                                                 //@II.VETTORE.CMB,  @cmb_02.vec
                                                 vec!["10", "20", "60"]];
-        let mut i = 1;  //indice
+        //creo la lista di stringhe per visualizzare le label
+        let vec_label_text = vec!["CAPITOLO_01+02+03", "CAPITOLO_04"];
 
         //CICLO FOR sul vettore di combobox per le combobox per adesso ce ne una,
         // + assegna la lista vettore indicizzata.  @cmb_01.builder
-        for combo in vec_combo {
-            //
-            let index: Vec<&str> = lista_di_vec[i - 1].clone();
+        for i in 0..vec_combo.len() {
+            // let index: Vec<&str> = lista_di_vec[i].clone();
+            //creo le label
+            nwg::Label::builder()
+                .parent(&mut basic_app_cmb.window)
+                .position((10, 90 * (i + 1) as i32 - 40))
+                .size(DIMENSIONI_CONTROL)
+                .text(vec_label_text[i])            //valorizzo le label con il il vettore
+                .build(vec_label[i])?;
 
+            //creo le combo
             nwg::ComboBox::builder()
                 .parent(&mut basic_app_cmb.window)
-                .position((10, 60 * i as i32))
+                .position((10, 90 * (i + 1) as i32))
                 .size(DIMENSIONI_CONTROL)
-                .collection(index)
+                .collection(lista_di_vec[i].clone())
                 .selected_index(None)
-                .build(combo)?;
-            i += 1;
+                .build(vec_combo[i])?;
         }
 
 
@@ -221,7 +236,7 @@ impl NativeUi<BasicAppCmbUi> for BasicAppCmb {
             default_handler: Default::default(),
         };
 
-/* EVENTI DI TUTTI GLI OGGETTI WINDOWS + FIGLI*/
+        /* EVENTI DI TUTTI GLI OGGETTI WINDOWS + FIGLI*/
 //-----------------------------------------------------------------------------//
         let evt_ui = Rc::downgrade(&ui.inner);
         /*LAMBDA = closure rust = funzione senza NOME,
@@ -244,7 +259,7 @@ impl NativeUi<BasicAppCmbUi> for BasicAppCmb {
                             // Eseguo la funzione definita nella struct BasicAppCmb
                             ui.fn_combo_box_cap_01_02_03(selection);
 
-                        //EVENTO CMB_02 DA FINIRE - //@definizione.metodo.CMB_02.evento, @evento.cmb_02
+                            //EVENTO CMB_02 DA FINIRE - //@definizione.metodo.CMB_02.evento, @evento.cmb_02
                         } else if &handle == &ui.mycmb_02 { // TODO: usa mycmb2
                             let selection = ui.mycmb_02.selection(); // TODO: usa mycmb2
                             ui.fn_combo_box_cap_02(selection); // DEFINIRE IL METODO DELLA NUOVA FUNZIONALITA !!!!!!
@@ -296,99 +311,88 @@ fn main() {
     nwg::init().expect("Failed to init Native Windows GUI");
     nwg::Font::set_global_family("Segoe UI").expect("Failed to set default font");
     //build BasicAppCmb
-    let _app = BasicAppCmb::build_ui(Default::default()).expect("Failed to build UI");
+    let _app = main_derive::BasicAppCmb::build_ui(Default::default()).expect("Failed to build UI");
     nwg::dispatch_thread_events();
 }
 
 
-
-
-
-
-
 //region: COMBINATE - PROCEDIMENTO DI CREAZIONE -
-    /*
+/*
 
- RIEPILOGO OPERAZIONI:
-      01)IMPOSTA LA VARIABILE OGGETTO NELLA STRUTTURA BASIC APP DI WINDOWS
-                                                @cmb_01.struct
-      											@cmb_02.struct
-      											@cmb_03.struct
+RIEPILOGO OPERAZIONI:
+  01)IMPOSTA LA VARIABILE OGGETTO NELLA STRUTTURA BASIC APP DI WINDOWS
+                                            @cmb_01.struct + @label_01
+                                              @cmb_02.struct
+                                              @cmb_03.struct
 
-      02)DEFINIZIONE IMPLEMENTAZIONE INDICE DELLE CASELLE COMBINATE
-                                                @cmb_01.index
-      											@cmb_02.index
-      											@cmb_03.index
+  02)DEFINIZIONE IMPLEMENTAZIONE INDICE DELLE CASELLE COMBINATE + LABEL
+                                            @cmb_01.index
+                                              @cmb_02.index
+                                              @cmb_03.index
 
-      03) IMPOSTAZIONE DELL'EVENTO DELLA COMBINATA 1, 2. ecc...
-                                                @cmb_01.evento
-      											@cmb_02.evento
-      											@cmb_03.evento
+  03) IMPOSTAZIONE DELL'EVENTO DELLA COMBINATA 1, 2. ecc...
+                                            @cmb_01.evento
+                                              @cmb_02.evento
+                                              @cmb_03.evento
 
-      04) BUILDER, COSTRUZIONE DELLE COMBINATE, ASSOCIAZIONE DEL VETTORE, BUILDER DELLA WINDOWS E DELLA TEXT BOX UNICA
-                                                @cmb_01.builder
-                                                @Textbox_01.builder
-                                                @cmb_01.vec
+  04) BUILDER, COSTRUZIONE DELLE COMBINATE, ASSOCIAZIONE DEL VETTORE, BUILDER DELLA WINDOWS E DELLA TEXT BOX UNICA
+                                            @cmb_01.builder
+                                            @Textbox_01.builder
+                                            @cmb_01.vec
 
-      ATTIVAZIONE MAIN
-        viene attivata la struttura Basic App nella main:
-                                                @inizializzoBasicApp, @mainBasicApp
-
-
-    PROCEDIMENTO LA CREAZIONE DELLE  COMBINATE 1,2,..   @procedimento.creazione.combinate
-    per impostare le combinate per capitoli occorre,
-    01)	IMPOSTA LA VARIABILE OGGETTO NELLA STRUTTURA BASIC APP DI WINDOWS, all'interno della struttura pub struct BasicAppCmb {...
-        che serve per creare una struttua windows mediante uma macro DERIVE, viene implementata all'interno
-        di una WINDOWS BASE un elenco di combinate divise per capitolo.
-        La Windows master avra come figli da 1 a 10 cmb per colonna.
-        Per creare le combinate occorre definire diverse variabili oggetto mediante la macro nwg come ad es.
-            mycmb: nwg::ComboBox<&'static str>, ec...
-        la chiave di ricerca per la combinata per impostare la variabile oggetto  è la seguente: @cmb_01.struct
+  ATTIVAZIONE MAIN
+    viene attivata la struttura Basic App nella main:
+                                            @inizializzoBasicApp, @mainBasicApp
 
 
-    02) DEFINIZIONE IMPLEMENTAZIONE INDICE DELLE CASELLE COMBINATE
-        Le caselle combinate vengono gestite sia nella creazione dell'indice sia nella implementazione dello stesso nella
-        funzione denominata
-            fn fn_combo_box_cap_01_02_03(&self, selezionato: Option<usize>){...
-        Questa funzione permette di creare ed impostare gli indici di scelta per ogni capitolo ed in questo caso essendo stata
-        denominata ... _cap_01_02_03... la prima combinata deve gestire almeno i primi 3 capitolo di esercizi.
-        L'indice viene gestito con le seguenti instruzioni:
-             match selezionato {
-                    //INDICE 0
-                    Some(0) => {....
-        l'indice della combinata parte da zero e si consiglia un massimo di 11 posizioni da 0-11.
-
-        la chiave di ricerca per la combinata per impostare la variabile oggetto è la seguente: @cmb_01.index
-
-    03) IMPOSTAZIONE DELL'EVENTO DELLA COMBINATA 1, 2. ecc...
-        Per tutte le combinate create occorre impostare l'evento nella procedura
-               match evt {....
-        L'0ggetto evt gestisce tutti gli eventi della form Master e dei suoi figli e per quanto riguarda le combinate
-        le stesse vengono gestite con la macro nwg
-            nwg::Event::OnComboxBoxSelection => { ......
-        questa macro permette di gestire gli eventi relativi solo ai figli della form e cioè le combinate che vengono
-        individuate con la if di controllo tra gli Handle della windows e l'handle della combinata con la seguente istruzione
-              if &handle == &ui.mycmb_01 {  ....
-        Questa if confronta i due handle individua quella della combinata 01, recupera l'indice scelto e chiama la
-        funzione di gestione degli indici individuata in
-                 ui.fn_combo_box_cap_01_02_03(selection);
-        Quindi per impostare la gestione degli eventi della combinata 1, 2 ecc... chiamare questa chiave:  @cmb_01.evento
+PROCEDIMENTO LA CREAZIONE DELLE  COMBINATE 1,2,..   @procedimento.creazione.combinate
+per impostare le combinate per capitoli occorre,
+01)	IMPOSTA LA VARIABILE OGGETTO NELLA STRUTTURA BASIC APP DI WINDOWS, all'interno della struttura pub struct BasicAppCmb {...
+    che serve per creare una struttua windows mediante uma macro DERIVE, viene implementata all'interno
+    di una WINDOWS BASE un elenco di combinate divise per capitolo.
+    La Windows master avra come figli da 1 a 10 cmb per colonna.
+    Per creare le combinate occorre definire diverse variabili oggetto mediante la macro nwg come ad es.
+        mycmb: nwg::ComboBox<&'static str>, ec...
+    AGGIUNGO AD OGNI COMBINATA UNA LABEL su cui scrivere quale capitolo viene gestito.
+    la chiave di ricerca per la combinata per impostare la variabile oggetto  è la seguente: @cmb_01.struct
 
 
-    04) BUILDER, COSTRUZIONE DELLE COMBINATE, ASSOCIAZIONE DEL VETTORE, BUILDER DELLA WINDOWS E DELLA TEXT BOX UNICA
-    	Nella funzione di implementazione della combinata
-    		NativeUi<BasicAppCmbUi> for BasicAppCmb {
-    	con il comando builder vengono implementate A) la costruzione della WINDOWS base, B)  la costruzione di una singola  TEXBOX da utilizzare
-    	per tutte le combinate C) la costruzione con un ciclo for di tutte LE COMBINATE e con la contestuale assegnazione
-    	della lista di VETTORI SCELTA per la COMBINATA 01
+02) DEFINIZIONE IMPLEMENTAZIONE INDICE DELLE CASELLE COMBINATE
+    Le caselle combinate vengono gestite sia nella creazione dell'indice sia nella implementazione dello stesso nella
+    funzione denominata
+        fn fn_combo_box_cap_01_02_03(&self, selezionato: Option<usize>){...
+    Questa funzione permette di creare ed impostare gli indici di scelta per ogni capitolo ed in questo caso essendo stata
+    denominata ... _cap_01_02_03... la prima combinata deve gestire almeno i primi 3 capitolo di esercizi.
+    L'indice viene gestito con le seguenti instruzioni:
+         match selezionato {
+                //INDICE 0
+                Some(0) => {....
+    l'indice della combinata parte da zero e si consiglia un massimo di 11 posizioni da 0-11.
+
+    la chiave di ricerca per la combinata per impostare la variabile oggetto è la seguente: @cmb_01.index
+
+03) IMPOSTAZIONE DELL'EVENTO DELLA COMBINATA 1, 2. ecc...
+    Per tutte le combinate create occorre impostare l'evento nella procedura
+           match evt {....
+    L'0ggetto evt gestisce tutti gli eventi della form Master e dei suoi figli e per quanto riguarda le combinate
+    le stesse vengono gestite con la macro nwg
+        nwg::Event::OnComboxBoxSelection => { ......
+    questa macro permette di gestire gli eventi relativi solo ai figli della form e cioè le combinate che vengono
+    individuate con la if di controllo tra gli Handle della windows e l'handle della combinata con la seguente istruzione
+          if &handle == &ui.mycmb_01 {  ....
+    Questa if confronta i due handle individua quella della combinata 01, recupera l'indice scelto e chiama la
+    funzione di gestione degli indici individuata in
+             ui.fn_combo_box_cap_01_02_03(selection);
+    Quindi per impostare la gestione degli eventi della combinata 1, 2 ecc... chiamare questa chiave:  @cmb_01.evento
 
 
+04) BUILDER, COSTRUZIONE DELLE COMBINATE, ASSOCIAZIONE DEL VETTORE, BUILDER DELLA WINDOWS E DELLA TEXT BOX UNICA
+    Nella funzione di implementazione della combinata
+        NativeUi<BasicAppCmbUi> for BasicAppCmb {
+    con il comando builder vengono implementate A) la costruzione della WINDOWS base, B)  la costruzione di una singola  TEXBOX da utilizzare
+    per tutte le combinate C) la costruzione con un ciclo for di tutte LE COMBINATE e con la contestuale assegnazione
+    della lista di VETTORI SCELTA per la COMBINATA 01
 
-
-
-
-
-
-    */
+*/
 
 //endregion: COMBINATE - PROCEDIMENTO DI CREAZIONE -

@@ -58,9 +58,7 @@ pub struct BasicApp {
     ///---------------------------------------------------------------------------------------//
     ///originale:
     /// #[nwg_control(text: "Heisenberg", size: (280, 35), position: (10, 10), focus: true)]
-    #[nwg_control(text: "Hello ", 
-                size: (230, 35),                    //casella di testo largh + alt originale 280,35 ---- > 230,35
-                position: (10, 10), focus: true)] //casella posizione x,y
+    #[nwg_control(text: "Hello ", size: (230, 35), position: (10, 10), focus: true)] //casella posizione x,y
     name_edit: nwg::TextInput,
     //---------------------------------------------------------------------------------------//
 
