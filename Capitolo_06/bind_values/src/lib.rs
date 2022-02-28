@@ -47,7 +47,13 @@
          , value_in_cents(Coin::Quarter(UsState::Alaska))
          , value_in_cents(Coin::Quarter(UsState::Alabama))
             );
-        
+
+
+
+        println!("\n\n\
+    ---------------------------------------------------------------------------
+                    FINE Capitolo_06 - bind_values - \n\n");
+
     }
 
 

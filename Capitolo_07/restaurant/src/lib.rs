@@ -1,32 +1,40 @@
 #[allow(dead_code)]  //serve per togliere i warnings sul codice non utilizzato
-mod front_of_house {
-    mod hosting {
+pub mod front_of_house {
+    pub mod hosting {
         /// AGGIUNGI ALLA LISTA DI ATTESA
-        fn add_to_waitlist() {}
+        pub fn add_to_waitlist() {
+            println!("AGGIUNGI ALLA LISTA DI ATTESA ");
+        }
+
         /// INVITA A SEDERE A TAVOLA
-        fn seat_at_table() {}
+        pub fn seat_at_table() {}
     }
 
-    mod serving {
+    pub mod serving {
         /// PRENDI UN ORDINE
-        fn take_order() {}
+        pub fn take_order() {
+            println!("PRENDI UN ORDINE");
+        }
 
         /// SERVI UN ORDINE
-        fn serve_order() {}
+        pub fn serve_order() {}
 
         ///PRENDI IL PAGAMENTO
-        fn take_payment() {}
+        pub fn take_payment() {}
     }
 }
 
+pub fn run() {
+    front_of_house::hosting::add_to_waitlist();
+}
 
 
 //creato una liberia con un test
 #[cfg(test)]    //annotazione per fare riconoscere come test
-mod tests { // modulo tst
+mod tests {
+    // modulo tst
     #[test] // annota la singola funzione come test
     fn it_works() {
-        let result = 2 + 2;
-        assert_eq!(result, 4); // se result == 4 non da errori altrimenti PANIC
+        super::run();
     }
 }

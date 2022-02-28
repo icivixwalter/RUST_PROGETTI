@@ -23,7 +23,13 @@ pub fn run() {
     //  *** FINE ***
     //=========================================================================================//\n");
 
-    
+
+
+    println!("\n\n\
+    ---------------------------------------------------------------------------
+                    FINE Capitolo_06 - catch_all - \n\n");
+
+
 }
 
 //faccio FUNZIONE CHE ATTIVA UNA DELLE SCELTE = i numeri u8 sono da 1 a 255 e quindi

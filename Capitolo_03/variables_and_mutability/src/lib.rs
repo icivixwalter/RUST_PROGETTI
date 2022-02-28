@@ -263,13 +263,14 @@ pub fn run () {
             //creo un array (va nello stack ) di 5 elementi interi
             let a = [1, 2, 3, 4, 5];  
             /*ATTENZIONE L'ACCESSO ad un indice non valido 
-            provoca l'uscita dal programma senza entrare in una memoria non valida questo è  la protezione di rusta
+            provoca l'uscita dal programma senza entrare in una memoria non valida questo
+            è  la protezione di rust
             che non permette in questa caso di andare a println rispetto ad altri linguaggi di basso livello che permettono
             di continuare accedendo alla memoria non valida e mandando in crash il pc.*/
             
             //con lo standard io leggo un imput da tastiera + controllo errori
             //-------------------------------------------------------------------------//
-                println!("Please enter an array index."); 
+                println!("ATTENZIONE DEVI IMPOSTARE UN INDICE 1-5: Please enter an array index ---> : ");
                 let mut index = String::new(); io::stdin()
                 .read_line(&mut index)
                 .expect("ERRORE FALLITA LA LETTURA DA LINERA DI COMANDO:Failed to read line"); 
@@ -305,5 +306,10 @@ pub fn run () {
 
 // //---------------------------------------------------------------------------//
 
+
+
+    println!("\n\n\
+    ---------------------------------------------------------------------------
+                    FINE Capitolo_03 - variables_and_mutability - \n\n");
 
 }

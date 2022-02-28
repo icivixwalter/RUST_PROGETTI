@@ -51,6 +51,10 @@ pub fn run() {
     //stampa l'intera struttura Rectangle con i campi ed i valori.
     // in Java era cosi Rectangle.square(3);
     println!("crea un quadrato con il METODO STATICO {:#?}", Rectangle::square(3));
-  
+
+
+    println!("\n\n\
+    ---------------------------------------------------------------------------
+                    FINE Capitolo_05 - multiple_impl_blocks - \n\n");
 
 }//main

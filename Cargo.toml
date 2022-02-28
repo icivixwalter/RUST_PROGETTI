@@ -6,47 +6,53 @@ edition = "2021"
 # See more keys and their definitions at https://doc.rust-lang.org/cargo/reference/manifest.html
 
 [dependencies]
-native-windows-gui = {version="1.0.12", feature=["combobox"]}
+native-windows-gui = { version = "1.0.12", feature = ["combobox"] }
 native-windows-derive = "1.0.3" # Optional. Only if the derive macro is used.
 rand = "0.8.4"
-call_exe={path="Capitolo_01/call_exe"}
-guessing_game={path="Capitolo_02/guessing_game"}
-branches={path="Capitolo_03/branches"}
-data_type={path="Capitolo_03/data_type"}
-function={path="Capitolo_03/function"}
-progetto_loop={path="Capitolo_03/progetto_loop"} #button 05
-variables_and_mutability={path="Capitolo_03/variables_and_mutability"} #button 06
+call_exe = { path = "Capitolo_01/call_exe" }
+guessing_game = { path = "Capitolo_02/guessing_game" }
+branches = { path = "Capitolo_03/branches" }
+data_type = { path = "Capitolo_03/data_type" }
+function = { path = "Capitolo_03/function" }
+progetto_loop = { path = "Capitolo_03/progetto_loop" } #button 05
+variables_and_mutability = { path = "Capitolo_03/variables_and_mutability" } #button 06
 
 #capitolo 04 --------------------------------------------------------------
 #sistemati:
-dangle={path="Capitolo_04/dangle"} #button 07 - c:\CASA\PROGRAMMI\RUST_PROGETTI\Capitolo_04\dangle\
-ownership={path="Capitolo_04/ownership"} #button 08 - c:\CASA\PROGRAMMI\RUST_PROGETTI\Capitolo_04\ownership\
-references_and_borrowing={path="Capitolo_04/references_and_borrowing"} #button 09 - c:\CASA\PROGRAMMI\RUST_PROGETTI\Capitolo_04\references_and_borrowing\
-the_slice_type={path="Capitolo_04/the_slice_type"} #button 10 - c:\CASA\PROGRAMMI\RUST_PROGETTI\Capitolo_04\the_slice_type\
+dangle = { path = "Capitolo_04/dangle" } #button 07 - c:\CASA\PROGRAMMI\RUST_PROGETTI\Capitolo_04\dangle\
+ownership = { path = "Capitolo_04/ownership" } #button 08 - c:\CASA\PROGRAMMI\RUST_PROGETTI\Capitolo_04\ownership\
+references_and_borrowing = { path = "Capitolo_04/references_and_borrowing" } #button 09 - c:\CASA\PROGRAMMI\RUST_PROGETTI\Capitolo_04\references_and_borrowing\
+the_slice_type = { path = "Capitolo_04/the_slice_type" } #button 10 - c:\CASA\PROGRAMMI\RUST_PROGETTI\Capitolo_04\the_slice_type\
 
 
 #II FILA DI BUTTON ----------------------------------------------------------
 #capitolo 05 --------------------------------------------------------------
-can_old={path="Capitolo_05/can_old"} #button_11 - c:\CASA\PROGRAMMI\RUST_PROGETTI\Capitolo_05\can_old\
-defining_methods={path="Capitolo_05/defining_methods"} #button_12 - c:\CASA\PROGRAMMI\RUST_PROGETTI\Capitolo_05\defining_methods\
-format_debug={path="Capitolo_05/format_debug"} #button_13 - c:\CASA\PROGRAMMI\RUST_PROGETTI\Capitolo_05\format_debug\
-multiple_impl_blocks={path="Capitolo_05/multiple_impl_blocks"} #button_14 - c:\CASA\PROGRAMMI\RUST_PROGETTI\Capitolo_05\multiple_impl_blocks\
-operator_c={path="Capitolo_05/operator_c"} #button_15 - c:\CASA\PROGRAMMI\RUST_PROGETTI\Capitolo_05\operator_c\
-ownership_2={path="Capitolo_05/ownership_2"} #button_16 - c:\CASA\PROGRAMMI\RUST_PROGETTI\Capitolo_05\ownership_2\
+can_old = { path = "Capitolo_05/can_old" } #button_11 - c:\CASA\PROGRAMMI\RUST_PROGETTI\Capitolo_05\can_old\
+defining_methods = { path = "Capitolo_05/defining_methods" } #button_12 - c:\CASA\PROGRAMMI\RUST_PROGETTI\Capitolo_05\defining_methods\
+format_debug = { path = "Capitolo_05/format_debug" } #button_13 - c:\CASA\PROGRAMMI\RUST_PROGETTI\Capitolo_05\format_debug\
+multiple_impl_blocks = { path = "Capitolo_05/multiple_impl_blocks" } #button_14 - c:\CASA\PROGRAMMI\RUST_PROGETTI\Capitolo_05\multiple_impl_blocks\
+operator_c = { path = "Capitolo_05/operator_c" } #button_15 - c:\CASA\PROGRAMMI\RUST_PROGETTI\Capitolo_05\operator_c\
+ownership_2 = { path = "Capitolo_05/ownership_2" } #button_16 - c:\CASA\PROGRAMMI\RUST_PROGETTI\Capitolo_05\ownership_2\
 #
 #
-rettangolo={path="Capitolo_05/rettangolo"} #button_17 - c:\CASA\PROGRAMMI\RUST_PROGETTI\Capitolo_05\rettangolo\
-struct_struttura={path="Capitolo_05/struct_struttura"} #button_18 - c:\CASA\PROGRAMMI\RUST_PROGETTI\Capitolo_05\struct_struttura\
-control_flow={path="Capitolo_06/control_flow"} #button_19 - c:\CASA\PROGRAMMI\RUST_PROGETTI\Capitolo_06\control_flow\
-bind_values={path="Capitolo_06/bind_values"} #button_20 - c:\CASA\PROGRAMMI\RUST_PROGETTI\Capitolo_06\bind_values\
+rettangolo = { path = "Capitolo_05/rettangolo" } #button_17 - c:\CASA\PROGRAMMI\RUST_PROGETTI\Capitolo_05\rettangolo\
+struct_struttura = { path = "Capitolo_05/struct_struttura" } #button_18 - c:\CASA\PROGRAMMI\RUST_PROGETTI\Capitolo_05\struct_struttura\
+control_flow = { path = "Capitolo_06/control_flow" } #button_19 - c:\CASA\PROGRAMMI\RUST_PROGETTI\Capitolo_06\control_flow\
+bind_values = { path = "Capitolo_06/bind_values" } #button_20 - c:\CASA\PROGRAMMI\RUST_PROGETTI\Capitolo_06\bind_values\
 
 #II FORM ESTERNA
-catch_all={path="Capitolo_06/catch_all"} #button_21 - c:\CASA\PROGRAMMI\RUST_PROGETTI\Capitolo_06\catch_all\
-dice_roll={path="Capitolo_06/dice_roll"} #button_22 - c:\CASA\PROGRAMMI\RUST_PROGETTI\Capitolo_06\dice_roll\
+catch_all = { path = "Capitolo_06/catch_all" } #button_21 - c:\CASA\PROGRAMMI\RUST_PROGETTI\Capitolo_06\catch_all\
+dice_roll = { path = "Capitolo_06/dice_roll" } #button_22 - c:\CASA\PROGRAMMI\RUST_PROGETTI\Capitolo_06\dice_roll\
 
-dice_roll_2={path="Capitolo_06/dice_roll_2"} #button_23 - c:\CASA\PROGRAMMI\RUST_PROGETTI\Capitolo_06\dice_roll_2\
+dice_roll_2 = { path = "Capitolo_06/dice_roll_2" } #button_23 - c:\CASA\PROGRAMMI\RUST_PROGETTI\Capitolo_06\dice_roll_2\
 
-config_max={path="Capitolo_06/config_max"} #button_24 - c:\CASA\PROGRAMMI\RUST_PROGETTI\Capitolo_06\config_max\
+config_max = { path = "Capitolo_06/config_max" } #button_24 - c:\CASA\PROGRAMMI\RUST_PROGETTI\Capitolo_06\config_max\
+
+# AGGIUNTI IL 28.02.2022???
+#CAPITOLO 7  --- ATTENZIONE I BUTTON 25 A 27 SONO DA FARE ---
+
+#Aper ora funziona solo RESTAURANT
+restaurant = { path = "Capitolo_07/restaurant" } #button_27 - c:\CASA\PROGRAMMI\RUST_PROGETTI\Capitolo_07\restaurant\
 
 
 

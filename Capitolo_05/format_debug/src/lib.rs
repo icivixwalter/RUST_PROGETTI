@@ -41,5 +41,12 @@ println!("\n
 //---------------------------------------------------------------------------//
 stampo l'intera struttura dati della struct con il comando dbg! insieme ai valori. \n");
         dbg!(&rect1); //utilizzando dbg!(&rect1) utilizzo il riferimento e non ottengo la proprieta
-    
+
+
+
+    println!("\n\n\
+    ---------------------------------------------------------------------------
+                    FINE Capitolo_05 - format_debug - \n\n");
+
+
 }

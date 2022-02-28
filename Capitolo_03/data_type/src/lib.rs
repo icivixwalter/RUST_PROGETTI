@@ -7,6 +7,10 @@ pub fn run() {
     let y: f32 = 3.0; // f32
 
     // al posto di %d ecc. si usano  le {}
-    println!("stampo i numeri f64 e f32: {} {}", x, y);
+    println!("DATA TIPE: stampo i numeri f64 e f32: {} {}", x, y);
+
+     println!("\n\n\
+    ---------------------------------------------------------------------------
+                    FINE Capitolo_03 - data_type - \n\n");
 
 }

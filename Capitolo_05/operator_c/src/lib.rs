@@ -74,5 +74,12 @@ pub fn run() {
     
 
    ", {p1.distance(&p2)}, {(&p1).distance(&p2)} );
+
+
+
+    println!("\n\n\
+    ---------------------------------------------------------------------------
+                    FINE Capitolo_05 - operator_c - \n\n");
+
 }
 // endregion: funzioni_esterne

@@ -88,6 +88,13 @@ pub fn run() {
         Gioco delle carte\n\t");
  
     tira_carta();
+
+
+
+    println!("\n\n\
+    ---------------------------------------------------------------------------
+                    FINE Capitolo_06 - config_max - \n\n");
+
 }
 
 //utilizzo del modulo Option il quale permette il passaggio di due tipi di parametri,

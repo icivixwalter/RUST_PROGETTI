@@ -49,5 +49,13 @@ pub fn run() {
 			The area of the Rectanglenw is {} square pixels.",
         rect1.areanew()
     );
+
+
+    println!("\n\n\
+    ---------------------------------------------------------------------------
+                    FINE Capitolo_05 - defining_methods - \n\n");
+
+
+
 } //FINE MAIN
   // endregion: main

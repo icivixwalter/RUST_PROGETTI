@@ -77,4 +77,12 @@ pub fn run() {
     AREA DEL RETTANGOLO 2 CON PARAMETRI E CON RISULTATO MODIFICABILE: 
     come sopra con questo risultato:
     Can rect1 hold rect3? {}", rect1.can_hold(&rect3));
+
+
+
+    println!("\n\n\
+    ---------------------------------------------------------------------------
+                    FINE Capitolo_05 - can_old - \n\n");
+
+
 } //main
